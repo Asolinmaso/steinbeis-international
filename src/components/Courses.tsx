@@ -1,0 +1,152 @@
+"use client";
+import React from 'react';
+
+const courses = [
+  {
+    levelText1: "German A1",
+    levelText2: "Beginner Level",
+    desc: "Learn basic words and phrases to communicate in everyday situations.",
+    img: "/hero-student.png" // Placeholder
+  },
+  {
+    levelText1: "German A2",
+    levelText2: "Elementary Level",
+    desc: "Build confidence by using common sentences in everyday conversations.",
+    img: "/about-classroom.png" // Placeholder
+  },
+  {
+    levelText1: "German B1",
+    levelText2: "Intermediate Level",
+    desc: "Manage real-life conversations with clarity and better understanding.",
+    img: "/course-german.png" // Placeholder
+  },
+  {
+    levelText1: "German B2",
+    levelText2: "Upper Intermediate Level",
+    desc: "Improve fluency and understanding for academic and professional communication.",
+    img: "/hero-student.png" // Placeholder
+  }
+];
+
+export default function Courses() {
+  return (
+    <section id="courses" style={{
+      position: 'relative',
+      width: '100%',
+      backgroundColor: '#051636', // Dark blue background matching the image
+      padding: '100px 0', // Removed side padding to let carousel bleed if needed, but we can set max-width container or use padding
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      overflow: 'hidden'
+    }}>
+      {/* Decorative Wavy Dotted Line Placeholder */}
+      <div style={{
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        width: '300px',
+        height: '300px',
+        borderRight: '2px dotted rgba(255,255,255,0.4)',
+        borderBottom: '2px dotted rgba(255,255,255,0.4)',
+        borderBottomRightRadius: '150px',
+        opacity: 0.8,
+        zIndex: 0,
+        transform: 'translate(-50%, -50%)'
+      }} />
+      <div style={{
+        position: 'absolute',
+        top: '150px',
+        left: '150px',
+        width: '300px',
+        height: '300px',
+        borderLeft: '2px dotted rgba(255,255,255,0.4)',
+        borderTop: '2px dotted rgba(255,255,255,0.4)',
+        borderTopLeftRadius: '150px',
+        opacity: 0.8,
+        zIndex: 0,
+        transform: 'translate(-50%, -50%)'
+      }} />
+
+      <div style={{ zIndex: 10, display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%', maxWidth: '1240px', padding: '0 20px' }}>
+        
+        <h2 style={{
+          fontFamily: 'Inter', fontWeight: 600, fontSize: '48px',
+          color: '#FFFFFF', textAlign: 'center', marginBottom: '20px'
+        }}>
+          Start Your German Learning Journey
+        </h2>
+        
+        <p style={{
+          fontFamily: 'Inter', fontWeight: 400, fontSize: '22px',
+          color: '#FFFFFF', textAlign: 'center', maxWidth: '800px',
+          marginBottom: '60px', lineHeight: '30px'
+        }}>
+          Build strong language skills from A1 to B2 with practical speaking, easy grammar, and step-by-step guidance.
+        </p>
+
+        {/* Carousel Container */}
+        <div 
+          className="no-scrollbar"
+          style={{
+            display: 'flex',
+            gap: '24px',
+            overflowX: 'auto',
+            width: '100%',
+            paddingBottom: '20px',
+            flexWrap: 'nowrap',
+            msOverflowStyle: 'none',
+            scrollbarWidth: 'none',
+            WebkitOverflowScrolling: 'touch'
+          }}
+        >
+          {courses.map((course, i) => (
+            <div key={i} style={{
+              display: 'flex', flexDirection: 'column',
+              padding: '20px', gap: '20px',
+              minWidth: '380px', // Prevents shrinking
+              width: '380px',
+              backgroundColor: '#FFFFFF',
+              borderRadius: '24px',
+              transition: 'transform 0.3s ease',
+              cursor: 'pointer',
+              flexShrink: 0
+            }}
+            onMouseEnter={(e) => e.currentTarget.style.transform = 'translateY(-10px)'}
+            onMouseLeave={(e) => e.currentTarget.style.transform = 'translateY(0)'}
+            >
+              {/* Card Image */}
+              <div style={{
+                width: '100%', height: '220px',
+                backgroundImage: `url(${course.img})`,
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+                borderRadius: '16px'
+              }} />
+              
+              {/* Card Content */}
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', paddingBottom: '10px' }}>
+                <h3 style={{
+                  fontFamily: 'Inter', fontWeight: 700, fontSize: '28px',
+                  color: '#2E2E2E', lineHeight: '1.2', margin: 0
+                }}>
+                  {course.levelText1} <br/> {course.levelText2}
+                </h3>
+                <p style={{
+                  fontFamily: 'Inter', fontWeight: 400, fontSize: '20px',
+                  color: '#4B5563', lineHeight: '28px', margin: 0
+                }}>
+                  {course.desc}
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <button className="btn-yellow" style={{ marginTop: '50px' }}>
+          Explore Details
+        </button>
+      </div>
+    </section>
+  );
+}
