@@ -1,0 +1,179 @@
+"use client";
+import React, { useState } from 'react';
+
+export default function About() {
+  const [activeTab, setActiveTab] = useState('vision');
+
+  const content = {
+    vision: {
+      title: "Vision",
+      text: "To build a global community where language empowers confidence, connection, and success.",
+      img: "/about_vision.png", 
+      color: "#25CAD8"
+    },
+    mission: {
+      title: "Mission",
+      text: "To equip individuals with skills, knowledge, and confidence to communicate effectively and thrive globally.",
+      img: "/about_mission.png",
+      color: "#2C4B82"
+    }
+  };
+
+  const activeContent = activeTab === 'vision' ? content.vision : content.mission;
+
+  return (
+    <section style={{
+      position: 'relative',
+      width: '100%',
+      minHeight: '900px',
+      backgroundColor: '#FFFFFF',
+      padding: '120px 100px',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'space-between',
+      gap: '60px'
+    }}>
+      
+      {/* Decorative Blob */}
+      <div style={{
+        position: 'absolute',
+        width: '487px', height: '465px',
+        left: '50px', top: '100px',
+        background: '#FFF0D2',
+        borderRadius: '30% 70% 70% 30% / 30% 30% 70% 70%',
+        zIndex: 1
+      }} />
+
+      {/* Image Area */}
+      <div style={{ position: 'relative', width: '50%', height: '600px', zIndex: 2 }}>
+        <div style={{
+          position: 'absolute',
+          width: '570px', height: '518px',
+          left: '30px', top: '50px',
+          backgroundImage: 'url(/about-classroom.png)',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          borderRadius: '24px',
+          transform: 'rotate(-5deg)',
+          boxShadow: '0 20px 40px rgba(0,0,0,0.1)'
+        }} />
+      </div>
+
+      {/* Content Area */}
+      <div style={{ width: '50%', zIndex: 2, display: 'flex', flexDirection: 'column', gap: '40px' }}>
+        <h2 style={{
+          fontFamily: 'Inter', fontWeight: 600, fontSize: '48px',
+          lineHeight: '58px', color: '#2E2E2E'
+        }}>
+          We Make <span style={{ color: '#FA4516' }}>German Learning</span> <br/> Easy & Career-Focused
+        </h2>
+        <p style={{
+          fontFamily: 'Inter', fontWeight: 400, fontSize: '24px',
+          lineHeight: '32px', color: '#2E2E2E'
+        }}>
+          We provide practical and engaging German language training designed to help students and professionals succeed in education and careers in Germany.
+        </p>
+
+        {/* Vision/Mission Interactive Box */}
+        <div style={{
+          position: 'relative',
+          width: '100%',
+          maxWidth: '650px',
+          backgroundColor: '#FFFFFF',
+          boxShadow: '0px 20px 60px rgba(0, 0, 0, 0.1)',
+          borderRadius: '40px',
+          overflow: 'hidden',
+          marginTop: '20px'
+        }}>
+          {/* Tabs */}
+          <div style={{ display: 'flex', height: '70px' }}>
+            <div 
+              onClick={() => setActiveTab('vision')}
+              style={{
+                flex: 1,
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                backgroundColor: '#25CAD8',
+                cursor: 'pointer',
+                position: 'relative'
+              }}
+            >
+              <span style={{ fontFamily: 'Inter', fontWeight: 600, fontSize: '32px', color: '#2E2E2E' }}>
+                Vision
+              </span>
+              {activeTab === 'vision' && (
+                <div style={{
+                  position: 'absolute',
+                  bottom: '-15px',
+                  left: '50%',
+                  transform: 'translateX(-50%)',
+                  width: 0,
+                  height: 0,
+                  borderLeft: '15px solid transparent',
+                  borderRight: '15px solid transparent',
+                  borderTop: '15px solid #25CAD8'
+                }} />
+              )}
+            </div>
+            <div 
+              onClick={() => setActiveTab('mission')}
+              style={{
+                flex: 1,
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                backgroundColor: '#2C4B82',
+                cursor: 'pointer',
+                position: 'relative'
+              }}
+            >
+              <span style={{ fontFamily: 'Inter', fontWeight: 600, fontSize: '32px', color: '#FFFFFF' }}>
+                Mission
+              </span>
+              {activeTab === 'mission' && (
+                <div style={{
+                  position: 'absolute',
+                  bottom: '-15px',
+                  left: '50%',
+                  transform: 'translateX(-50%)',
+                  width: 0,
+                  height: 0,
+                  borderLeft: '15px solid transparent',
+                  borderRight: '15px solid transparent',
+                  borderTop: '15px solid #2C4B82'
+                }} />
+              )}
+            </div>
+          </div>
+          
+          {/* Content Body */}
+          <div style={{
+            padding: '50px 30px 40px',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '30px',
+            minHeight: '280px'
+          }}>
+            <div style={{
+              width: '240px',
+              height: '180px',
+              backgroundImage: `url(${activeContent.img})`,
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+              borderRadius: '20px',
+              flexShrink: 0
+            }} />
+            <p style={{
+              fontFamily: 'Inter',
+              fontWeight: 500,
+              fontSize: '24px',
+              lineHeight: '34px',
+              color: '#2E2E2E',
+              margin: 0
+            }}>
+              {activeContent.text}
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  );
+}
