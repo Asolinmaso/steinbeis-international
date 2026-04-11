@@ -1,8 +1,10 @@
-
+"use client";
 import Link from 'next/link';
 import React from 'react';
+import { usePathname } from 'next/navigation';
 
 export default function Navbar() {
+  const pathname = usePathname();
   return (
     <nav style={{
       position: 'absolute',
@@ -29,28 +31,41 @@ export default function Navbar() {
       }}>
         <Link href="/" style={{
           fontFamily: 'Inter',
-          fontWeight: 700,
+          fontWeight: pathname === '/' ? 700 : 400,
           fontSize: '24px',
           color: '#2E2E2E',
           position: 'relative'
         }}>
           Home
-          <div style={{
-            position: 'absolute',
-            width: '43px',
-            height: '0px',
-            border: '2px solid #2E2E2E', /* Made border slightly thicker for visibility */
-            left: '1px',
-            bottom: '-5px'
-          }} />
+          {pathname === '/' && (
+            <div style={{
+              position: 'absolute',
+              width: '43px',
+              height: '0px',
+              border: '2px solid #2E2E2E',
+              left: '1px',
+              bottom: '-5px'
+            }} />
+          )}
         </Link>
-        <Link href="#courses" style={{
+        <Link href="/courses" style={{
           fontFamily: 'Inter',
-          fontWeight: 400,
+          fontWeight: pathname === '/courses' ? 700 : 400,
           fontSize: '24px',
-          color: '#2E2E2E'
+          color: '#2E2E2E',
+          position: 'relative'
         }}>
           Courses
+          {pathname === '/courses' && (
+            <div style={{
+              position: 'absolute',
+              width: '60px',
+              height: '0px',
+              border: '2px solid #2E2E2E',
+              left: '1px',
+              bottom: '-5px'
+            }} />
+          )}
         </Link>
         <Link href="#contact" style={{
           fontFamily: 'Inter',
