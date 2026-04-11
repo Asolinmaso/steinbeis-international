@@ -67,13 +67,24 @@ export default function Navbar() {
             }} />
           )}
         </Link>
-        <Link href="#contact" style={{
+        <Link href="/contact" style={{
           fontFamily: 'Inter',
-          fontWeight: 400,
+          fontWeight: pathname === '/contact' ? 700 : 400,
           fontSize: '24px',
-          color: '#2E2E2E'
+          color: '#2E2E2E',
+          position: 'relative'
         }}>
           Contact Us
+          {pathname === '/contact' && (
+            <div style={{
+              position: 'absolute',
+              width: '60px',
+              height: '0px',
+              border: '2px solid #2E2E2E',
+              left: '1px',
+              bottom: '-5px'
+            }} />
+          )}
         </Link>
       </div>
 
