@@ -6,78 +6,71 @@ const courses = [
     levelText1: "German A1",
     levelText2: "Beginner Level",
     desc: "Learn basic words and phrases to communicate in everyday situations.",
-    img: "/hero-student.png" // Placeholder
+    img: "/hero-student.png"
   },
   {
     levelText1: "German A2",
     levelText2: "Elementary Level",
     desc: "Build confidence by using common sentences in everyday conversations.",
-    img: "/about-classroom.png" // Placeholder
+    img: "/about-classroom.png"
   },
   {
     levelText1: "German B1",
     levelText2: "Intermediate Level",
     desc: "Manage real-life conversations with clarity and better understanding.",
-    img: "/course-german.png" // Placeholder
+    img: "/course-german.png"
   },
   {
     levelText1: "German B2",
     levelText2: "Upper Intermediate Level",
     desc: "Improve fluency and understanding for academic and professional communication.",
-    img: "/hero-student.png" // Placeholder
+    img: "/hero-student.png"
   }
 ];
 
 export default function Courses() {
   return (
-    <section id="courses" style={{
+    <section className="courses-section" id="courses" style={{
       position: 'relative',
       width: '100%',
-      backgroundColor: '#051636', // Dark blue background matching the image
-      padding: '100px 0', // Removed side padding to let carousel bleed if needed, but we can set max-width container or use padding
+      backgroundColor: '#051636',
+      padding: '100px 0',
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'center',
       overflow: 'hidden'
     }}>
-      {/* Decorative Wavy Dotted Line Placeholder */}
+      {/* Decorative Wavy Dotted Line */}
       <div style={{
-        position: 'absolute',
-        top: 0,
-        left: 0,
-        width: '300px',
-        height: '300px',
+        position: 'absolute', top: 0, left: 0,
+        width: '300px', height: '300px',
         borderRight: '2px dotted rgba(255,255,255,0.4)',
         borderBottom: '2px dotted rgba(255,255,255,0.4)',
         borderBottomRightRadius: '150px',
-        opacity: 0.8,
-        zIndex: 0,
-        transform: 'translate(-50%, -50%)'
+        opacity: 0.8, zIndex: 0, transform: 'translate(-50%, -50%)'
       }} />
       <div style={{
-        position: 'absolute',
-        top: '150px',
-        left: '150px',
-        width: '300px',
-        height: '300px',
+        position: 'absolute', top: '150px', left: '150px',
+        width: '300px', height: '300px',
         borderLeft: '2px dotted rgba(255,255,255,0.4)',
         borderTop: '2px dotted rgba(255,255,255,0.4)',
         borderTopLeftRadius: '150px',
-        opacity: 0.8,
-        zIndex: 0,
-        transform: 'translate(-50%, -50%)'
+        opacity: 0.8, zIndex: 0, transform: 'translate(-50%, -50%)'
       }} />
 
-      <div style={{ zIndex: 10, display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%', maxWidth: '1240px', padding: '0 20px' }}>
-        
-        <h2 style={{
+      <div className="courses-inner" style={{
+        zIndex: 10,
+        display: 'flex', flexDirection: 'column', alignItems: 'center',
+        width: '100%', maxWidth: '1240px', padding: '0 20px'
+      }}>
+        <h2 className="courses-title" style={{
           fontFamily: 'Inter', fontWeight: 600, fontSize: '48px',
           color: '#FFFFFF', textAlign: 'center', marginBottom: '20px'
         }}>
           Start Your German Learning Journey
         </h2>
-        
-        <p style={{
+
+        <p className="courses-desc" style={{
           fontFamily: 'Inter', fontWeight: 400, fontSize: '22px',
           color: '#FFFFFF', textAlign: 'center', maxWidth: '800px',
           marginBottom: '60px', lineHeight: '30px'
@@ -86,7 +79,7 @@ export default function Courses() {
         </p>
 
         {/* Carousel Container */}
-        <div 
+        <div
           className="no-scrollbar"
           style={{
             display: 'flex',
@@ -101,10 +94,10 @@ export default function Courses() {
           }}
         >
           {courses.map((course, i) => (
-            <div key={i} style={{
+            <div key={i} className="courses-carousel-card" style={{
               display: 'flex', flexDirection: 'column',
               padding: '20px', gap: '20px',
-              minWidth: '380px', // Prevents shrinking
+              minWidth: '380px',
               width: '380px',
               backgroundColor: '#FFFFFF',
               borderRadius: '24px',
@@ -123,7 +116,7 @@ export default function Courses() {
                 backgroundPosition: 'center',
                 borderRadius: '16px'
               }} />
-              
+
               {/* Card Content */}
               <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', paddingBottom: '10px' }}>
                 <h3 style={{
