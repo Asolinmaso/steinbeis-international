@@ -39,8 +39,8 @@ export default function Footer() {
         zIndex: 20
       }}>
         <div style={{
-          width: '70px', height: '70px',
-          backgroundImage: 'url(/logo.png)',
+          width: '110px', height: '110px',
+          backgroundImage: 'url(/footer_logo.png)',
           backgroundSize: 'contain', backgroundRepeat: 'no-repeat', backgroundPosition: 'center'
         }} />
       </div>

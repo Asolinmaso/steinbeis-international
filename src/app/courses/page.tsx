@@ -260,9 +260,21 @@ export default function CoursesPage() {
             position: 'absolute', top: '260px', left: '100px', right: '100px',
             display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-start'
           }}>
-            <div className="cpage-path-dashes" style={{ position: 'absolute', left: '210px', top: '48.5px', width: '139.01px', height: '0px', borderTop: '3px dashed #FFFFFF' }} />
-            <div className="cpage-path-dashes" style={{ position: 'absolute', left: '534px', top: '48px', width: '139.01px', height: '0px', borderTop: '3px dashed #FFFFFF' }} />
-            <div className="cpage-path-dashes" style={{ position: 'absolute', left: '873px', top: '48.5px', width: '139.01px', height: '0px', borderTop: '3px dashed #FFFFFF' }} />
+            <div className="cpage-path-dashes" style={{ position: 'absolute', left: '210px', top: '40px' }}>
+              <svg width="140" height="14" viewBox="0 0 140 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0.361328 11.6804C54.7751 -1.80596 84.991 -1.98069 139.376 11.6804" stroke="white" strokeWidth="3" strokeDasharray="6 6"/>
+              </svg>
+            </div>
+            <div className="cpage-path-dashes" style={{ position: 'absolute', left: '534px', top: '40px' }}>
+              <svg width="140" height="14" viewBox="0 0 140 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0.361328 11.6804C54.7751 -1.80596 84.991 -1.98069 139.376 11.6804" stroke="white" strokeWidth="3" strokeDasharray="6 6"/>
+              </svg>
+            </div>
+            <div className="cpage-path-dashes" style={{ position: 'absolute', left: '873px', top: '40px' }}>
+              <svg width="140" height="14" viewBox="0 0 140 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0.361328 11.6804C54.7751 -1.80596 84.991 -1.98069 139.376 11.6804" stroke="white" strokeWidth="3" strokeDasharray="6 6"/>
+              </svg>
+            </div>
 
             {STEPS.map((step, idx) => (
               <div key={idx} className="cpage-path-step" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '24px', width: '259px', zIndex: 10 }}>
