@@ -75,7 +75,7 @@ export default function ContactPage() {
       }}>
         <div className="contact-main-row" style={{
           width: '100%', maxWidth: '1240px', display: 'flex', flexDirection: 'row',
-          justifyContent: 'space-between', padding: '0 20px', gap: '60px'
+          justifyContent: 'space-between', padding: '0 100px', gap: '60px'
         }}>
 
           {/* Left Side: Contact Info */}
@@ -198,7 +198,7 @@ export default function ContactPage() {
       }}>
         <div className="contact-faq-row" style={{
           width: '100%', maxWidth: '1240px', display: 'flex', flexDirection: 'row',
-          justifyContent: 'space-between', padding: '0 20px', gap: '60px'
+          justifyContent: 'space-between', padding: '0 100px', gap: '60px'
         }}>
           {/* Left Side: FAQ Header & Still-have-questions Box */}
           <div className="contact-faq-left" style={{ flex: '0 0 483px', display: 'flex', flexDirection: 'column' }}>
@@ -243,17 +243,19 @@ export default function ContactPage() {
                     </h4>
                     <div style={{
                       width: '40px', height: '40px', backgroundColor: '#2C4B82', borderRadius: '50%',
-                      display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0
+                      display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0,
+                      transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)',
+                      transition: 'transform 0.3s ease'
                     }}>
-                      <span style={{ color: '#FFFFFF', fontSize: '24px', lineHeight: '1', fontWeight: 'bold', userSelect: 'none' }}>
-                        {isOpen ? '−' : '+'}
-                      </span>
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M6 9L12 15L18 9" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
+                      </svg>
                     </div>
                   </div>
 
                   {isOpen && (
                     <div style={{ borderTop: '1px solid rgba(44,75,130,0.2)', paddingTop: '16px' }}>
-                      <p className="contact-faq-a" style={{ fontFamily: 'Inter', fontWeight: 400, fontSize: '24px', lineHeight: '32px', color: '#2E2E2E', margin: 0 }}>
+                      <p className="contact-faq-a" style={{ fontFamily: 'Inter', fontWeight: 400, fontSize: '20px', lineHeight: '30px', color: '#2E2E2E', margin: 0 }}>
                         {faq.answer}
                       </p>
                     </div>
@@ -268,7 +270,7 @@ export default function ContactPage() {
       {/* Map Section */}
       <div className="contact-map-wrapper" style={{
         width: '100%', height: '600px', display: 'flex', justifyContent: 'center', alignItems: 'center',
-        padding: '0 100px 100px 100px'
+        padding: '0 100px 60px 100px'
       }}>
         <div style={{
           width: '100%', maxWidth: '1240px', height: '100%', borderRadius: '24px',
