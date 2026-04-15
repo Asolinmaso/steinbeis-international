@@ -27,23 +27,19 @@ const FAQS = [
 ];
 
 export default function ContactPage() {
-  const [openFAQIndex, setOpenFAQIndex] = useState<number | null>(0); // First one open by default
+  const [openFAQIndex, setOpenFAQIndex] = useState<number | null>(0);
 
   const toggleFAQ = (index: number) => {
-    if (openFAQIndex === index) {
-      setOpenFAQIndex(null);
-    } else {
-      setOpenFAQIndex(index);
-    }
+    setOpenFAQIndex(openFAQIndex === index ? null : index);
   };
 
   return (
     <main style={{ position: 'relative', width: '100%', overflowX: 'hidden' }}>
-      
+
       <Navbar />
 
-      {/* Hero Banner Area */}
-      <div style={{
+      {/* Hero Banner */}
+      <div className="contact-hero" style={{
         position: 'relative',
         width: '100%',
         minHeight: '543px',
@@ -60,12 +56,12 @@ export default function ContactPage() {
         zIndex: 10
       }}>
         <div style={{ display: 'flex', flexDirection: 'column', gap: '24px', alignItems: 'center', maxWidth: '800px', textAlign: 'center' }}>
-          <h1 style={{
+          <h1 className="contact-hero-title" style={{
             fontFamily: 'Inter', fontWeight: 600, fontSize: '64px', lineHeight: '77px', color: '#FFFFFF'
           }}>
             Get in Touch <span style={{ color: '#FFB61E' }}>With Us</span>
           </h1>
-          <p style={{
+          <p className="contact-hero-desc" style={{
             fontFamily: 'Inter', fontWeight: 400, fontSize: '24px', lineHeight: '29px', color: '#FFFFFF'
           }}>
             Have questions or need guidance? Reach out to us and take the first step towards your learning journey with expert support.
@@ -73,18 +69,19 @@ export default function ContactPage() {
         </div>
       </div>
 
-      {/* Main Content Area: Split Contact Info and Form */}
-      <div style={{
+      {/* Main Content Area: Contact Info + Form */}
+      <div className="contact-main-section" style={{
         width: '100%', display: 'flex', justifyContent: 'center', padding: '100px 0', backgroundColor: '#FFFFFF'
       }}>
-        <div style={{
-          width: '100%', maxWidth: '1240px', display: 'flex', flexDirection: 'row', justifyContent: 'space-between', padding: '0 20px', gap: '60px'
+        <div className="contact-main-row" style={{
+          width: '100%', maxWidth: '1240px', display: 'flex', flexDirection: 'row',
+          justifyContent: 'space-between', padding: '0 20px', gap: '60px'
         }}>
-          
+
           {/* Left Side: Contact Info */}
-          <div style={{ flex: '1', display: 'flex', flexDirection: 'column', maxWidth: '500px' }}>
+          <div className="contact-info-col" style={{ flex: '1', display: 'flex', flexDirection: 'column', maxWidth: '500px' }}>
             <h2 style={{ fontFamily: 'Inter', fontWeight: 600, fontSize: '48px', lineHeight: '58px', color: '#2E2E2E', marginBottom: '24px' }}>
-              Let’s Connect &<br/>
+              Let's Connect &<br/>
               Begin <span style={{ color: '#FA4516' }}>Your Journey</span>
             </h2>
             <p style={{ fontFamily: 'Inter', fontWeight: 400, fontSize: '24px', lineHeight: '32px', color: '#2E2E2E', marginBottom: '40px' }}>
@@ -99,7 +96,7 @@ export default function ContactPage() {
                 </div>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
                   <span style={{ fontFamily: 'Inter', fontWeight: 600, fontSize: '24px', color: '#2E2E2E' }}>Contact</span>
-                  <span style={{ fontFamily: 'Inter', fontWeight: 400, fontSize: '24px', color: '#2E2E2E' }}>09600116858</span>
+                  <span className="contact-info-detail" style={{ fontFamily: 'Inter', fontWeight: 400, fontSize: '24px', color: '#2E2E2E' }}>09600116858</span>
                 </div>
               </div>
 
@@ -110,7 +107,7 @@ export default function ContactPage() {
                 </div>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
                   <span style={{ fontFamily: 'Inter', fontWeight: 600, fontSize: '24px', color: '#2E2E2E' }}>E-mail</span>
-                  <span style={{ fontFamily: 'Inter', fontWeight: 400, fontSize: '24px', color: '#2E2E2E' }}>steinbeisinternational@gmail.com</span>
+                  <span className="contact-info-detail" style={{ fontFamily: 'Inter', fontWeight: 400, fontSize: '24px', color: '#2E2E2E', wordBreak: 'break-word' }}>steinbeisinternational@gmail.com</span>
                 </div>
               </div>
 
@@ -121,7 +118,7 @@ export default function ContactPage() {
                 </div>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
                   <span style={{ fontFamily: 'Inter', fontWeight: 600, fontSize: '24px', color: '#2E2E2E' }}>Address</span>
-                  <span style={{ fontFamily: 'Inter', fontWeight: 400, fontSize: '24px', lineHeight: '32px', color: '#2E2E2E' }}>
+                  <span className="contact-info-detail" style={{ fontFamily: 'Inter', fontWeight: 400, fontSize: '24px', lineHeight: '32px', color: '#2E2E2E' }}>
                     Building No. 1/288, East Coast Road, Kottivakkam, Near Tamil Matrimony Office, Thiruvanmiyur, Chennai, Tamil Nadu – 600041
                   </span>
                 </div>
@@ -130,42 +127,42 @@ export default function ContactPage() {
           </div>
 
           {/* Right Side: Form */}
-          <div style={{ flex: '1', display: 'flex', flexDirection: 'column', maxWidth: '600px' }}>
+          <div className="contact-form-col" style={{ flex: '1', display: 'flex', flexDirection: 'column', maxWidth: '600px' }}>
             <h2 style={{ fontFamily: 'Inter', fontWeight: 600, fontSize: '48px', lineHeight: '58px', color: '#2E2E2E', marginBottom: '16px' }}>
-              Let’s Get <span style={{ color: '#FA4516' }}>In Touch</span>
+              Let's Get <span style={{ color: '#FA4516' }}>In Touch</span>
             </h2>
             <p style={{ fontFamily: 'Inter', fontWeight: 400, fontSize: '24px', lineHeight: '32px', color: '#2E2E2E', marginBottom: '40px' }}>
-              Let us know your concern, and we’ll get back to you within 24 hours.
+              Let us know your concern, and we'll get back to you within 24 hours.
             </p>
 
             <form style={{ display: 'flex', flexDirection: 'column', gap: '32px' }} onSubmit={(e) => e.preventDefault()}>
               {/* Row 1 */}
-              <div style={{ display: 'flex', gap: '32px' }}>
-                <input type="text" placeholder="First Name" style={{
+              <div className="contact-form-pair-row" style={{ display: 'flex', gap: '32px' }}>
+                <input type="text" placeholder="First Name" className="contact-form-input" style={{
                   flex: 1, border: 'none', borderBottom: '1px solid #C4C4C4', padding: '12px 0',
                   fontFamily: 'Inter', fontSize: '20px', outline: 'none', backgroundColor: 'transparent'
                 }} />
-                <input type="text" placeholder="Last Name" style={{
+                <input type="text" placeholder="Last Name" className="contact-form-input" style={{
                   flex: 1, border: 'none', borderBottom: '1px solid #C4C4C4', padding: '12px 0',
                   fontFamily: 'Inter', fontSize: '20px', outline: 'none', backgroundColor: 'transparent'
                 }} />
               </div>
 
               {/* Row 2 */}
-              <div style={{ display: 'flex', gap: '32px' }}>
-                <input type="email" placeholder="Email" style={{
+              <div className="contact-form-pair-row" style={{ display: 'flex', gap: '32px' }}>
+                <input type="email" placeholder="Email" className="contact-form-input" style={{
                   flex: 1, border: 'none', borderBottom: '1px solid #C4C4C4', padding: '12px 0',
                   fontFamily: 'Inter', fontSize: '20px', outline: 'none', backgroundColor: 'transparent'
                 }} />
                 <div style={{ flex: 1, display: 'flex', borderBottom: '1px solid #C4C4C4', padding: '12px 0', alignItems: 'center' }}>
                   <span style={{ fontFamily: 'Inter', fontSize: '20px', color: '#2E2E2E', marginRight: '16px' }}>+91</span>
-                  <input type="tel" placeholder="Phone number" style={{
+                  <input type="tel" placeholder="Phone number" className="contact-form-input" style={{
                     border: 'none', flex: 1, fontFamily: 'Inter', fontSize: '20px', outline: 'none', backgroundColor: 'transparent'
                   }} />
                 </div>
               </div>
 
-              <select 
+              <select
                 defaultValue=""
                 style={{
                   width: '100%', border: 'none', borderBottom: '1px solid #C4C4C4', padding: '12px 0',
@@ -196,14 +193,15 @@ export default function ContactPage() {
       </div>
 
       {/* FAQ Section */}
-      <div style={{
+      <div className="contact-faq-section" style={{
         width: '100%', display: 'flex', justifyContent: 'center', padding: '100px 0', backgroundColor: '#FFFFFF'
       }}>
-        <div style={{
-          width: '100%', maxWidth: '1240px', display: 'flex', flexDirection: 'row', justifyContent: 'space-between', padding: '0 20px', gap: '60px'
+        <div className="contact-faq-row" style={{
+          width: '100%', maxWidth: '1240px', display: 'flex', flexDirection: 'row',
+          justifyContent: 'space-between', padding: '0 20px', gap: '60px'
         }}>
-          {/* Left Side: FAQ Header & Box */}
-          <div style={{ flex: '0 0 483px', display: 'flex', flexDirection: 'column' }}>
+          {/* Left Side: FAQ Header & Still-have-questions Box */}
+          <div className="contact-faq-left" style={{ flex: '0 0 483px', display: 'flex', flexDirection: 'column' }}>
             <h2 style={{ fontFamily: 'Inter', fontWeight: 600, fontSize: '48px', lineHeight: '58px', color: '#2E2E2E', marginBottom: '24px' }}>
               Frequently Asked<br/>
               <span style={{ color: '#FA4516' }}>Questions</span>
@@ -213,7 +211,7 @@ export default function ContactPage() {
             </p>
 
             {/* Dark Blue Box */}
-            <div style={{
+            <div className="contact-still-box" style={{
               backgroundColor: '#071B42', borderRadius: '24px', padding: '32px', display: 'flex', flexDirection: 'column', gap: '24px'
             }}>
               <h3 style={{ fontFamily: 'Inter', fontWeight: 600, fontSize: '32px', color: '#FFFFFF' }}>
@@ -229,7 +227,7 @@ export default function ContactPage() {
           </div>
 
           {/* Right Side: Accordion */}
-          <div style={{ flex: '1', display: 'flex', flexDirection: 'column', gap: '24px' }}>
+          <div className="contact-faq-right" style={{ flex: '1', display: 'flex', flexDirection: 'column', gap: '24px' }}>
             {FAQS.map((faq, index) => {
               const isOpen = openFAQIndex === index;
               return (
@@ -238,9 +236,9 @@ export default function ContactPage() {
                   padding: '24px', display: 'flex', flexDirection: 'column', gap: '16px',
                   cursor: 'pointer', transition: 'all 0.3s ease'
                 }} onClick={() => toggleFAQ(index)}>
-                  
+
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                    <h4 style={{ fontFamily: 'Inter', fontWeight: 600, fontSize: '24px', color: '#2E2E2E', margin: 0, paddingRight: '20px' }}>
+                    <h4 className="contact-faq-q" style={{ fontFamily: 'Inter', fontWeight: 600, fontSize: '24px', color: '#2E2E2E', margin: 0, paddingRight: '20px' }}>
                       {faq.question}
                     </h4>
                     <div style={{
@@ -252,15 +250,14 @@ export default function ContactPage() {
                       </span>
                     </div>
                   </div>
-                  
+
                   {isOpen && (
                     <div style={{ borderTop: '1px solid rgba(44,75,130,0.2)', paddingTop: '16px' }}>
-                      <p style={{ fontFamily: 'Inter', fontWeight: 400, fontSize: '24px', lineHeight: '32px', color: '#2E2E2E', margin: 0 }}>
+                      <p className="contact-faq-a" style={{ fontFamily: 'Inter', fontWeight: 400, fontSize: '24px', lineHeight: '32px', color: '#2E2E2E', margin: 0 }}>
                         {faq.answer}
                       </p>
                     </div>
                   )}
-
                 </div>
               );
             })}
@@ -269,7 +266,7 @@ export default function ContactPage() {
       </div>
 
       {/* Map Section */}
-      <div style={{
+      <div className="contact-map-wrapper" style={{
         width: '100%', height: '600px', display: 'flex', justifyContent: 'center', alignItems: 'center',
         padding: '0 100px 100px 100px'
       }}>
@@ -277,13 +274,13 @@ export default function ContactPage() {
           width: '100%', maxWidth: '1240px', height: '100%', borderRadius: '24px',
           overflow: 'hidden', border: '1px solid #E0E0E0'
         }}>
-          <iframe 
-            src="https://maps.google.com/maps?q=Building%20No.%201/288,%20East%20Coast%20Road,%20Kottivakkam,%20Chennai&t=&z=15&ie=UTF8&iwloc=&output=embed" 
-            width="100%" 
-            height="100%" 
-            style={{ border: 0 }} 
-            allowFullScreen={false} 
-            loading="lazy" 
+          <iframe
+            src="https://maps.google.com/maps?q=Building%20No.%201/288,%20East%20Coast%20Road,%20Kottivakkam,%20Chennai&t=&z=15&ie=UTF8&iwloc=&output=embed"
+            width="100%"
+            height="100%"
+            style={{ border: 0 }}
+            allowFullScreen={false}
+            loading="lazy"
             referrerPolicy="no-referrer-when-downgrade"
           />
         </div>
