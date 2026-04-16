@@ -69,15 +69,17 @@ export default function Features() {
         }
       `}</style>
 
-      {/* Decorative dashed ellipse */}
+      {/* Decorative dashed wavy line */}
       <div className="features-dashed-ellipse" style={{
         position: 'absolute',
-        width: '1434px', height: '396px',
-        left: 'calc(50% - 717px)', top: '350px',
-        border: '4px dashed #FFFFFF',
-        borderRadius: '50%',
+        width: '1438px', height: '400px',
+        left: 'calc(50% - 719px)', top: '270px',
         zIndex: 0
-      }} />
+      }}>
+        <svg width="1438" height="400" viewBox="0 0 1438 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M1.87939 0.68457C1.87939 0.68457 113.988 308.417 283.379 341.185C455.47 374.475 499.673 116.575 674.879 121.685C862.231 127.148 880.449 396.929 1067.88 397.185C1347.74 397.566 1436.38 0.68457 1436.38 0.68457" stroke="white" strokeWidth="4" strokeDasharray="6 6"/>
+        </svg>
+      </div>
 
       {/* Blur Ellipses */}
       <div style={{ position: 'absolute', width: '215px', height: '215px', right: '100px', top: '34px', background: '#0256EB', filter: 'blur(175px)', borderRadius: '50%', zIndex: 0 }} />
