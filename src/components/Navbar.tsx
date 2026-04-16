@@ -9,23 +9,14 @@ export default function Navbar() {
 
   return (
     <>
-      <nav style={{
-        position: 'fixed',
-        width: '100%',
-        height: '120px',
-        left: 0,
-        top: 0,
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        padding: '0 100px',
-        zIndex: 50,
-        backgroundColor: '#FFFFFF',
-        boxShadow: '0 2px 12px rgba(0,0,0,0.06)'
-      }}>
+      <nav className="navbar-root">
         <div style={{ display: 'flex', alignItems: 'center' }}>
           <Link href="/">
-            <img src="/logo.png" alt="Steinbeis International Logo" style={{ width: 198, height: 49 }} />
+            <img 
+              src="/logo.png" 
+              alt="Steinbeis International Logo" 
+              className="navbar-logo"
+            />
           </Link>
         </div>
 

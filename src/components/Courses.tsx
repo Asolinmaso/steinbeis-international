@@ -6,25 +6,25 @@ const courses = [
     levelText1: "German A1",
     levelText2: "Beginner Level",
     desc: "Learn basic words and phrases to communicate in everyday situations.",
-    img: "/hero-student.png"
+    img: "/learning_journey_1.png"
   },
   {
     levelText1: "German A2",
     levelText2: "Elementary Level",
     desc: "Build confidence by using common sentences in everyday conversations.",
-    img: "/about-classroom.png"
+    img: "/learning_journey_2.png"
   },
   {
     levelText1: "German B1",
     levelText2: "Intermediate Level",
     desc: "Manage real-life conversations with clarity and better understanding.",
-    img: "/course-german.png"
+    img: "/learning_journey_3.png"
   },
   {
     levelText1: "German B2",
     levelText2: "Upper Intermediate Level",
     desc: "Improve fluency and understanding for academic and professional communication.",
-    img: "/hero-student.png"
+    img: "/learning_journey_1.png"
   }
 ];
 
