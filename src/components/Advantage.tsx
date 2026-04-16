@@ -27,7 +27,7 @@ const advantages = [
     color: "#FFB61E",
     shadow: "rgba(255, 182, 30, 0.5)",
     top: "130px",
-    left: "425px",
+    left: "580px",
     width: "381px",
     icon: (
       <svg width="40" height="40" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -42,7 +42,7 @@ const advantages = [
     color: "#25CAD8",
     shadow: "rgba(37, 202, 216, 0.5)",
     top: "130px",
-    left: "846px",
+    left: "980px",
     width: "394px",
     icon: (
       <svg width="40" height="40" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -57,7 +57,7 @@ const advantages = [
     color: "#25CAD8",
     shadow: "rgba(37, 202, 216, 0.5)",
     top: "258px",
-    left: "444px",
+    left: "600px",
     width: "366px",
     icon: (
       <svg width="40" height="40" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -71,7 +71,7 @@ const advantages = [
     color: "#FA4516",
     shadow: "rgba(250, 69, 22, 0.5)",
     top: "258px",
-    left: "850px",
+    left: "985px",
     width: "390px",
     icon: (
       <svg width="40" height="40" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
