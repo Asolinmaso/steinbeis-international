@@ -1,5 +1,6 @@
 "use client";
 import React from 'react';
+import Link from 'next/link';
 
 const advantages = [
   { text: "A1 to B2 Detailed Brochure", bg: "#FFF7E5", color: "#FFB61E", top: "130px", left: "0px" },
@@ -32,9 +33,11 @@ export default function Advantage() {
             A comprehensive guide to help you decide. We provide practical and engaging German language training designed to help students and professionals.
           </p>
 
-          <button className="btn-navy" style={{ width: '193px', marginTop: '20px' }}>
-            Enquire Now
-          </button>
+          <Link href="/contact">
+            <button className="btn-navy" style={{ width: '193px', marginTop: '20px' }}>
+              Enquire Now
+            </button>
+          </Link>
         </div>
 
         <div className="advantage-cards-col" style={{ flex: 2, position: 'relative', height: '400px' }}>

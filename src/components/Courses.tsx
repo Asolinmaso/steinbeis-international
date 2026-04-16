@@ -1,5 +1,6 @@
 "use client";
 import React from 'react';
+import Link from 'next/link';
 
 const courses = [
   {
@@ -136,9 +137,11 @@ export default function Courses() {
           ))}
         </div>
 
-        <button className="btn-yellow" style={{ marginTop: '50px' }}>
-          Explore Details
-        </button>
+        <Link href="/courses">
+          <button className="btn-yellow" style={{ marginTop: '50px' }}>
+            Explore Details
+          </button>
+        </Link>
       </div>
     </section>
   );
