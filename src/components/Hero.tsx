@@ -1,5 +1,6 @@
 "use client";
 import React, { useState, useEffect, useRef } from 'react';
+import Link from 'next/link';
 
 export default function Hero() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -91,20 +92,24 @@ export default function Hero() {
         </div>
 
         <div className="hero-btn-row" style={{ display: 'flex', gap: '24px' }}>
-          <button className="btn-yellow" style={{ width: '193px', height: '61px' }}>
-            Enquire Now
-          </button>
-          <button className="hero-explore-btn" style={{
-            width: '236px', height: '61px',
-            borderRadius: '16px',
-            border: '1px solid #FFB61E',
-            background: 'transparent',
-            color: '#FFB61E',
-            fontFamily: 'Inter', fontWeight: 500, fontSize: '20px',
-            cursor: 'pointer'
-          }}>
-            Explore Courses
-          </button>
+          <Link href="/contact">
+            <button className="btn-yellow" style={{ width: '193px', height: '61px' }}>
+              Enquire Now
+            </button>
+          </Link>
+          <Link href="/courses">
+            <button className="hero-explore-btn" style={{
+              width: '236px', height: '61px',
+              borderRadius: '16px',
+              border: '1px solid #FFB61E',
+              background: 'transparent',
+              color: '#FFB61E',
+              fontFamily: 'Inter', fontWeight: 500, fontSize: '20px',
+              cursor: 'pointer'
+            }}>
+              Explore Courses
+            </button>
+          </Link>
         </div>
       </div>
 

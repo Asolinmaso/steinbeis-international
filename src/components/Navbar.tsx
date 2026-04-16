@@ -81,9 +81,11 @@ export default function Navbar() {
         </div>
 
         {/* Desktop enquire button */}
-        <button className="navbar-enquire btn-yellow">
-          Enquire Now
-        </button>
+        <Link href="/contact">
+          <button className="navbar-enquire btn-yellow">
+            Enquire Now
+          </button>
+        </Link>
 
         {/* Hamburger (mobile only) */}
         <button
@@ -111,9 +113,11 @@ export default function Navbar() {
           style={{ fontWeight: pathname === '/contact' ? 700 : 400, borderBottom: '1px solid #f0f0f0', paddingBottom: '12px' }}>
           Contact Us
         </Link>
-        <button className="btn-yellow" style={{ width: '100%' }}>
-          Enquire Now
-        </button>
+        <Link href="/contact" onClick={() => setMenuOpen(false)}>
+          <button className="btn-yellow" style={{ width: '100%' }}>
+            Enquire Now
+          </button>
+        </Link>
       </div>
     </>
   );
