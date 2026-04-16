@@ -129,14 +129,21 @@ button {
   to { opacity: 1; transform: scale(1); }
 }
 
-.animate-fadeInUp {
-  animation: fadeInUp 0.7s ease forwards;
-}
-
-.animate-rippleIn {
-  animation: rippleIn 1s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+/* Initially hide animated elements */
+.animate-fadeInUp, .animate-rippleIn {
   opacity: 0;
 }
+
+/* Trigger animations only when parent .is-visible is present */
+.is-visible .animate-fadeInUp {
+  animation: fadeInUp 1.5s ease forwards; /* Slowed from 0.7s to 1.5s */
+}
+
+.is-visible .animate-rippleIn {
+  animation: rippleIn 2.2s cubic-bezier(0.25, 1, 0.5, 1) forwards; /* Slowed from 1s to 2.2s */
+}
+
+/* Maintain original classes for backward compatibility if needed, but they won't trigger without .is-visible */
 
 /* ============================================================
    MOBILE RESPONSIVENESS — Tablet (≤768px) & Mobile (≤480px)
@@ -144,6 +151,27 @@ button {
    ============================================================ */
 
 /* ----- Navbar ----- */
+.navbar-root {
+  position: fixed;
+  width: 100%;
+  height: 120px;
+  left: 0;
+  top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 100px;
+  background-color: #FFFFFF;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  z-index: 1000;
+}
+
+.navbar-logo {
+  width: 198px;
+  height: 49px;
+  object-fit: contain;
+}
+
 .navbar-hamburger {
   display: none;
   flex-direction: column;
@@ -166,6 +194,15 @@ button {
 }
 
 @media (max-width: 768px) {
+  .navbar-root {
+    height: 72px !important;
+    padding: 0 20px !important;
+    z-index: 1000;
+  }
+  .navbar-logo {
+    width: 140px !important;
+    height: auto !important;
+  }
   .navbar-links { display: none !important; }
   .navbar-enquire { display: none !important; }
   .navbar-hamburger { display: flex !important; }
@@ -199,42 +236,143 @@ button {
 
 /* ----- Hero Component ----- */
 @media (max-width: 768px) {
+  section[style*="marginTop: 120px"], 
+  main > div[style*="marginTop: 120px"],
+  .hero-section-root { 
+    margin-top: 72px !important; 
+    height: 1250px !important;
+    background: #061B42 !important;
+  }
   .hero-content-wrapper {
     width: 100% !important;
     padding: 0 20px !important;
-    margin-top: 48px !important;
+    margin-top: 40px !important;
+    gap: 24px !important;
+    z-index: 20 !important;
   }
   .hero-title {
-    font-size: 34px !important;
-    line-height: 42px !important;
+    font-size: 40px !important;
+    line-height: 48px !important;
+    width: 100% !important;
+    max-width: 435px;
   }
   .hero-subtitle {
-    font-size: 16px !important;
+    font-size: 20px !important;
     line-height: 24px !important;
     width: 100% !important;
   }
-  .hero-pills-container { display: none !important; }
-  .hero-image-wrapper {
-    width: 100% !important;
-    height: 320px !important;
-    margin-top: 24px !important;
-    position: relative !important;
-  }
-  .hero-main-image {
-    width: 240px !important;
-    height: 340px !important;
-    left: 50% !important;
-    transform: translateX(-50%) !important;
+  .hero-subtitle:last-of-type {
+    max-width: 359px !important;
+    margin: 0 auto;
   }
   .hero-btn-row {
-    flex-wrap: wrap;
-    gap: 12px !important;
-    justify-content: center;
-  }
-  .hero-explore-btn {
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: center !important;
+    align-items: center !important;
+    gap: 24px !important;
     width: 100% !important;
-    max-width: 260px !important;
+  }
+  .hero-btn-row .btn-yellow, 
+  .hero-btn-row .hero-explore-btn {
+    width: auto !important;
+    flex: 1;
+    max-width: 205px;
+    height: 56px !important;
+    font-size: 20px !important;
+    padding: 16px 24px !important;
+    border-radius: 16px !important;
+  }
+  .hero-btn-row .hero-explore-btn {
+    background: #FFB61E !important;
+    color: #2E2E2E !important;
+    border: none !important;
+  }
+  .hero-image-wrapper {
+    width: 100% !important;
+    height: 413px !important;
+    margin-top: 0 !important;
+    position: absolute !important;
+    top: 780px !important;
+    left: 0 !important;
+    z-index: 10 !important;
+    opacity: 0 !important;
+    visibility: hidden;
+  }
+  .is-delayed-visible .hero-image-wrapper {
+    visibility: visible !important;
+    opacity: 1 !important;
+    animation: fadeInUp 1.5s ease forwards !important;
+  }
+  .hero-main-image {
+    width: 301px !important;
+    height: 413px !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    border-radius: 0 !important; /* Figma image usually doesn't have borderRadius like desktop unless specified */
+  }
+  .hero-pills-container { 
+    display: block !important; 
+    position: absolute !important;
+    inset: 0 !important;
+    z-index: 25 !important;
+    opacity: 0 !important;
+    visibility: hidden;
+  }
+  .is-delayed-visible .hero-pills-container {
+    visibility: visible !important;
+    opacity: 1 !important;
+    animation: fadeIn 1.0s ease forwards !important;
+    animation-delay: 0.5s !important; /* Slight extra delay after student */
+  }
+  .hero-circle {
+    border-radius: 50% !important;
+    z-index: 1 !important;
+  }
+  .hero-circle-3 { width: 534px !important; height: 534px !important; top: 542px !important; left: calc(50% - 267px) !important; background: #0A2A66 !important; }
+  .hero-circle-4 { width: 498px !important; height: 498px !important; top: 560px !important; left: calc(50% - 249px) !important; background: #082458 !important; }
+  .hero-circle-5 { width: 466px !important; height: 466px !important; top: 576px !important; left: calc(50% - 233px) !important; background: #061C45 !important; }
+  .hero-circle-2 { width: 424px !important; height: 424px !important; top: 597px !important; left: calc(50% - 212px) !important; background: #06193B !important; }
+  .hero-circle-1 { width: 385px !important; height: 385px !important; top: 616px !important; left: calc(50% - 192.5px) !important; background: #041431 !important; }
+
+  .hero-section-root > div[style*="blur"] {
+    display: none !important;
+  }
+
+  .hero-pill {
+    width: auto !important;
+    height: 62px !important;
+    padding: 12px 16px !important;
+    background: rgba(255,255,255,0.1) !important;
+    backdrop-filter: blur(10px) !important;
+    border: 1px solid rgba(255,255,255,0.2) !important;
+    border-radius: 40px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+  .hero-pill-text {
     font-size: 16px !important;
+    line-height: 19px !important;
+    white-space: pre-wrap !important;
+    text-align: center !important;
+    width: 100% !important;
+    max-width: 120px !important;
+  }
+  .hero-pill-batch     { left: calc(50% + 87px) !important;  top: 21px !important;  right: auto !important; min-width: 130px; }
+  .hero-pill-visa      { left: calc(50% + 105px) !important; top: 166px !important; right: auto !important; min-width: 124px; }
+  .hero-pill-practical { left: calc(50% - 233px) !important; top: 161px !important; right: auto !important; min-width: 139px; }
+  .hero-pill-trainers  { left: calc(50% - 225px) !important; top: 310px !important; right: auto !important; min-width: 123px; }
+  .hero-pill-advanced  { left: calc(50% - 212px) !important; top: 21px !important;  right: auto !important; min-width: 165px; }
+  .hero-pill-job       { left: calc(50% + 111px) !important; top: 311px !important; right: auto !important; min-width: 122px; }
+
+  @media (max-width: 400px) {
+    .hero-pill-batch     { left: calc(50% + 50px) !important; }
+    .hero-pill-visa      { left: calc(50% + 60px) !important; }
+    .hero-pill-practical { left: calc(50% - 180px) !important; }
+    .hero-pill-trainers  { left: calc(50% - 170px) !important; }
+    .hero-pill-advanced  { left: calc(50% - 160px) !important; }
+    .hero-pill-job       { left: calc(50% + 70px) !important; }
   }
 }
 
@@ -462,7 +600,10 @@ button {
 /* ----- Courses Page ----- */
 @media (max-width: 768px) {
   /* Hero */
-  .cpage-hero { padding: 40px 0 !important; }
+  .cpage-hero { 
+    padding: 40px 0 !important;
+    margin-top: 72px !important;
+  }
   .cpage-hero-inner {
     flex-direction: column !important;
     padding: 0 20px !important;
