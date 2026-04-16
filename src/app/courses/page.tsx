@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 
@@ -68,13 +68,42 @@ export default function CoursesPage() {
   const [activeTab, setActiveTab] = useState("German A2");
   const currentData = CourseData[activeTab];
 
+  const sectionRef = useRef<HTMLElement>(null);
+  const [isVisible, setIsVisible] = useState(false);
+  const [mounted, setMounted] = useState(false);
+  const [showDelayedElements, setShowDelayedElements] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsVisible(entry.isIntersecting);
+        if (entry.isIntersecting) {
+          setTimeout(() => setShowDelayedElements(true), 1500);
+        } else {
+          setShowDelayedElements(false);
+        }
+      },
+      { threshold: 0.01, rootMargin: "0px" }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
+  const activeClass = mounted && isVisible ? 'is-visible' : '';
+  const delayedClass = mounted && showDelayedElements ? 'is-delayed-visible' : '';
+
   return (
     <main style={{ position: 'relative', width: '100%', overflowX: 'hidden' }}>
 
       <Navbar />
 
       {/* Header Hero Section */}
-      <div className="cpage-hero" style={{
+      <section ref={sectionRef} className={`cpage-hero ${activeClass} ${delayedClass}`} style={{
         position: 'relative',
         width: '100%',
         minHeight: '623px',
@@ -85,9 +114,13 @@ export default function CoursesPage() {
         justifyContent: 'center',
         padding: '60px 0'
       }}>
+        {/* Background Ripple Circles (Synchronized with Hero.tsx) */}
+        <div className="animate-rippleIn hero-circle" style={{ animationDelay: '0.2s', position: 'absolute', width: '800px', height: '800px', left: 'auto', right: '-200px', top: '-100px', background: '#0A2A66', borderRadius: '50%', opacity: 0.6 }} />
+        <div className="animate-rippleIn hero-circle" style={{ animationDelay: '0.4s', position: 'absolute', width: '700px', height: '700px', left: 'auto', right: '-150px', top: '-50px', background: '#082458', borderRadius: '50%', opacity: 0.6 }} />
+
         {/* Blur Ellipses Background */}
-        <div style={{ position: 'absolute', width: '400px', height: '400px', left: '-100px', top: '-100px', background: '#0256EB', filter: 'blur(200px)', opacity: 0.5 }} />
-        <div style={{ position: 'absolute', width: '400px', height: '400px', right: '-100px', bottom: '-100px', background: '#0256EB', filter: 'blur(200px)', opacity: 0.5 }} />
+        <div style={{ position: 'absolute', width: '400px', height: '400px', left: '-100px', top: '-100px', background: '#0256EB', filter: 'blur(200px)', opacity: 0.4 }} />
+        <div style={{ position: 'absolute', width: '400px', height: '400px', right: '-100px', bottom: '-100px', background: '#0256EB', filter: 'blur(200px)', opacity: 0.4 }} />
 
         <div className="cpage-hero-inner" style={{
           position: 'relative',
@@ -101,7 +134,7 @@ export default function CoursesPage() {
           zIndex: 10
         }}>
           {/* Left Content */}
-          <div style={{ flex: '1', display: 'flex', flexDirection: 'column', gap: '32px', minWidth: '0' }}>
+          <div className="animate-fadeInUp" style={{ flex: '1', display: 'flex', flexDirection: 'column', gap: '32px', minWidth: '0' }}>
             <h1 className="cpage-hero-title" style={{
               fontFamily: 'Inter', fontWeight: 600, fontSize: '60px', lineHeight: '1.2', color: '#FFFFFF',
               whiteSpace: 'nowrap'
@@ -124,22 +157,44 @@ export default function CoursesPage() {
           </div>
 
           {/* Right Image Section */}
-          <div className="cpage-hero-image" style={{ position: 'relative', width: '500px', height: '500px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-            <div style={{
-              position: 'absolute', width: '540px', height: '540px',
-              borderRadius: '50%', border: '2px solid #25CAD8', opacity: 0.4
+          <div className="cpage-hero-image" style={{
+            position: 'relative',
+            width: '500px',
+            height: '500px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center'
+          }}>
+            {/* Outline rings */}
+            <div className="animate-rippleIn" style={{
+              position: 'absolute', width: '560px', height: '560px',
+              borderRadius: '50%', border: '1px solid #25CAD8', opacity: 0.3, animationDelay: '0.8s'
             }} />
-            <div style={{
-              width: '500px', height: '500px', borderRadius: '50%',
-              backgroundImage: 'url(/hero-student.png)',
-              backgroundSize: 'cover', backgroundPosition: 'center', overflow: 'hidden', position: 'relative'
+            <div className="animate-rippleIn" style={{
+              position: 'absolute', width: '620px', height: '620px',
+              borderRadius: '50%', border: '1px solid #FFB61E', opacity: 0.2, animationDelay: '1s'
             }} />
-            <div style={{ position: 'absolute', width: '67px', height: '67px', left: '-30px', top: '150px', background: '#25CAD8', borderRadius: '50%', zIndex: 11 }} />
-            <div style={{ position: 'absolute', width: '39px', height: '39px', left: '0px', bottom: '100px', background: '#FA4516', borderRadius: '50%', zIndex: 11 }} />
-            <div style={{ position: 'absolute', width: '51px', height: '51px', right: '-10px', top: '100px', background: '#FFB61E', borderRadius: '50%', zIndex: 11 }} />
+
+            {/* Main Rounded Banner Image */}
+            <div className="animate-fadeInUp" style={{
+              width: '500px', height: '500px',
+              borderRadius: '24px',
+              backgroundImage: 'url(/courses_banner.png)',
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+              overflow: 'hidden',
+              position: 'relative',
+              boxShadow: '0 20px 40px rgba(0,0,0,0.3)',
+              zIndex: 12
+            }} />
+
+            {/* Floating Decorative Elements */}
+            <div className="animate-fadeInUp" style={{ position: 'absolute', width: '67px', height: '67px', left: '-30px', top: '150px', background: '#25CAD8', borderRadius: '50%', zIndex: 13, animationDelay: '1.6s' }} />
+            <div className="animate-fadeInUp" style={{ position: 'absolute', width: '39px', height: '39px', left: '0px', bottom: '100px', background: '#FA4516', borderRadius: '50%', zIndex: 13, animationDelay: '1.8s' }} />
+            <div className="animate-fadeInUp" style={{ position: 'absolute', width: '51px', height: '51px', right: '-10px', top: '100px', background: '#FFB61E', borderRadius: '50%', zIndex: 13, animationDelay: '2s' }} />
           </div>
         </div>
-      </div>
+      </section>
 
       {/* Content Tabs Section */}
       <div style={{ position: 'relative', width: '100%', marginTop: '100px', paddingBottom: '100px', display: 'flex', flexDirection: 'column', alignItems: 'center', backgroundColor: '#FFFFFF' }}>
@@ -262,17 +317,17 @@ export default function CoursesPage() {
           }}>
             <div className="cpage-path-dashes" style={{ position: 'absolute', left: '210px', top: '40px' }}>
               <svg width="140" height="14" viewBox="0 0 140 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M0.361328 11.6804C54.7751 -1.80596 84.991 -1.98069 139.376 11.6804" stroke="white" strokeWidth="3" strokeDasharray="6 6"/>
+                <path d="M0.361328 11.6804C54.7751 -1.80596 84.991 -1.98069 139.376 11.6804" stroke="white" strokeWidth="3" strokeDasharray="6 6" />
               </svg>
             </div>
             <div className="cpage-path-dashes" style={{ position: 'absolute', left: '534px', top: '40px' }}>
               <svg width="140" height="14" viewBox="0 0 140 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M0.361328 11.6804C54.7751 -1.80596 84.991 -1.98069 139.376 11.6804" stroke="white" strokeWidth="3" strokeDasharray="6 6"/>
+                <path d="M0.361328 11.6804C54.7751 -1.80596 84.991 -1.98069 139.376 11.6804" stroke="white" strokeWidth="3" strokeDasharray="6 6" />
               </svg>
             </div>
             <div className="cpage-path-dashes" style={{ position: 'absolute', left: '873px', top: '40px' }}>
               <svg width="140" height="14" viewBox="0 0 140 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M0.361328 11.6804C54.7751 -1.80596 84.991 -1.98069 139.376 11.6804" stroke="white" strokeWidth="3" strokeDasharray="6 6"/>
+                <path d="M0.361328 11.6804C54.7751 -1.80596 84.991 -1.98069 139.376 11.6804" stroke="white" strokeWidth="3" strokeDasharray="6 6" />
               </svg>
             </div>
 
@@ -314,7 +369,7 @@ export default function CoursesPage() {
 
           <div className="cpage-ready-img" style={{
             position: 'absolute', width: '490px', height: '474px', left: '752px', top: '0px',
-            backgroundImage: 'url(/about-classroom.png)', backgroundSize: 'cover', borderRadius: '32px', backgroundPosition: 'center'
+            backgroundImage: 'url(/start_journey.png)', backgroundSize: 'cover', borderRadius: '32px', backgroundPosition: 'center'
           }} />
 
           <div className="cpage-ready-content" style={{
