@@ -8,52 +8,57 @@ interface CourseNode {
   overview: string;
   whatYouWillLearn: string[];
   outcome: string;
+  img: string;
 }
 
 const CourseData: Record<string, CourseNode> = {
   "German A1": {
     levelTitle: "German A1 – Beginner Level",
-    overview: "This level is designed for absolute beginners who are starting their German language journey. It focuses on building a basic understanding of the language and everyday communication.",
+    overview: "This level introduces the basic of the German language. You will learn how to introduce yourself and others and how to ask and answer simple questions about personal details.",
     whatYouWillLearn: [
       "Basic vocabulary and common phrases",
       "Introducing yourself and others",
-      "Simple conversations (greetings, shopping, directions)",
+      "Simple conversations (Greetings, shopping, directions)",
       "Basic grammar (sentence structure, verbs, articles)"
     ],
-    outcome: "You will be able to understand and use simple expressions and communicate in basic everyday situations."
+    outcome: "You will be able to understand and use familiar everyday expressions and very basic phrases aimed at the satisfaction of needs of a concrete type.",
+    img: "/course_german_A1.png"
   },
   "German A2": {
     levelTitle: "German A2 – Elementary Level",
-    overview: "This level is designed for learners who have basic knowledge of German and want to improve their communication skills. It focuses on expanding vocabulary, understanding everyday conversations, and building confidence in simple interactions.",
+    overview: "At this level you will understand sentences and frequently used expressions related to areas of most immediate relevance (e.g. basic personal and family information, shopping, local geography, employment).",
     whatYouWillLearn: [
       "Expanding vocabulary for daily situations",
       "Talking about routine activities and experiences",
       "Understanding short conversations and texts",
       "Basic grammar (past tense, sentence formation, connectors)"
     ],
-    outcome: "You will be able to communicate in simple and routine tasks, understand commonly used expressions, and handle basic conversations with more confidence."
+    outcome: "You will be able to communicate in simple and routine tasks, understand commonly used expressions, and handle basic conversations with more confidence.",
+    img: "/course_german_A2.png"
   },
   "German B1": {
     levelTitle: "German B1 – Intermediate Level",
-    overview: "This level is for learners who already possess a solid foundation. It focuses on independent language use in personal and professional contexts.",
+    overview: "At this level you will understand the main points of clear standard input on familiar matters regularly encountered in work, school, leisure, etc.",
     whatYouWillLearn: [
-      "Understanding main points of clear standard input",
-      "Dealing with most travel situations",
-      "Producing simple connected text on familiar topics",
-      "Describing experiences, dreams, and ambitions"
+      "Engaging in conversations on familiar topics",
+      "Understanding the main points of clear standard speech",
+      "Describing experiences, events, dreams, and ambitions",
+      "Intermediate grammar (complex sentences, passive voice, modal verbs)"
     ],
-    outcome: "You will be able to communicate independently and handle most situations likely to arise while travelling in an area where German is spoken."
+    outcome: "You will be able to communicate independently and handle most situations likely to arise while travelling in an area where German is spoken.",
+    img: "/course_german_B1.png"
   },
   "German B2": {
     levelTitle: "German B2 – Upper Intermediate Level",
-    overview: "This level is for advanced learners preparing for academic or professional environments. It focuses on fluent, spontaneous communication and complex text comprehension.",
+    overview: "This level is designed for learners who can understand the main ideas of complex text on both concrete and abstract topics, including technical discussions in their field of specialization.",
     whatYouWillLearn: [
       "Understanding main ideas of complex texts",
       "Interacting with a degree of fluency and spontaneity",
       "Producing clear, detailed text on a wide range of subjects",
-      "Explaining viewpoints on topical issues"
+      "Advanced grammar proficiency"
     ],
-    outcome: "You will be able to communicate fluently with native speakers and understand complex academic and professional texts."
+    outcome: "You will be able to communicate fluently with native speakers and understand complex academic and professional texts.",
+    img: "/course_german_B2.png"
   }
 };
 
@@ -65,7 +70,7 @@ const STEPS = [
 ];
 
 export default function CoursesPage() {
-  const [activeTab, setActiveTab] = useState("German A2");
+  const [activeTab, setActiveTab] = useState("German A1");
   const currentData = CourseData[activeTab];
 
   const sectionRef = useRef<HTMLElement>(null);
@@ -274,7 +279,7 @@ export default function CoursesPage() {
             height: '704px',
             borderRadius: '32px',
             overflow: 'hidden',
-            backgroundImage: 'url(/about-classroom.png)',
+            backgroundImage: `url(${currentData.img})`,
             backgroundSize: 'cover',
             backgroundPosition: 'center',
             boxShadow: '0 20px 40px rgba(0,0,0,0.1)'
