@@ -77,9 +77,7 @@ export default function Features() {
     setMounted(true);
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-        }
+        setIsVisible(entry.isIntersecting);
       },
       { threshold: 0.2, rootMargin: "0px" }
     );
@@ -106,6 +104,12 @@ export default function Features() {
       <style>{`
         .features-dashed-ellipse {
           opacity: 0;
+          clip-path: inset(0 100% 0 0);
+        }
+        .features-section:not(.is-visible) .features-dashed-ellipse {
+          animation: none !important;
+          clip-path: inset(0 100% 0 0) !important;
+          opacity: 0 !important;
         }
         .features-section.is-visible .features-dashed-ellipse {
           animation: drawDashed 1.5s ease-in-out forwards;
@@ -118,6 +122,11 @@ export default function Features() {
         .features-card-anim {
           opacity: 0;
           visibility: hidden;
+        }
+        .features-section:not(.is-visible) .features-card-anim {
+          animation: none !important;
+          opacity: 0 !important;
+          visibility: hidden !important;
         }
         .features-section.is-visible .features-card-anim {
           animation: popIn 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;

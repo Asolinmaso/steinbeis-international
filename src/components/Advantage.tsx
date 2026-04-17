@@ -96,9 +96,7 @@ export default function Advantage() {
     setMounted(true);
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-        }
+        setIsVisible(entry.isIntersecting);
       },
       { threshold: 0.1, rootMargin: "0px" }
     );
@@ -237,6 +235,13 @@ export default function Advantage() {
         .advantage-pill-anim {
           opacity: 0;
           visibility: hidden;
+          transform: translateY(40px);
+        }
+        .advantage-root:not(.is-visible) .advantage-pill-anim {
+          animation: none !important;
+          opacity: 0 !important;
+          visibility: hidden !important;
+          transform: translateY(40px) !important;
         }
         .advantage-root.is-visible .advantage-pill-anim {
           animation: popIn 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
