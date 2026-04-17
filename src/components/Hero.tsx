@@ -127,7 +127,7 @@ export default function Hero() {
         zIndex: 10
       }}>
         {/* Main Hero Image */}
-        <div className="hero-main-image" style={{
+        <div className="hero-main-image animate-fadeInUp" style={{
           position: 'absolute',
           width: '520px',
           height: '714px',
@@ -136,16 +136,15 @@ export default function Hero() {
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat',
-          borderRadius: '24px'
+          borderRadius: '24px',
+          animationDelay: '1.2s'
         }} />
 
-        {/* Floating Pills — hidden on mobile via .hero-pills-container */}
+        {/* Floating Feature Texts */}
         <div className="hero-pills-container" style={{ position: 'absolute', inset: 0, zIndex: 11 }}>
           <div style={{
             position: 'absolute', display: 'flex', alignItems: 'center', justifyContent: 'center',
-            padding: '12px 24px', gap: '10px', left: '106px', top: '255px',
-            borderRadius: '40px', backgroundColor: 'rgba(255,255,255,0.1)',
-            backdropFilter: 'blur(10px)', border: '1px solid rgba(255,255,255,0.2)'
+            left: '106px', top: '255px'
           }} className="animate-fadeInUp hero-pill hero-pill-practical">
             <span className="hero-pill-text" style={{ fontFamily: 'Inter', fontWeight: 400, fontSize: '24px', color: '#EDEDED' }}>
               100% Practical Learning
@@ -154,9 +153,7 @@ export default function Hero() {
 
           <div style={{
             position: 'absolute', display: 'flex', alignItems: 'center', justifyContent: 'center',
-            padding: '16px 24px', gap: '10px', left: '97px', top: '425px',
-            borderRadius: '40px', backgroundColor: 'rgba(255,255,255,0.1)',
-            backdropFilter: 'blur(10px)', border: '1px solid rgba(255,255,255,0.2)', animationDelay: '0.2s'
+            left: '97px', top: '425px', animationDelay: '0.2s'
           }} className="animate-fadeInUp hero-pill hero-pill-trainers">
             <span className="hero-pill-text" style={{ fontFamily: 'Inter', fontWeight: 400, fontSize: '24px', color: '#EDEDED' }}>
               Experienced Trainers
@@ -165,9 +162,7 @@ export default function Hero() {
 
           <div style={{
             position: 'absolute', display: 'flex', alignItems: 'center', justifyContent: 'center',
-            padding: '16px 24px', gap: '10px', left: '163px', top: '93px',
-            borderRadius: '40px', backgroundColor: 'rgba(255,255,255,0.1)',
-            backdropFilter: 'blur(10px)', border: '1px solid rgba(255,255,255,0.2)', animationDelay: '0.4s'
+            left: '163px', top: '93px', animationDelay: '0.4s'
           }} className="animate-fadeInUp hero-pill hero-pill-advanced">
             <span className="hero-pill-text" style={{ fontFamily: 'Inter', fontWeight: 400, fontSize: '24px', color: '#EDEDED' }}>
               Beginner to Advanced (A1–B2)
@@ -176,9 +171,7 @@ export default function Hero() {
 
           <div style={{
             position: 'absolute', display: 'flex', alignItems: 'center', justifyContent: 'center',
-            padding: '16px 24px', gap: '10px', right: '50px', top: '93px',
-            borderRadius: '40px', backgroundColor: 'rgba(255,255,255,0.1)',
-            backdropFilter: 'blur(10px)', border: '1px solid rgba(255,255,255,0.2)', animationDelay: '0.1s'
+            right: '50px', top: '93px', animationDelay: '0.1s'
           }} className="animate-fadeInUp hero-pill hero-pill-batch">
             <span className="hero-pill-text" style={{ fontFamily: 'Inter', fontWeight: 400, fontSize: '24px', color: '#EDEDED' }}>
               Flexible Batch Timings
@@ -187,9 +180,7 @@ export default function Hero() {
 
           <div style={{
             position: 'absolute', display: 'flex', alignItems: 'center', justifyContent: 'center',
-            padding: '16px 24px', gap: '10px', right: '-50px', top: '255px',
-            borderRadius: '40px', backgroundColor: 'rgba(255,255,255,0.1)',
-            backdropFilter: 'blur(10px)', border: '1px solid rgba(255,255,255,0.2)', animationDelay: '0.3s'
+            right: '-50px', top: '255px', animationDelay: '0.3s'
           }} className="animate-fadeInUp hero-pill hero-pill-visa">
             <span className="hero-pill-text" style={{ fontFamily: 'Inter', fontWeight: 400, fontSize: '24px', color: '#EDEDED' }}>
               Visa Support Assistance
@@ -198,9 +189,7 @@ export default function Hero() {
 
           <div style={{
             position: 'absolute', display: 'flex', alignItems: 'center', justifyContent: 'center',
-            padding: '16px 24px', gap: '10px', right: '20px', top: '425px',
-            borderRadius: '40px', backgroundColor: 'rgba(255,255,255,0.1)',
-            backdropFilter: 'blur(10px)', border: '1px solid rgba(255,255,255,0.2)', animationDelay: '0.5s'
+            right: '20px', top: '425px', animationDelay: '0.5s'
           }} className="animate-fadeInUp hero-pill hero-pill-job">
             <span className="hero-pill-text" style={{ fontFamily: 'Inter', fontWeight: 400, fontSize: '24px', color: '#EDEDED' }}>
               German Job Guidance
