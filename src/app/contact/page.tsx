@@ -49,7 +49,7 @@ export default function ContactPage() {
         alignItems: 'center',
         justifyContent: 'center',
         backgroundColor: '#061B42',
-        backgroundImage: 'linear-gradient(0deg, rgba(6, 27, 66, 0.8), rgba(6, 27, 66, 0.8)), url(/germany-campus.png)',
+        backgroundImage: 'linear-gradient(0deg, rgba(6, 27, 66, 0.8), rgba(6, 27, 66, 0.8)), url(/contact_banner_bg.png)',
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         padding: '0 20px',
