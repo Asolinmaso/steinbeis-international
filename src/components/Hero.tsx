@@ -54,10 +54,10 @@ export default function Hero() {
       <div className="animate-rippleIn hero-circle hero-circle-2" style={{ animationDelay: '0.8s', position: 'absolute', width: '686px', height: '686px', left: 'calc(50% - 686px/2)', top: '595px', background: '#06193B', borderRadius: '50%' }} />
       <div className="animate-rippleIn hero-circle hero-circle-1" style={{ animationDelay: '1.0s', position: 'absolute', width: '622px', height: '622px', left: 'calc(50% - 622px/2)', top: '627px', background: '#041431', borderRadius: '50%' }} />
 
-      {/* Blur Ellipses */}
-      <div style={{ position: 'absolute', width: '215px', height: '215px', left: '1201px', top: '844px', background: '#0256EB', filter: 'blur(200px)', borderRadius: '50%' }} />
-      <div style={{ position: 'absolute', width: '215px', height: '215px', left: '1122px', top: '-54px', background: '#0256EB', filter: 'blur(200px)', borderRadius: '50%' }} />
-      <div style={{ position: 'absolute', width: '215px', height: '215px', left: '73px', top: '291px', background: '#0256EB', filter: 'blur(200px)', borderRadius: '50%' }} />
+      {/* Blur Ellipses (hidden on small screens — avoids fixed layout offsets) */}
+      <div className="hero-decorative-blur" style={{ position: 'absolute', width: '215px', height: '215px', left: '1201px', top: '844px', background: '#0256EB', filter: 'blur(200px)', borderRadius: '50%' }} />
+      <div className="hero-decorative-blur" style={{ position: 'absolute', width: '215px', height: '215px', left: '1122px', top: '-54px', background: '#0256EB', filter: 'blur(200px)', borderRadius: '50%' }} />
+      <div className="hero-decorative-blur" style={{ position: 'absolute', width: '215px', height: '215px', left: '73px', top: '291px', background: '#0256EB', filter: 'blur(200px)', borderRadius: '50%' }} />
 
       {/* Main Content */}
       <div className="hero-content-wrapper" style={{
@@ -66,7 +66,6 @@ export default function Hero() {
         alignItems: 'center',
         gap: '40px',
         marginTop: '80px',
-        width: '1177px',
         zIndex: 10
       }}>
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '24px', width: '100%' }}>
@@ -83,9 +82,9 @@ export default function Hero() {
             Build Your <span style={{ color: '#FFB61E' }}>Career in Germany</span> with <br />
             German Language Training
           </h1>
-          <p className="hero-subtitle" style={{
+          <p className="hero-subtitle hero-description" style={{
             fontFamily: 'Inter', fontWeight: 400, fontSize: '24px',
-            lineHeight: '29px', textAlign: 'center', color: '#EDEDED', width: '781px'
+            lineHeight: '29px', textAlign: 'center', color: '#EDEDED'
           }}>
             Structured A1–B2 German courses with certified trainers, practical learning, and complete guidance for study and jobs in Germany.
           </p>
@@ -93,23 +92,15 @@ export default function Hero() {
 
         <div className="hero-btn-row" style={{ display: 'flex', gap: '24px' }}>
           <Link href="/courses">
-            <button className="hero-explore-btn animate-fadeInUp" style={{
-              width: '236px', height: '61px',
-              borderRadius: '16px',
-              border: '1px solid #FFB61E',
-              background: 'transparent',
-              color: '#FFB61E',
-              fontFamily: 'Inter', fontWeight: 500, fontSize: '20px',
-              cursor: 'pointer',
-              animationDelay: '1.2s'
+            <button type="button" className="btn-yellow animate-fadeInUp" style={{
+              width: '236px', height: '61px', animationDelay: '1.2s'
             }}>
               Explore Courses
             </button>
           </Link>
           <Link href="/contact">
-            <button className="btn-yellow animate-fadeInUp" style={{ 
-              width: '193px', height: '61px',
-              animationDelay: '1.4s'
+            <button type="button" className="btn-yellow animate-fadeInUp" style={{
+              width: '193px', height: '61px', animationDelay: '1.4s'
             }}>
               Enquire Now
             </button>
