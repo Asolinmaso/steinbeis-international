@@ -10,10 +10,12 @@ export default function Footer() {
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'center',
-      paddingTop: '150px'
+      paddingTop: '150px',
+      marginTop: '2rem'
+
     }}>
       {/* Background Container for shape and overflow */}
-      <div style={{
+      < div style={{
         position: 'absolute',
         inset: 0,
         borderTopLeftRadius: '100px',
@@ -22,7 +24,7 @@ export default function Footer() {
         zIndex: 0
       }}>
         {/* Background Image with Overlay */}
-        <div style={{
+        < div style={{
           position: 'absolute',
           width: '100%', height: '100%',
           left: '0', top: '0',
@@ -30,24 +32,24 @@ export default function Footer() {
           backgroundSize: 'cover',
           backgroundPosition: 'center',
         }} />
-      </div>
+      </div >
 
 
       {/* Footer Logo - Overflowing upwards */}
-      <div style={{
+      < div style={{
         position: 'absolute',
         top: '-70px', left: '50%',
         transform: 'translateX(-50%)',
-        width: '140px', height: '140px',
+        width: '100px', height: '100px',
         backgroundImage: 'url(/footer_logo.png)',
         backgroundSize: 'contain', backgroundRepeat: 'no-repeat', backgroundPosition: 'center',
         zIndex: 20
       }} />
 
-      <div className="footer-inner" style={{ zIndex: 10, display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%', maxWidth: '1240px' }}>
+      < div className="footer-inner" style={{ zIndex: 10, display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%', maxWidth: '1240px' }}>
 
         {/* Title */}
-        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '20px', marginBottom: '80px', marginTop: '40px' }}>
+        < div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '20px', marginBottom: '80px', marginTop: '40px' }}>
           <h2 className="footer-title" style={{
             fontFamily: 'Inter', fontWeight: 700, fontSize: '64px',
             color: '#FFFFFF', textTransform: 'uppercase', textAlign: 'center',
@@ -61,25 +63,25 @@ export default function Footer() {
           }}>
             Your trusted partner for German language training and international career growth.
           </p>
-        </div>
+        </div >
 
         {/* Links Area */}
-        <div className="footer-links-grid" style={{
+        < div className="footer-links-grid" style={{
           display: 'flex', justifyContent: 'space-between', width: '100%', maxWidth: '1123px',
           padding: '0 20px', marginBottom: '80px', flexWrap: 'wrap', gap: '40px'
         }}>
           {/* Quick Links */}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
+          < div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
             <h3 className="footer-col-title" style={{ fontFamily: 'Inter', fontWeight: 500, fontSize: '24px', color: '#FFFFFF' }}>Quick Links</h3>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
               <Link href="/" className="footer-col-link" style={{ fontFamily: 'Inter', fontWeight: 400, fontSize: '24px', color: '#FFFFFF' }}>Home</Link>
               <Link href="#courses" className="footer-col-link" style={{ fontFamily: 'Inter', fontWeight: 400, fontSize: '24px', color: '#FFFFFF' }}>Courses</Link>
               <Link href="#contact" className="footer-col-link" style={{ fontFamily: 'Inter', fontWeight: 400, fontSize: '24px', color: '#FFFFFF' }}>Contact</Link>
             </div>
-          </div>
+          </div >
 
           {/* Courses */}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
+          < div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
             <h3 className="footer-col-title" style={{ fontFamily: 'Inter', fontWeight: 500, fontSize: '24px', color: '#FFFFFF' }}>Courses</h3>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
               <span className="footer-col-link" style={{ fontFamily: 'Inter', fontWeight: 400, fontSize: '24px', color: '#FFFFFF' }}>German A1</span>
@@ -87,10 +89,10 @@ export default function Footer() {
               <span className="footer-col-link" style={{ fontFamily: 'Inter', fontWeight: 400, fontSize: '24px', color: '#FFFFFF' }}>German B1</span>
               <span className="footer-col-link" style={{ fontFamily: 'Inter', fontWeight: 400, fontSize: '24px', color: '#FFFFFF' }}>German B2</span>
             </div>
-          </div>
+          </div >
 
           {/* Follow Us */}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
+          < div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
             <h3 className="footer-col-title" style={{ fontFamily: 'Inter', fontWeight: 500, fontSize: '24px', color: '#FFFFFF' }}>Follow Us</h3>
             <div style={{ display: 'flex', gap: '15px' }}>
               <a href="https://www.facebook.com/share/18DMkNKn7e/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" style={{ width: '56px', height: '55px', borderRadius: '50%', border: '1px solid rgba(255,255,255,0.25)', display: 'flex', alignItems: 'center', justifyContent: 'center', transition: 'background-color 0.3s' }} className="footer-social-link">
@@ -104,10 +106,10 @@ export default function Footer() {
                 </svg>
               </a>
             </div>
-          </div>
+          </div >
 
           {/* Contact Us */}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
+          < div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
             <h3 className="footer-col-title" style={{ fontFamily: 'Inter', fontWeight: 500, fontSize: '24px', color: '#FFFFFF' }}>Contact Us</h3>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
@@ -132,11 +134,11 @@ export default function Footer() {
                 <span className="footer-col-link" style={{ fontFamily: 'Inter', fontWeight: 400, fontSize: '24px', color: '#FFFFFF' }}>Chennai, TamilNadu – 600041</span>
               </div>
             </div>
-          </div>
-        </div>
+          </div >
+        </div >
 
         {/* Divider */}
-        <div style={{ width: '100%', height: '1px', backgroundColor: 'rgba(255,255,255,0.2)', marginBottom: '25px' }} />
+        < div style={{ width: '100%', height: '1px', backgroundColor: 'rgba(255,255,255,0.2)', marginBottom: '25px' }} />
 
         {/* Copyright */}
         <p className="footer-copyright" style={{
@@ -145,7 +147,7 @@ export default function Footer() {
         }}>
           © 2026 Steinbeis International Academy. All rights reserved. | Designed & Developed By Manvian
         </p>
-      </div>
-    </footer>
+      </div >
+    </footer >
   );
 }
