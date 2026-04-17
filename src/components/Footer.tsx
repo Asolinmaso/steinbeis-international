@@ -7,43 +7,42 @@ export default function Footer() {
       position: 'relative',
       width: '100%',
       minHeight: '830px',
-      backgroundColor: '#061B42',
-      borderTopLeftRadius: '100px',
-      borderTopRightRadius: '100px',
-      overflow: 'hidden',
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'center',
       paddingTop: '150px'
     }}>
-      {/* Background Image with Overlay */}
+      {/* Background Container for shape and overflow */}
       <div style={{
         position: 'absolute',
-        width: '100%', height: '100%',
-        left: '0', top: '0',
-        backgroundImage: 'linear-gradient(0deg, rgba(6, 27, 66, 0.8), rgba(6, 27, 66, 0.8)), url(/germany-campus.png)',
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
+        inset: 0,
+        borderTopLeftRadius: '100px',
+        borderTopRightRadius: '100px',
+        overflow: 'hidden',
         zIndex: 0
-      }} />
-
-      {/* Top Center Shield */}
-      <div style={{
-        position: 'absolute',
-        top: 0, left: '50%',
-        transform: 'translateX(-50%)',
-        width: '180px', height: '140px',
-        backgroundColor: '#FFFFFF',
-        clipPath: 'polygon(0 0, 100% 0, 100% 70%, 50% 100%, 0 70%)',
-        display: 'flex', justifyContent: 'center',
-        zIndex: 20
       }}>
+        {/* Background Image with Overlay */}
         <div style={{
-          width: '110px', height: '110px',
-          backgroundImage: 'url(/footer_logo.png)',
-          backgroundSize: 'contain', backgroundRepeat: 'no-repeat', backgroundPosition: 'center'
+          position: 'absolute',
+          width: '100%', height: '100%',
+          left: '0', top: '0',
+          backgroundImage: 'url(/footer_image.png)',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
         }} />
       </div>
+
+
+      {/* Footer Logo - Overflowing upwards */}
+      <div style={{
+        position: 'absolute',
+        top: '-70px', left: '50%',
+        transform: 'translateX(-50%)',
+        width: '140px', height: '140px',
+        backgroundImage: 'url(/footer_logo.png)',
+        backgroundSize: 'contain', backgroundRepeat: 'no-repeat', backgroundPosition: 'center',
+        zIndex: 20
+      }} />
 
       <div className="footer-inner" style={{ zIndex: 10, display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%', maxWidth: '1240px' }}>
 

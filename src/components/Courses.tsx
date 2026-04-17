@@ -80,61 +80,50 @@ export default function Courses() {
         </p>
 
         {/* Carousel Container */}
-        <div
-          className="no-scrollbar"
-          style={{
-            display: 'flex',
-            gap: '24px',
-            overflowX: 'auto',
-            width: '100%',
-            paddingBottom: '20px',
-            flexWrap: 'nowrap',
-            msOverflowStyle: 'none',
-            scrollbarWidth: 'none',
-            WebkitOverflowScrolling: 'touch'
-          }}
-        >
-          {courses.map((course, i) => (
-            <div key={i} className="courses-carousel-card" style={{
-              display: 'flex', flexDirection: 'column',
-              padding: '20px', gap: '20px',
-              minWidth: '380px',
-              width: '380px',
-              backgroundColor: '#FFFFFF',
-              borderRadius: '24px',
-              transition: 'transform 0.3s ease',
-              cursor: 'pointer',
-              flexShrink: 0
-            }}
-            onMouseEnter={(e) => e.currentTarget.style.transform = 'translateY(-10px)'}
-            onMouseLeave={(e) => e.currentTarget.style.transform = 'translateY(0)'}
-            >
-              {/* Card Image */}
-              <div style={{
-                width: '100%', height: '220px',
-                backgroundImage: `url(${course.img})`,
-                backgroundSize: 'cover',
-                backgroundPosition: 'center',
-                borderRadius: '16px'
-              }} />
+        <div style={{ width: '100%', overflow: 'hidden', paddingBottom: '20px' }}>
+          <div className="courses-marquee-container">
+            {[...courses, ...courses].map((course, i) => (
+              <div key={i} className="courses-carousel-card" style={{
+                display: 'flex', flexDirection: 'column',
+                padding: '20px', gap: '20px',
+                minWidth: '380px',
+                width: '380px',
+                backgroundColor: '#FFFFFF',
+                borderRadius: '24px',
+                transition: 'transform 0.3s ease',
+                cursor: 'pointer',
+                flexShrink: 0
+              }}
+              onMouseEnter={(e) => e.currentTarget.style.transform = 'translateY(-10px)'}
+              onMouseLeave={(e) => e.currentTarget.style.transform = 'translateY(0)'}
+              >
+                {/* Card Image */}
+                <div style={{
+                  width: '100%', height: '220px',
+                  backgroundImage: `url(${course.img})`,
+                  backgroundSize: 'cover',
+                  backgroundPosition: 'center',
+                  borderRadius: '16px'
+                }} />
 
-              {/* Card Content */}
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', paddingBottom: '10px' }}>
-                <h3 style={{
-                  fontFamily: 'Inter', fontWeight: 700, fontSize: '28px',
-                  color: '#2E2E2E', lineHeight: '1.2', margin: 0
-                }}>
-                  {course.levelText1} <br/> {course.levelText2}
-                </h3>
-                <p style={{
-                  fontFamily: 'Inter', fontWeight: 400, fontSize: '20px',
-                  color: '#4B5563', lineHeight: '28px', margin: 0
-                }}>
-                  {course.desc}
-                </p>
+                {/* Card Content */}
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', paddingBottom: '10px' }}>
+                  <h3 style={{
+                    fontFamily: 'Inter', fontWeight: 700, fontSize: '28px',
+                    color: '#2E2E2E', lineHeight: '1.2', margin: 0
+                  }}>
+                    {course.levelText1} <br/> {course.levelText2}
+                  </h3>
+                  <p style={{
+                    fontFamily: 'Inter', fontWeight: 400, fontSize: '20px',
+                    color: '#4B5563', lineHeight: '28px', margin: 0
+                  }}>
+                    {course.desc}
+                  </p>
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
 
         <Link href="/courses">

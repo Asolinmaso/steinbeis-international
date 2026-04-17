@@ -20,6 +20,22 @@
   --white: #FFFFFF;
 }
 
+@keyframes marqueeScroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+.courses-marquee-container {
+  display: flex;
+  gap: 24px;
+  width: max-content;
+  animation: marqueeScroll 30s linear infinite;
+}
+
+.courses-marquee-container:hover {
+  animation-play-state: paused;
+}
+
 html {
   scroll-behavior: smooth;
 }

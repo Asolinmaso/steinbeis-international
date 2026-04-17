@@ -1,58 +1,56 @@
 import React from 'react';
+import Link from 'next/link';
 
 export default function CTA() {
   return (
     <section className="cta-section" style={{
-      padding: '100px 72px',
-      backgroundColor: '#FFFFFF',
-      display: 'flex',
-      justifyContent: 'center'
+      position: 'relative', width: '100%', display: 'flex', justifyContent: 'center', paddingTop: '100px', paddingBottom: '100px', backgroundColor: '#FFFFFF'
     }}>
-      <div className="cta-inner" style={{
-        position: 'relative',
-        width: '100%',
-        maxWidth: '1266px',
-        height: '385px',
-        backgroundColor: '#FFB61E',
-        borderRadius: '32px',
-        display: 'flex',
-        alignItems: 'center',
-        padding: '0 40px',
-        overflow: 'hidden'
+      <div className="cpage-ready-container" style={{
+        position: 'relative', width: '1266px', height: '474px', borderRadius: '32px'
       }}>
-        {/* Content */}
-        <div className="cta-content" style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '32px', zIndex: 10, maxWidth: '679px' }}>
-          <h2 className="cta-title" style={{
-            fontFamily: 'Inter', fontWeight: 600, fontSize: '48px', color: '#2E2E2E', lineHeight: '1.1'
-          }}>
+        <div className="cpage-ready-yellow-bg" style={{
+          position: 'absolute', left: '0', top: '45px', width: '100%', height: '385px',
+          backgroundColor: '#FFB61E', borderRadius: '32px'
+        }} />
+
+        <div className="cpage-ready-img" style={{
+          position: 'absolute', width: '490px', height: '474px', left: '752px', top: '0px',
+          backgroundImage: 'url(/start_journey.png)', backgroundSize: 'cover', borderRadius: '32px', backgroundPosition: 'center'
+        }} />
+
+        <div className="cpage-ready-content" style={{
+          position: 'absolute', width: '679px', height: '252px', left: '40px', top: 'calc(50% - 252px/2 + 0.5px)',
+          display: 'flex', flexDirection: 'column', gap: '32px'
+        }}>
+          <h2 className="cpage-ready-title" style={{ fontFamily: 'Inter', fontWeight: 600, fontSize: '48px', lineHeight: '60px', color: '#2E2E2E' }}>
             Ready to Start Your Journey?
           </h2>
-          <p className="cta-desc" style={{
-            fontFamily: 'Inter', fontWeight: 400, fontSize: '24px', color: '#2E2E2E', lineHeight: '32px'
-          }}>
+          <p className="cpage-ready-desc" style={{ fontFamily: 'Inter', fontWeight: 400, fontSize: '24px', lineHeight: '32px', color: '#2E2E2E' }}>
             Take the first step towards building your future with structured learning, expert guidance, and real career opportunities.
           </p>
 
-          <div className="cta-btn-row" style={{ display: 'flex', gap: '24px' }}>
-            <button className="btn-navy" style={{ width: '236px' }}>
-              Enroll Now
-            </button>
-            <button className="btn-navy" style={{ width: '193px' }}>
-              Contact Us
-            </button>
+          <div className="cpage-ready-btn-row" style={{ display: 'flex', flexDirection: 'row', gap: '32px' }}>
+            <Link href="/courses">
+              <button className="cpage-ready-btn" style={{
+                display: 'flex', justifyContent: 'center', alignItems: 'center', padding: '16px 24px',
+                width: '236px', height: '61px', backgroundColor: '#2C4B82', border: '1px solid #FFFFFF',
+                borderRadius: '16px', fontFamily: 'Inter', fontWeight: 500, fontSize: '24px', color: '#FFFFFF', cursor: 'pointer'
+              }}>
+                Explore Courses
+              </button>
+            </Link>
+            <Link href="/contact">
+              <button className="cpage-ready-btn" style={{
+                display: 'flex', justifyContent: 'center', alignItems: 'center', padding: '16px 24px',
+                width: '193px', height: '61px', backgroundColor: '#2C4B82', border: '1px solid #FFFFFF',
+                borderRadius: '16px', fontFamily: 'Inter', fontWeight: 500, fontSize: '24px', color: '#FFFFFF', cursor: 'pointer'
+              }}>
+                Enquire Now
+              </button>
+            </Link>
           </div>
         </div>
-
-        {/* Image Right Side */}
-        <div className="cta-image-right" style={{
-          position: 'absolute',
-          right: '0', top: '0',
-          width: '490px', height: '474px',
-          backgroundImage: 'url(/cta-students.png)',
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          borderRadius: '32px 0 0 32px'
-        }} />
       </div>
     </section>
   );
