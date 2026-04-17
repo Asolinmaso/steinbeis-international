@@ -38,28 +38,27 @@ export default function About() {
         position: 'relative',
         zIndex: 2
       }}>
-        {/* Decorative Blob */}
-        <div className="about-blob" style={{
-          position: 'absolute',
-          width: '487px', height: '465px',
-          left: '50px', top: '100px',
-          background: '#FFF0D2',
-          borderRadius: '30% 70% 70% 30% / 30% 30% 70% 70%',
-          zIndex: 1
-        }} />
-
         {/* Image Area */}
-        <div className="about-image-area" style={{ position: 'relative', width: '50%', height: '600px', zIndex: 2 }}>
+        <div className="about-image-area" style={{ position: 'relative', width: '50%', height: '620px', zIndex: 2 }}>
+          {/* Decorative Blob */}
+          <div className="about-blob" style={{
+            position: 'absolute',
+            width: '487.37px', height: '465.91px',
+            left: '67.18px', top: '31.17px',
+            background: '#FFF0D2',
+            borderRadius: '30% 70% 70% 30% / 30% 30% 70% 70%',
+            zIndex: 1
+          }} />
           <div className="about-image-rotated" style={{
             position: 'absolute',
             width: '570px', height: '518px',
-            left: '30px', top: '50px',
+            left: '0', top: '0',
             backgroundImage: 'url(/about-classroom.png)',
             backgroundSize: 'cover',
             backgroundPosition: 'center',
             borderRadius: '24px',
-            transform: 'rotate(-5deg)',
-            boxShadow: '0 20px 40px rgba(0,0,0,0.1)'
+            transform: 'rotate(-11deg)',
+            zIndex: 2
           }} />
         </div>
 
@@ -69,7 +68,7 @@ export default function About() {
             fontFamily: 'Inter', fontWeight: 600, fontSize: '48px',
             lineHeight: '58px', color: '#2E2E2E'
           }}>
-            We Make <span style={{ color: '#FA4516' }}>German Learning</span> <br/> Easy & Career-Focused
+            We Make <span style={{ color: '#FA4516' }}>German Learning</span> <br /> Easy & Career-Focused
           </h2>
           <p className="about-desc" style={{
             fontFamily: 'Inter', fontWeight: 400, fontSize: '24px',

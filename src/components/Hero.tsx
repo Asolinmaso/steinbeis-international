@@ -92,22 +92,26 @@ export default function Hero() {
         </div>
 
         <div className="hero-btn-row" style={{ display: 'flex', gap: '24px' }}>
-          <Link href="/contact">
-            <button className="btn-yellow" style={{ width: '193px', height: '61px' }}>
-              Enquire Now
-            </button>
-          </Link>
           <Link href="/courses">
-            <button className="hero-explore-btn" style={{
+            <button className="hero-explore-btn animate-fadeInUp" style={{
               width: '236px', height: '61px',
               borderRadius: '16px',
               border: '1px solid #FFB61E',
               background: 'transparent',
               color: '#FFB61E',
               fontFamily: 'Inter', fontWeight: 500, fontSize: '20px',
-              cursor: 'pointer'
+              cursor: 'pointer',
+              animationDelay: '1.2s'
             }}>
               Explore Courses
+            </button>
+          </Link>
+          <Link href="/contact">
+            <button className="btn-yellow animate-fadeInUp" style={{ 
+              width: '193px', height: '61px',
+              animationDelay: '1.4s'
+            }}>
+              Enquire Now
             </button>
           </Link>
         </div>
