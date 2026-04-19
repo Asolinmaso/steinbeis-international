@@ -102,7 +102,8 @@ export default function Advantage() {
       style={{
         backgroundColor: "#FFFFFF",
         width: "100%",
-        overflow: "hidden",
+        overflowX: "hidden",
+        overflowY: "visible",
         padding: "120px 0",
       }}
     >

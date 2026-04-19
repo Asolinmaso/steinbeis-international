@@ -2,9 +2,14 @@
 import React from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { replayViewport } from "@/components/motion";
-
 const ease = [0.16, 1, 0.3, 1] as const;
+
+/** Calmer than site-wide `replayViewport` — fewer in/out toggles while scrolling over the hero. */
+const heroStaggerViewport = {
+  once: false,
+  amount: 0.48,
+  margin: "0px",
+} as const;
 
 const heroItem = {
   hidden: { opacity: 0, y: 32, scale: 0.94 },
@@ -16,6 +21,22 @@ const heroItem = {
   },
 };
 
+/** Person banner: slower rise from below (replays with viewport). */
+const heroMainImageReveal = {
+  hidden: { opacity: 0, y: 168, scale: 0.97 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: {
+      type: "spring" as const,
+      stiffness: 42,
+      damping: 22,
+      mass: 1.05,
+    },
+  },
+};
+
 const circles = [
   { delay: 0.2, width: 863, top: 507, bg: "#0A2A66", className: "hero-circle-3" },
   { delay: 0.4, width: 805, top: 536, bg: "#082458", className: "hero-circle-4" },
@@ -24,13 +45,20 @@ const circles = [
   { delay: 1.0, width: 622, top: 627, bg: "#041431", className: "hero-circle-1" },
 ];
 
-const pills = [
-  { text: "100% Practical Learning", left: "106px", top: "255px", right: undefined, className: "hero-pill-practical" },
-  { text: "Experienced Trainers", left: "97px", top: "425px", right: undefined, className: "hero-pill-trainers" },
-  { text: "Beginner to Advanced (A1–B2)", left: "163px", top: "93px", right: undefined, className: "hero-pill-advanced" },
-  { text: "Flexible Batch Timings", left: undefined, top: "93px", right: "50px", className: "hero-pill-batch" },
-  { text: "Visa Support Assistance", left: undefined, top: "255px", right: "-50px", className: "hero-pill-visa" },
-  { text: "German Job Guidance", left: undefined, top: "425px", right: "20px", className: "hero-pill-job" },
+const pills: {
+  text: string;
+  left?: string;
+  top: string;
+  right?: string;
+  className: string;
+  floatDelay: string;
+}[] = [
+  { text: "Beginner to Advanced (A1–B2)", left: "163px", top: "93px", className: "hero-pill-advanced", floatDelay: "0s" },
+  { text: "Flexible Batch Timings", top: "93px", right: "50px", className: "hero-pill-batch", floatDelay: "0.45s" },
+  { text: "Visa Support Assistance", top: "255px", right: "-50px", className: "hero-pill-visa", floatDelay: "0.9s" },
+  { text: "German Job Guidance", top: "425px", right: "20px", className: "hero-pill-job", floatDelay: "1.35s" },
+  { text: "100% Practical Learning", left: "106px", top: "255px", className: "hero-pill-practical", floatDelay: "1.8s" },
+  { text: "Experienced Trainers", left: "97px", top: "425px", className: "hero-pill-trainers", floatDelay: "2.25s" },
 ];
 
 export default function Hero() {
@@ -42,7 +70,8 @@ export default function Hero() {
         width: "100%",
         marginTop: "120px",
         backgroundColor: "#061B42",
-        overflow: "hidden",
+        /* Do not set overflow-x: hidden here — same quirk as body: it can make this
+           section the scroll container and “eat” the first wheel gesture over the hero. */
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
@@ -60,10 +89,12 @@ export default function Hero() {
             top: `${c.top}px`,
             background: c.bg,
             borderRadius: "50%",
+            pointerEvents: "none",
           }}
           initial={{ scale: 0.35, opacity: 0 }}
           whileInView={{ scale: 1, opacity: 1 }}
-          viewport={replayViewport}
+          /* Circles: animate once only — replayViewport on 5 large layers caused IO + style churn while scrolling the hero. */
+          viewport={{ once: true, amount: 0.12 }}
           transition={{ delay: c.delay * 0.5, duration: 1.35, ease }}
         />
       ))}
@@ -79,6 +110,7 @@ export default function Hero() {
           background: "#0256EB",
           filter: "blur(200px)",
           borderRadius: "50%",
+          pointerEvents: "none",
         }}
       />
       <div
@@ -92,6 +124,7 @@ export default function Hero() {
           background: "#0256EB",
           filter: "blur(200px)",
           borderRadius: "50%",
+          pointerEvents: "none",
         }}
       />
       <div
@@ -105,6 +138,7 @@ export default function Hero() {
           background: "#0256EB",
           filter: "blur(200px)",
           borderRadius: "50%",
+          pointerEvents: "none",
         }}
       />
 
@@ -120,7 +154,7 @@ export default function Hero() {
         }}
         initial="hidden"
         whileInView="visible"
-        viewport={replayViewport}
+        viewport={heroStaggerViewport}
         variants={{
           hidden: {},
           visible: {
@@ -129,6 +163,7 @@ export default function Hero() {
         }}
       >
         <motion.div
+          className="hero-content-inner"
           style={{
             display: "flex",
             flexDirection: "column",
@@ -221,7 +256,7 @@ export default function Hero() {
         }}
         initial="hidden"
         whileInView="visible"
-        viewport={replayViewport}
+        viewport={heroStaggerViewport}
         variants={{
           hidden: {},
           visible: {
@@ -231,7 +266,7 @@ export default function Hero() {
       >
         <motion.div
           className="hero-main-image"
-          variants={heroItem}
+          variants={heroMainImageReveal}
           style={{
             position: "absolute",
             width: "520px",
@@ -261,11 +296,13 @@ export default function Hero() {
               zIndex: 11,
             }}
           >
-            <span
-              className="hero-pill-text"
-              style={{ fontFamily: "Inter", fontWeight: 400, fontSize: "24px", color: "#EDEDED" }}
-            >
-              {p.text}
+            <span className="hero-pill-float-wrap" style={{ animationDelay: p.floatDelay }}>
+              <span
+                className="hero-pill-text"
+                style={{ fontFamily: "Inter", fontWeight: 400, fontSize: "24px", color: "#EDEDED" }}
+              >
+                {p.text}
+              </span>
             </span>
           </motion.div>
         ))}

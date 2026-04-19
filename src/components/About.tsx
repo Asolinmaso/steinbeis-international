@@ -29,7 +29,8 @@ export default function About() {
       width: '100%',
       minHeight: '900px',
       backgroundColor: '#FFFFFF',
-      overflow: 'hidden'
+      overflowX: 'hidden',
+      overflowY: 'visible',
     }}
     >
       <div className="about-section-inner" style={{
@@ -41,28 +42,39 @@ export default function About() {
         position: 'relative',
         zIndex: 2
       }}>
-        {/* Image Area */}
-        <RevealX className="about-image-area" x={-56} style={{ position: 'relative', width: '50%', height: '620px', zIndex: 2 }}>
-          {/* Decorative Blob */}
-          <div className="about-blob" style={{
-            position: 'absolute',
-            width: '487.37px', height: '465.91px',
-            left: '67.18px', top: '31.17px',
-            background: '#FFF0D2',
-            borderRadius: '30% 70% 70% 30% / 30% 30% 70% 70%',
-            zIndex: 1
-          }} />
-          <div className="about-image-rotated" style={{
-            position: 'absolute',
-            width: '570px', height: '518px',
-            left: '0', top: '0',
-            backgroundImage: 'url(/about-classroom.png)',
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-            borderRadius: '24px',
-            transform: 'rotate(-11deg)',
-            zIndex: 2
-          }} />
+        {/* Left visual: yellow/blob asset behind, classroom photo in front */}
+        <RevealX
+          className="about-image-area"
+          x={-56}
+          style={{
+            position: 'relative',
+            maxWidth: '620px',
+            flexShrink: 0,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'flex-start',
+            zIndex: 2,
+          }}
+        >
+          <div className="about-visual-stack">
+            <img
+              className="about-hero-bg"
+              src="/bg_oberlap.png"
+              alt=""
+              width={640}
+              height={620}
+              decoding="async"
+              aria-hidden
+            />
+            <img
+              className="about-hero-photo"
+              src="/about-classroom.png"
+              alt="Students in a German language classroom"
+              width={520}
+              height={420}
+              decoding="async"
+            />
+          </div>
         </RevealX>
 
         {/* Content Area */}

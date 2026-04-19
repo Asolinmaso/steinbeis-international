@@ -23,8 +23,7 @@ export default function Offerings() {
           </Reveal>
           <Reveal delay={0.08}>
             <p className="offerings-desc">
-              Comprehensive programs designed to support your learning journey, from classroom training to job placement, and visa assistance.
-            </p>
+            Comprehensive programs designed to support your learning journey with structured training, exam preparation, and career-focused guidance.            </p>
           </Reveal>
           <motion.ul
             className="offerings-list"

@@ -89,7 +89,8 @@ export default function Features() {
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
-        overflow: "hidden",
+        overflowX: "hidden",
+        overflowY: "visible",
       }}
     >
       <div
@@ -101,6 +102,7 @@ export default function Features() {
           left: "0",
           top: "270px",
           zIndex: 0,
+          pointerEvents: "none",
         }}
       >
         <svg width="100%" height="400" viewBox="0 0 1438 400" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
@@ -113,8 +115,8 @@ export default function Features() {
         </svg>
       </div>
 
-      <div style={{ position: "absolute", width: "215px", height: "215px", right: "100px", top: "34px", background: "#0256EB", filter: "blur(175px)", borderRadius: "50%", zIndex: 0 }} />
-      <div style={{ position: "absolute", width: "215px", height: "215px", left: "-56px", bottom: "100px", background: "#0256EB", filter: "blur(200px)", borderRadius: "50%", zIndex: 0 }} />
+      <div style={{ position: "absolute", width: "215px", height: "215px", right: "100px", top: "34px", background: "#0256EB", filter: "blur(175px)", borderRadius: "50%", zIndex: 0, pointerEvents: "none" }} />
+      <div style={{ position: "absolute", width: "215px", height: "215px", left: "-56px", bottom: "100px", background: "#0256EB", filter: "blur(200px)", borderRadius: "50%", zIndex: 0, pointerEvents: "none" }} />
 
       <div style={{ display: "flex", flexDirection: "column", alignItems: "center", zIndex: 10 }}>
         <Reveal>
@@ -175,6 +177,7 @@ export default function Features() {
             key={i}
             rotate={card.rotation}
             marginTop={card.mt}
+            danceDelay={i * 0.38}
             className="features-card"
             style={{
               width: "280px",

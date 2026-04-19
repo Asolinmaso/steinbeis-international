@@ -11,7 +11,7 @@ import Footer from '@/components/Footer';
 
 export default function Home() {
   return (
-    <main style={{ position: 'relative', width: '100%', overflowX: 'hidden' }}>
+    <main style={{ position: 'relative', width: '100%' }}>
       <Navbar />
       <Hero />
       <About />

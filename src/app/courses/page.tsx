@@ -1,8 +1,14 @@
 "use client";
-import React, { useState } from 'react';
-import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
-import { motion, replayViewport, Reveal, RevealX } from '@/components/motion';
+import React, { Suspense, useEffect, useState } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
+import { motion, replayViewport, Reveal, RevealX } from "@/components/motion";
+import {
+  COURSE_LEVEL_TABS,
+  type CourseLevelTab,
+  isCourseLevelTab,
+} from "@/constants/courseLevels";
 
 interface CourseNode {
   levelTitle: string;
@@ -70,12 +76,29 @@ const STEPS = [
   { number: "04", title: "Explore Opportunities", desc: "Take the next step towards study or career opportunities." }
 ];
 
-export default function CoursesPage() {
-  const [activeTab, setActiveTab] = useState("German A1");
+function CoursesPageContent() {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const [activeTab, setActiveTab] = useState<CourseLevelTab>("German A1");
+
+  useEffect(() => {
+    const q = searchParams.get("course");
+    if (isCourseLevelTab(q)) {
+      setActiveTab(q);
+    }
+  }, [searchParams]);
+
+  const selectTab = (tab: CourseLevelTab) => {
+    setActiveTab(tab);
+    const next = new URLSearchParams(searchParams.toString());
+    next.set("course", tab);
+    router.replace(`/courses?${next.toString()}`, { scroll: false });
+  };
+
   const currentData = CourseData[activeTab];
 
   return (
-    <main style={{ position: 'relative', width: '100%', overflowX: 'hidden' }}>
+    <main style={{ position: 'relative', width: '100%' }}>
 
       <Navbar />
 
@@ -228,6 +251,8 @@ export default function CoursesPage() {
 
       {/* Content Tabs Section */}
       <div
+        id="course-levels"
+        className="cpage-levels-section"
         style={{ position: 'relative', width: '100%', marginTop: '100px', paddingBottom: '100px', display: 'flex', flexDirection: 'column', alignItems: 'center', backgroundColor: '#FFFFFF' }}
       >
 
@@ -238,11 +263,11 @@ export default function CoursesPage() {
           justifyContent: 'center', width: '100%', maxWidth: '770px', padding: '0 20px',
           marginBottom: '60px'
         }}>
-          {["German A1", "German A2", "German B1", "German B2"].map(tab => {
+          {COURSE_LEVEL_TABS.map((tab) => {
             const isActive = activeTab === tab;
             return (
-              <button key={tab} className="cpage-tab-btn" onClick={() => setActiveTab(tab)} style={{
-                display: 'flex', justifyContent: 'center', alignItems: 'center', padding: '16px 24px',
+              <button key={tab} type="button" className="cpage-tab-btn" onClick={() => selectTab(tab)} style={{
+                display: 'flex', justifyContent: 'center', alignItems: 'center',
                 backgroundColor: isActive ? '#FA4516' : '#FFFFFF',
                 border: isActive ? 'none' : '1px solid #2E2E2E',
                 borderRadius: '40px',
@@ -483,5 +508,19 @@ export default function CoursesPage() {
 
       <Footer />
     </main>
+  );
+}
+
+export default function CoursesPage() {
+  return (
+    <Suspense
+      fallback={
+        <main style={{ position: "relative", width: "100%", minHeight: "60vh" }}>
+          <Navbar />
+        </main>
+      }
+    >
+      <CoursesPageContent />
+    </Suspense>
   );
 }
