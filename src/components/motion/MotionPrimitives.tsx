@@ -9,11 +9,12 @@ import {
 } from "framer-motion";
 import type { CSSProperties, ReactNode } from "react";
 
-/** Replay every time the section enters the viewport (including initial paint when in view). */
+/** Replay when the section enters the viewport (including initial paint when in view). */
 export const replayViewport = {
   once: false,
-  amount: 0.18,
-  margin: "0px 0px -10% 0px",
+  /** Slightly higher threshold + calmer root margin = less in/out flicker at scroll edges (smoother wheel). */
+  amount: 0.32,
+  margin: "0px 0px 0px 0px",
 } as const;
 
 const easePremium = [0.16, 1, 0.3, 1] as const;
@@ -190,8 +191,9 @@ export function MotionFeatureCard({
   rotate,
   marginTop,
   style,
+  danceDelay = 0,
   ...props
-}: HTMLMotionProps<"div"> & { rotate: number; marginTop: string }) {
+}: HTMLMotionProps<"div"> & { rotate: number; marginTop: string; danceDelay?: number }) {
   const reduce = useReducedMotion();
   if (reduce) {
     return (
@@ -224,7 +226,31 @@ export function MotionFeatureCard({
       }}
       {...props}
     >
-      {children as ReactNode}
+      <motion.div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          gap: "24px",
+          width: "100%",
+          height: "100%",
+          flex: 1,
+          minHeight: 0,
+          transformOrigin: "center center",
+        }}
+        animate={{
+          rotate: [0, 5.5, -4.5, 4, -3.5, 3, -2, 0],
+          y: [0, -8, 6, -7, 5, -5, 4, 0],
+          x: [0, 4, -4, 3, -3, 2, -2, 0],
+        }}
+        transition={{
+          duration: 4.2,
+          repeat: Infinity,
+          ease: "easeInOut",
+          delay: danceDelay,
+        }}
+      >
+        {children as ReactNode}
+      </motion.div>
     </motion.div>
   );
 }

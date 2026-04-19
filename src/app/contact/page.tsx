@@ -35,7 +35,7 @@ export default function ContactPage() {
   };
 
   return (
-    <main style={{ position: 'relative', width: '100%', overflowX: 'hidden' }}>
+    <main style={{ position: 'relative', width: '100%' }}>
 
       <Navbar />
 

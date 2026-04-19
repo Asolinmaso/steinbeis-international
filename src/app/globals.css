@@ -201,15 +201,119 @@
   animation: marqueeScroll 30s linear infinite;
 }
 
+/*
+ * Document scroll: never use `overflow-x: hidden` on `body` — it forces
+ * `overflow-y: auto` (CSS 2.1), so `body` becomes the scroll container and
+ * the first wheel/trackpad gesture often does nothing. Clip horizontally on `main` instead.
+ */
 html {
-  scroll-behavior: smooth;
+  scroll-behavior: auto;
 }
 
 body {
   font-family: 'Inter', sans-serif;
   background: #FFFFFF;
   color: var(--text-dark);
-  overflow-x: hidden;
+  min-height: 100%;
+}
+
+body > main {
+  overflow-x: clip;
+  max-width: 100%;
+}
+
+/* Prefer vertical pan / scroll chaining over the hero (helps trackpad + touch). */
+.hero-section-root {
+  touch-action: pan-y;
+}
+
+/* Decorative layers: don’t sit above the page scroll gesture */
+.hero-section-root .hero-circle,
+.hero-section-root .hero-decorative-blur {
+  pointer-events: none;
+}
+
+/*
+ * Hero scroll fix: full-width flex/motion wrappers were stealing wheel/trackpad targets
+ * over “empty” navy padding. Pass events through except on real content.
+ * (Do not set pointer-events:none on the section root — can drop wheel targets in some browsers.)
+ */
+.hero-section-root .hero-content-wrapper {
+  pointer-events: none;
+}
+
+.hero-section-root .hero-content-wrapper > * {
+  pointer-events: auto;
+}
+
+/* Narrow the “active” hit column for headline copy (side margins pass wheel through). */
+.hero-section-root .hero-content-wrapper > .hero-content-inner {
+  pointer-events: none;
+}
+
+.hero-section-root .hero-content-inner > * {
+  pointer-events: auto;
+}
+
+.hero-section-root .hero-image-wrapper {
+  pointer-events: none;
+}
+
+.hero-section-root .hero-main-image,
+.hero-section-root .hero-pill {
+  pointer-events: auto;
+}
+
+/* Hero pills: soft vertical float (inner wrap — avoids fighting Framer entrance `transform`). */
+@media (prefers-reduced-motion: no-preference) {
+  @keyframes hero-pill-float {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+
+    50% {
+      transform: translateY(-14px);
+    }
+  }
+
+  @keyframes hero-pill-float-sm {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+
+    50% {
+      transform: translateY(-7px);
+    }
+  }
+
+  @media (min-width: 769px) {
+    .hero-section-root .hero-pill-float-wrap {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 100%;
+      animation: hero-pill-float 3.8s ease-in-out infinite;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .hero-section-root .hero-pill-float-wrap {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      animation: hero-pill-float-sm 3.4s ease-in-out infinite;
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-section-root .hero-pill-float-wrap {
+    animation: none !important;
+  }
 }
 
 a {
@@ -574,7 +678,6 @@ button {
     margin-inline: auto !important;
     aspect-ratio: 520 / 714 !important;
     height: auto !important;
-    transform: none !important;
     border-radius: 16px !important;
   }
 
@@ -615,6 +718,40 @@ button {
 }
 
 /* ----- About Component ----- */
+@media (min-width: 769px) {
+  .about-section-inner .about-image-area {
+    align-self: center;
+  }
+
+  .about-section-inner .about-visual-stack {
+    position: relative;
+    width: 100%;
+    max-width: min(580px, 46vw);
+    line-height: 0;
+  }
+
+  .about-section-inner .about-hero-bg {
+    position: relative;
+    z-index: 0;
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: contain;
+  }
+
+  /* Classroom photo sits in front of the blob/yellow asset */
+  .about-section-inner .about-hero-photo {
+    position: absolute;
+    z-index: 1;
+    left: 7%;
+    top: 20%;
+    height: auto;
+    max-height: 86%;
+    object-fit: cover;
+    border-radius: 22px;
+  }
+}
+
 @media (max-width: 768px) {
   .about-section-inner {
     flex-direction: column !important;
@@ -624,23 +761,41 @@ button {
     align-items: flex-start !important;
   }
 
-  .about-blob {
-    display: none !important;
-  }
-
   .about-image-area {
     width: 100% !important;
-    height: 260px !important;
+    max-width: 100% !important;
+    height: auto !important;
+    min-height: 0 !important;
+    justify-content: center !important;
   }
 
-  .about-image-rotated {
-    width: 100% !important;
-    max-width: 340px !important;
-    height: 220px !important;
-    left: 0 !important;
-    top: 0 !important;
-    transform: none !important;
+  .about-visual-stack {
     position: relative !important;
+    width: min(100%, 360px) !important;
+    margin-inline: auto !important;
+    line-height: 0 !important;
+  }
+
+  .about-hero-bg {
+    width: 100% !important;
+    height: auto !important;
+    max-height: 320px !important;
+    object-fit: contain !important;
+    display: block !important;
+  }
+
+  .about-hero-photo {
+    position: absolute !important;
+    z-index: 1 !important;
+    left: 5% !important;
+    top: 8% !important;
+    width: 76% !important;
+    height: auto !important;
+    max-height: 80% !important;
+    object-fit: cover !important;
+    border-radius: 16px !important;
+    transform: rotate(-8deg) !important;
+    box-shadow: 0 14px 36px rgba(0, 0, 0, 0.12) !important;
   }
 
   .about-content-area {
@@ -1098,7 +1253,14 @@ button {
 }
 
 /* ----- Courses Page ----- */
+.cpage-levels-section {
+  scroll-margin-top: 120px;
+}
+
 @media (max-width: 768px) {
+  .cpage-levels-section {
+    scroll-margin-top: 88px;
+  }
 
   /* Hero */
   .cpage-hero {

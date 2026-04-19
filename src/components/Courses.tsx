@@ -26,7 +26,7 @@ const courses = [
     levelText1: "German B2",
     levelText2: "Upper Intermediate Level",
     desc: "Improve fluency and understanding for academic and professional communication.",
-    img: "/learning_journey_1.png"
+    img: "/learning_journey_4.png"
   }
 ];
 
@@ -43,7 +43,8 @@ export default function Courses() {
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'center',
-      overflow: 'hidden'
+      overflowX: 'hidden',
+      overflowY: 'visible',
     }}
     >
       {/* Decorative Wavy Dotted Line */}

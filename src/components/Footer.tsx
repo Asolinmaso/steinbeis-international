@@ -4,6 +4,7 @@ import React from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { Reveal, replayViewport, staggerItemVariants } from '@/components/motion';
+import { COURSE_LEVEL_TABS } from '@/constants/courseLevels';
 
 export default function Footer() {
   return (
@@ -95,7 +96,7 @@ export default function Footer() {
             <h3 className="footer-col-title" style={{ fontFamily: 'Inter', fontWeight: 500, fontSize: '24px', color: '#FFFFFF' }}>Quick Links</h3>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
               <Link href="/" className="footer-col-link" style={{ fontFamily: 'Inter', fontWeight: 400, fontSize: '24px', color: '#FFFFFF' }}>Home</Link>
-              <Link href="#courses" className="footer-col-link" style={{ fontFamily: 'Inter', fontWeight: 400, fontSize: '24px', color: '#FFFFFF' }}>Courses</Link>
+              <Link href="/courses" className="footer-col-link" style={{ fontFamily: 'Inter', fontWeight: 400, fontSize: '24px', color: '#FFFFFF' }}>Courses</Link>
               <Link href="#contact" className="footer-col-link" style={{ fontFamily: 'Inter', fontWeight: 400, fontSize: '24px', color: '#FFFFFF' }}>Contact</Link>
             </div>
           </motion.div>
@@ -104,10 +105,16 @@ export default function Footer() {
           <motion.div variants={staggerItemVariants} style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
             <h3 className="footer-col-title" style={{ fontFamily: 'Inter', fontWeight: 500, fontSize: '24px', color: '#FFFFFF' }}>Courses</h3>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-              <span className="footer-col-link" style={{ fontFamily: 'Inter', fontWeight: 400, fontSize: '24px', color: '#FFFFFF' }}>German A1</span>
-              <span className="footer-col-link" style={{ fontFamily: 'Inter', fontWeight: 400, fontSize: '24px', color: '#FFFFFF' }}>German A2</span>
-              <span className="footer-col-link" style={{ fontFamily: 'Inter', fontWeight: 400, fontSize: '24px', color: '#FFFFFF' }}>German B1</span>
-              <span className="footer-col-link" style={{ fontFamily: 'Inter', fontWeight: 400, fontSize: '24px', color: '#FFFFFF' }}>German B2</span>
+              {COURSE_LEVEL_TABS.map((level) => (
+                <Link
+                  key={level}
+                  href={`/courses?course=${encodeURIComponent(level)}#course-levels`}
+                  className="footer-col-link"
+                  style={{ fontFamily: 'Inter', fontWeight: 400, fontSize: '24px', color: '#FFFFFF' }}
+                >
+                  {level}
+                </Link>
+              ))}
             </div>
           </motion.div>
 

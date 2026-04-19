@@ -30,7 +30,8 @@ export default function Testimonials() {
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
-        overflow: "hidden",
+        overflowX: "hidden",
+        overflowY: "visible",
       }}
     >
       <div
@@ -43,6 +44,7 @@ export default function Testimonials() {
           background: "#0256EB",
           filter: "blur(220px)",
           borderRadius: "50%",
+          pointerEvents: "none",
         }}
       />
 
@@ -59,7 +61,8 @@ export default function Testimonials() {
             zIndex: 10,
           }}
         >
-          From Learning to Living in Germany
+          From <span style={{ color: "#FFB61E" }}>Learning</span> to{" "}
+          <span style={{ color: "#FFB61E" }}>Living in Germany</span>
         </h2>
       </Reveal>
       <Reveal delay={0.1}>
