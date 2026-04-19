@@ -1,6 +1,7 @@
 "use client";
 import React from 'react';
 import Link from 'next/link';
+import { Reveal } from '@/components/motion';
 
 const courses = [
   {
@@ -31,7 +32,10 @@ const courses = [
 
 export default function Courses() {
   return (
-    <section className="courses-section" id="courses" style={{
+    <section
+      className="courses-section"
+      id="courses"
+      style={{
       position: 'relative',
       width: '100%',
       backgroundColor: '#051636',
@@ -40,7 +44,8 @@ export default function Courses() {
       flexDirection: 'column',
       alignItems: 'center',
       overflow: 'hidden'
-    }}>
+    }}
+    >
       {/* Decorative Wavy Dotted Line */}
       <div style={{
         position: 'absolute', top: 0, left: 0,
@@ -64,13 +69,16 @@ export default function Courses() {
         display: 'flex', flexDirection: 'column', alignItems: 'center',
         width: '100%', maxWidth: '1240px', padding: '0 20px'
       }}>
+        <Reveal>
         <h2 className="courses-title" style={{
           fontFamily: 'Inter', fontWeight: 600, fontSize: '48px',
           color: '#FFFFFF', textAlign: 'center', marginBottom: '20px'
         }}>
           Start Your German Learning Journey
         </h2>
+        </Reveal>
 
+        <Reveal delay={0.1}>
         <p className="courses-desc" style={{
           fontFamily: 'Inter', fontWeight: 400, fontSize: '22px',
           color: '#FFFFFF', textAlign: 'center', maxWidth: '800px',
@@ -78,8 +86,10 @@ export default function Courses() {
         }}>
           Build strong language skills from A1 to B2 with practical speaking, easy grammar, and step-by-step guidance.
         </p>
+        </Reveal>
 
         {/* Carousel Container */}
+        <Reveal delay={0.16}>
         <div style={{ width: '100%', overflow: 'hidden', paddingBottom: '20px' }}>
           <div className="courses-marquee-container">
             {[...courses, ...courses].map((course, i) => (
@@ -125,12 +135,15 @@ export default function Courses() {
             ))}
           </div>
         </div>
+        </Reveal>
 
+        <Reveal delay={0.22}>
         <Link href="/courses">
           <button className="btn-yellow" style={{ marginTop: '50px' }}>
             Explore Details
           </button>
         </Link>
+        </Reveal>
       </div>
     </section>
   );

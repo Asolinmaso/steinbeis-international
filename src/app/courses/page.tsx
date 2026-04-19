@@ -1,7 +1,8 @@
 "use client";
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState } from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import { motion, replayViewport, Reveal, RevealX } from '@/components/motion';
 
 interface CourseNode {
   levelTitle: string;
@@ -73,42 +74,13 @@ export default function CoursesPage() {
   const [activeTab, setActiveTab] = useState("German A1");
   const currentData = CourseData[activeTab];
 
-  const sectionRef = useRef<HTMLElement>(null);
-  const [isVisible, setIsVisible] = useState(false);
-  const [mounted, setMounted] = useState(false);
-  const [showDelayedElements, setShowDelayedElements] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        setIsVisible(entry.isIntersecting);
-        if (entry.isIntersecting) {
-          setTimeout(() => setShowDelayedElements(true), 1500);
-        } else {
-          setShowDelayedElements(false);
-        }
-      },
-      { threshold: 0.01, rootMargin: "0px" }
-    );
-
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
-    }
-
-    return () => observer.disconnect();
-  }, []);
-
-  const activeClass = mounted && isVisible ? 'is-visible' : '';
-  const delayedClass = mounted && showDelayedElements ? 'is-delayed-visible' : '';
-
   return (
     <main style={{ position: 'relative', width: '100%', overflowX: 'hidden' }}>
 
       <Navbar />
 
       {/* Header Hero Section */}
-      <section ref={sectionRef} className={`cpage-hero ${activeClass} ${delayedClass}`} style={{
+      <section className="cpage-hero" style={{
         position: 'relative',
         width: '100%',
         minHeight: '623px',
@@ -119,9 +91,23 @@ export default function CoursesPage() {
         justifyContent: 'center',
         padding: '60px 0'
       }}>
-        {/* Background Ripple Circles (Synchronized with Hero.tsx) */}
-        <div className="animate-rippleIn hero-circle" style={{ animationDelay: '0.2s', position: 'absolute', width: '800px', height: '800px', left: 'auto', right: '-200px', top: '-100px', background: '#0A2A66', borderRadius: '50%', opacity: 0.6 }} />
-        <div className="animate-rippleIn hero-circle" style={{ animationDelay: '0.4s', position: 'absolute', width: '700px', height: '700px', left: 'auto', right: '-150px', top: '-50px', background: '#082458', borderRadius: '50%', opacity: 0.6 }} />
+        {/* Background circles — replay on each viewport entry */}
+        <motion.div
+          className="hero-circle"
+          style={{ position: 'absolute', width: '800px', height: '800px', left: 'auto', right: '-200px', top: '-100px', background: '#0A2A66', borderRadius: '50%' }}
+          initial={{ scale: 0.72, opacity: 0 }}
+          whileInView={{ scale: 1, opacity: 0.6 }}
+          viewport={replayViewport}
+          transition={{ duration: 1.15, delay: 0.12, ease: [0.22, 1, 0.36, 1] }}
+        />
+        <motion.div
+          className="hero-circle"
+          style={{ position: 'absolute', width: '700px', height: '700px', left: 'auto', right: '-150px', top: '-50px', background: '#082458', borderRadius: '50%' }}
+          initial={{ scale: 0.72, opacity: 0 }}
+          whileInView={{ scale: 1, opacity: 0.6 }}
+          viewport={replayViewport}
+          transition={{ duration: 1.15, delay: 0.28, ease: [0.22, 1, 0.36, 1] }}
+        />
 
         {/* Blur Ellipses Background */}
         <div style={{ position: 'absolute', width: '400px', height: '400px', left: '-100px', top: '-100px', background: '#0256EB', filter: 'blur(200px)', opacity: 0.4 }} />
@@ -139,7 +125,8 @@ export default function CoursesPage() {
           zIndex: 10
         }}>
           {/* Left Content */}
-          <div className="animate-fadeInUp" style={{ flex: '1', display: 'flex', flexDirection: 'column', gap: '32px', minWidth: '0' }}>
+          <div style={{ flex: '1', display: 'flex', flexDirection: 'column', gap: '32px', minWidth: '0' }}>
+            <Reveal>
             <h1 className="cpage-hero-title" style={{
               fontFamily: 'Inter', fontWeight: 600, fontSize: '60px', lineHeight: '1.2', color: '#FFFFFF',
               whiteSpace: 'nowrap'
@@ -147,7 +134,9 @@ export default function CoursesPage() {
               Learn with <span style={{ color: '#FFB61E' }}>Purpose.</span><br />
               Grow with <span style={{ color: '#FFB61E' }}>Confidence.</span>
             </h1>
+            </Reveal>
 
+            <Reveal delay={0.1}>
             <p className="cpage-hero-desc" style={{
               maxWidth: '498px',
               fontFamily: 'Inter', fontWeight: 400, fontSize: '24px', lineHeight: '32px', color: '#FFFFFF',
@@ -155,14 +144,17 @@ export default function CoursesPage() {
             }}>
               Structured A1–B2 German language courses designed to help you build strong communication skills and move towards global career and study opportunities.
             </p>
+            </Reveal>
 
+            <Reveal delay={0.18}>
             <button className="btn-yellow" style={{ width: '193px', height: '61px', fontSize: '20px' }}>
               Enquire Now
             </button>
+            </Reveal>
           </div>
 
           {/* Right Image Section */}
-          <div className="cpage-hero-image" style={{
+          <RevealX x={48} className="cpage-hero-image" style={{
             position: 'relative',
             width: '500px',
             height: '500px',
@@ -170,41 +162,77 @@ export default function CoursesPage() {
             alignItems: 'center',
             justifyContent: 'center'
           }}>
-            {/* Outline rings */}
-            <div className="animate-rippleIn" style={{
-              position: 'absolute', width: '560px', height: '560px',
-              borderRadius: '50%', border: '1px solid #25CAD8', opacity: 0.3, animationDelay: '0.8s'
-            }} />
-            <div className="animate-rippleIn" style={{
-              position: 'absolute', width: '620px', height: '620px',
-              borderRadius: '50%', border: '1px solid #FFB61E', opacity: 0.2, animationDelay: '1s'
-            }} />
+            <motion.div
+              style={{
+                position: 'absolute', width: '560px', height: '560px',
+                borderRadius: '50%', border: '1px solid #25CAD8', opacity: 0.3
+              }}
+              initial={{ scale: 0.85, opacity: 0 }}
+              whileInView={{ scale: 1, opacity: 0.3 }}
+              viewport={replayViewport}
+              transition={{ duration: 0.9, delay: 0.35, ease: [0.22, 1, 0.36, 1] }}
+            />
+            <motion.div
+              style={{
+                position: 'absolute', width: '620px', height: '620px',
+                borderRadius: '50%', border: '1px solid #FFB61E', opacity: 0.2
+              }}
+              initial={{ scale: 0.85, opacity: 0 }}
+              whileInView={{ scale: 1, opacity: 0.2 }}
+              viewport={replayViewport}
+              transition={{ duration: 0.95, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
+            />
 
-            {/* Main Rounded Banner Image */}
-            <div className="animate-fadeInUp" style={{
-              width: '500px', height: '500px',
-              borderRadius: '24px',
-              backgroundImage: 'url(/courses_banner.png)',
-              backgroundSize: 'cover',
-              backgroundPosition: 'center',
-              overflow: 'hidden',
-              position: 'relative',
-              boxShadow: '0 20px 40px rgba(0,0,0,0.3)',
-              zIndex: 12
-            }} />
+            <motion.div
+              style={{
+                width: '500px', height: '500px',
+                borderRadius: '24px',
+                backgroundImage: 'url(/courses_banner.png)',
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+                overflow: 'hidden',
+                position: 'relative',
+                boxShadow: '0 20px 40px rgba(0,0,0,0.3)',
+                zIndex: 12
+              }}
+              initial={{ opacity: 0, scale: 0.92, y: 28 }}
+              whileInView={{ opacity: 1, scale: 1, y: 0 }}
+              viewport={replayViewport}
+              transition={{ type: 'spring', stiffness: 82, damping: 17, delay: 0.2 }}
+            />
 
-            {/* Floating Decorative Elements */}
-            <div className="animate-fadeInUp" style={{ position: 'absolute', width: '67px', height: '67px', left: '-30px', top: '150px', background: '#25CAD8', borderRadius: '50%', zIndex: 13, animationDelay: '1.6s' }} />
-            <div className="animate-fadeInUp" style={{ position: 'absolute', width: '39px', height: '39px', left: '0px', bottom: '100px', background: '#FA4516', borderRadius: '50%', zIndex: 13, animationDelay: '1.8s' }} />
-            <div className="animate-fadeInUp" style={{ position: 'absolute', width: '51px', height: '51px', right: '-10px', top: '100px', background: '#FFB61E', borderRadius: '50%', zIndex: 13, animationDelay: '2s' }} />
-          </div>
+            <motion.div
+              style={{ position: 'absolute', width: '67px', height: '67px', left: '-30px', top: '150px', background: '#25CAD8', borderRadius: '50%', zIndex: 13 }}
+              initial={{ opacity: 0, scale: 0 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={replayViewport}
+              transition={{ type: 'spring', stiffness: 200, damping: 14, delay: 0.55 }}
+            />
+            <motion.div
+              style={{ position: 'absolute', width: '39px', height: '39px', left: '0px', bottom: '100px', background: '#FA4516', borderRadius: '50%', zIndex: 13 }}
+              initial={{ opacity: 0, scale: 0 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={replayViewport}
+              transition={{ type: 'spring', stiffness: 200, damping: 14, delay: 0.65 }}
+            />
+            <motion.div
+              style={{ position: 'absolute', width: '51px', height: '51px', right: '-10px', top: '100px', background: '#FFB61E', borderRadius: '50%', zIndex: 13 }}
+              initial={{ opacity: 0, scale: 0 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={replayViewport}
+              transition={{ type: 'spring', stiffness: 200, damping: 14, delay: 0.75 }}
+            />
+          </RevealX>
         </div>
       </section>
 
       {/* Content Tabs Section */}
-      <div style={{ position: 'relative', width: '100%', marginTop: '100px', paddingBottom: '100px', display: 'flex', flexDirection: 'column', alignItems: 'center', backgroundColor: '#FFFFFF' }}>
+      <div
+        style={{ position: 'relative', width: '100%', marginTop: '100px', paddingBottom: '100px', display: 'flex', flexDirection: 'column', alignItems: 'center', backgroundColor: '#FFFFFF' }}
+      >
 
         {/* Tabs Bar */}
+        <Reveal>
         <div className="cpage-tabs-row" style={{
           display: 'flex', flexDirection: 'row', alignItems: 'center', gap: '24px',
           justifyContent: 'center', width: '100%', maxWidth: '770px', padding: '0 20px',
@@ -229,6 +257,7 @@ export default function CoursesPage() {
             );
           })}
         </div>
+        </Reveal>
 
         {/* Level Details Content */}
         <div className="cpage-detail-row" style={{
@@ -236,7 +265,7 @@ export default function CoursesPage() {
           gap: '40px', padding: '0 20px', justifyContent: 'space-between', alignItems: 'flex-start'
         }}>
           {/* Left Column: Text */}
-          <div className="cpage-detail-text" style={{ flex: '0 1 620px', display: 'flex', flexDirection: 'column', gap: '24px' }}>
+          <RevealX className="cpage-detail-text" x={-36} style={{ flex: '0 1 620px', display: 'flex', flexDirection: 'column', gap: '24px' }}>
             <h2 style={{ fontFamily: 'Inter', fontWeight: 600, fontSize: '32px', lineHeight: '39px', color: '#2E2E2E' }}>
               {currentData.levelTitle}
             </h2>
@@ -271,24 +300,32 @@ export default function CoursesPage() {
             <button className="btn-yellow" style={{ width: '193px', height: '61px', marginTop: '16px' }}>
               Enquire Now
             </button>
-          </div>
+          </RevealX>
 
           {/* Right Column: Image */}
-          <div className="cpage-detail-image" style={{
-            flex: '0 0 566px',
-            height: '704px',
-            borderRadius: '32px',
-            overflow: 'hidden',
-            backgroundImage: `url(${currentData.img})`,
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-            boxShadow: '0 20px 40px rgba(0,0,0,0.1)'
-          }} />
+          <RevealX
+            key={activeTab}
+            className="cpage-detail-image"
+            x={40}
+            delay={0.06}
+            style={{
+              flex: '0 0 566px',
+              height: '704px',
+              borderRadius: '32px',
+              overflow: 'hidden',
+              backgroundImage: `url(${currentData.img})`,
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+              boxShadow: '0 20px 40px rgba(0,0,0,0.1)'
+            }}
+          />
         </div>
       </div>
 
       {/* Your Path to Global Opportunities */}
-      <div className="cpage-path-section" style={{
+      <div
+        className="cpage-path-section"
+        style={{
         position: 'relative',
         width: '100%',
         height: '662px',
@@ -296,25 +333,37 @@ export default function CoursesPage() {
         overflow: 'hidden',
         display: 'flex',
         justifyContent: 'center'
-      }}>
+      }}
+      >
         <div style={{ position: 'relative', width: '100%', maxWidth: '1440px', height: '100%' }}>
           <div style={{ position: 'absolute', width: '215px', height: '215px', left: '-75px', top: '-50px', background: '#0256EB', filter: 'blur(175px)' }} />
           <div style={{ position: 'absolute', width: '180px', height: '180px', left: '670px', top: '526px', background: '#0256EB', filter: 'blur(175px)' }} />
           <div style={{ position: 'absolute', width: '180px', height: '180px', left: '1045px', top: '-50px', background: '#0256EB', filter: 'blur(175px)' }} />
 
-          <h2 className="cpage-path-title" style={{
-            position: 'absolute', width: '100%', top: '60px', left: 0,
-            fontFamily: 'Inter', fontWeight: 600, fontSize: '48px', lineHeight: '58px', textAlign: 'center', color: '#FFFFFF'
-          }}>
+          <Reveal
+            className="cpage-path-title"
+            style={{
+              position: 'absolute', width: '100%', top: '60px', left: 0,
+              fontFamily: 'Inter', fontWeight: 600, fontSize: '48px', lineHeight: '58px', textAlign: 'center', color: '#FFFFFF'
+            }}
+          >
+            <h2 style={{ margin: 0, font: 'inherit', color: 'inherit' }}>
             Your Path to Global Opportunities
-          </h2>
+            </h2>
+          </Reveal>
 
-          <p className="cpage-path-subtitle" style={{
-            position: 'absolute', width: '782px', left: 'calc(50% - 782px/2)', top: '142px',
-            fontFamily: 'Inter', fontWeight: 400, fontSize: '24px', lineHeight: '29px', textAlign: 'center', color: '#FFFFFF'
-          }}>
+          <Reveal
+            delay={0.1}
+            className="cpage-path-subtitle"
+            style={{
+              position: 'absolute', width: '782px', left: 'calc(50% - 782px/2)', top: '142px',
+              fontFamily: 'Inter', fontWeight: 400, fontSize: '24px', lineHeight: '29px', textAlign: 'center', color: '#FFFFFF'
+            }}
+          >
+            <p style={{ margin: 0, font: 'inherit', color: 'inherit' }}>
             A clear step-by-step journey to help you move from learning the language to achieving your career or study goals.
-          </p>
+            </p>
+          </Reveal>
 
           <div className="cpage-path-steps-row" style={{
             position: 'absolute', top: '260px', left: '100px', right: '100px',
@@ -337,7 +386,7 @@ export default function CoursesPage() {
             </div>
 
             {STEPS.map((step, idx) => (
-              <div key={idx} className="cpage-path-step" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '24px', width: '259px', zIndex: 10 }}>
+              <Reveal key={idx} delay={0.08 * idx} className="cpage-path-step" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '24px', width: '259px', zIndex: 10 }}>
                 <div style={{
                   width: '100px', height: '100px', backgroundColor: '#FFB61E', borderRadius: '100px',
                   display: 'flex', alignItems: 'center', justifyContent: 'center'
@@ -354,33 +403,57 @@ export default function CoursesPage() {
                     {step.desc}
                   </p>
                 </div>
-              </div>
+              </Reveal>
             ))}
           </div>
         </div>
       </div>
 
       {/* Ready to Start Your Journey? Section */}
-      <div className="cpage-ready-outer" style={{
+      <div
+        className="cpage-ready-outer"
+        style={{
         position: 'relative', width: '100%', display: 'flex', justifyContent: 'center', paddingTop: '100px', paddingBottom: '100px'
-      }}>
+      }}
+      >
         <div className="cpage-ready-container" style={{
           position: 'relative', width: '1266px', height: '474px', borderRadius: '32px'
         }}>
-          <div className="cpage-ready-yellow-bg" style={{
-            position: 'absolute', left: '0', top: '45px', width: '100%', height: '385px',
-            backgroundColor: '#FFB61E', borderRadius: '32px'
-          }} />
+          <motion.div
+            className="cpage-ready-yellow-bg"
+            style={{
+              position: 'absolute', left: '0', top: '45px', width: '100%', height: '385px',
+              backgroundColor: '#FFB61E', borderRadius: '32px', transformOrigin: '50% 50%'
+            }}
+            initial={{ opacity: 0, scale: 0.94 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={replayViewport}
+            transition={{ type: 'spring', stiffness: 80, damping: 18, delay: 0.06 }}
+          />
 
-          <div className="cpage-ready-img" style={{
-            position: 'absolute', width: '490px', height: '474px', left: '752px', top: '0px',
-            backgroundImage: 'url(/start_journey.png)', backgroundSize: 'cover', borderRadius: '32px', backgroundPosition: 'center'
-          }} />
+          <motion.div
+            className="cpage-ready-img"
+            style={{
+              position: 'absolute', width: '490px', height: '474px', left: '752px', top: '0px',
+              backgroundImage: 'url(/start_journey.png)', backgroundSize: 'cover', borderRadius: '32px', backgroundPosition: 'center'
+            }}
+            initial={{ opacity: 0, x: 56, scale: 0.96 }}
+            whileInView={{ opacity: 1, x: 0, scale: 1 }}
+            viewport={replayViewport}
+            transition={{ type: 'spring', stiffness: 85, damping: 17, delay: 0.14 }}
+          />
 
-          <div className="cpage-ready-content" style={{
-            position: 'absolute', width: '679px', height: '252px', left: '40px', top: 'calc(50% - 252px/2 + 0.5px)',
-            display: 'flex', flexDirection: 'column', gap: '32px'
-          }}>
+          <motion.div
+            className="cpage-ready-content"
+            style={{
+              position: 'absolute', width: '679px', height: '252px', left: '40px', top: 'calc(50% - 252px/2 + 0.5px)',
+              display: 'flex', flexDirection: 'column', gap: '32px'
+            }}
+            initial={{ opacity: 0, x: -40 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={replayViewport}
+            transition={{ type: 'spring', stiffness: 88, damping: 18, delay: 0.1 }}
+          >
             <h2 className="cpage-ready-title" style={{ fontFamily: 'Inter', fontWeight: 600, fontSize: '48px', lineHeight: '60px', color: '#2E2E2E' }}>
               Ready to Start Your Journey?
             </h2>
@@ -404,7 +477,7 @@ export default function CoursesPage() {
                 Enquire Now
               </button>
             </div>
-          </div>
+          </motion.div>
         </div>
       </div>
 

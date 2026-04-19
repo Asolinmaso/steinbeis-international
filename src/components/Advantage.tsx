@@ -1,6 +1,8 @@
 "use client";
-import React, { useRef, useState, useEffect } from 'react';
-import Link from 'next/link';
+import React from "react";
+import Link from "next/link";
+import { motion } from "framer-motion";
+import { Reveal, replayViewport } from "@/components/motion";
 
 const advantages = [
   {
@@ -20,7 +22,6 @@ const advantages = [
         <path d="M22 14L23 15L24 14" stroke="#2C4B82" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" opacity="0.6"/>
       </svg>
     ),
-    delay: '0.4s'
   },
   {
     text: "Affordable Fee Structure",
@@ -36,7 +37,6 @@ const advantages = [
         <path d="M11 12H21M11 16H21M18 10L13 22" stroke="#FFB61E" strokeWidth="2" strokeLinecap="round"/>
       </svg>
     ),
-    delay: '0.6s'
   },
   {
     text: "Study Materials Included",
@@ -52,7 +52,6 @@ const advantages = [
         <path d="M16 8V22" stroke="#25CAD8" strokeWidth="2" strokeLinecap="round"/>
       </svg>
     ),
-    delay: '0.8s'
   },
   {
     text: "Hostel Accommodation",
@@ -67,7 +66,6 @@ const advantages = [
         <path d="M6 26V10L16 6L26 10V26M6 16H26M11 16V26M16 16V26M21 16V26" stroke="#25CAD8" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
       </svg>
     ),
-    delay: '1.0s'
   },
   {
     text: "Flexible Learning Timings",
@@ -83,175 +81,177 @@ const advantages = [
         <path d="M16 10V16L20 20" stroke="#FA4516" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
       </svg>
     ),
-    delay: '1.2s'
-  }
+  },
 ];
 
+const pillVariants = {
+  hidden: { opacity: 0, y: 56, scale: 0.88, rotateX: -10 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    rotateX: 0,
+    transition: { type: "spring" as const, stiffness: 85, damping: 14 },
+  },
+};
+
 export default function Advantage() {
-  const sectionRef = useRef<HTMLElement>(null);
-  const [isVisible, setIsVisible] = useState(false);
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        setIsVisible(entry.isIntersecting);
-      },
-      { threshold: 0.1, rootMargin: "0px" }
-    );
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
-    }
-    return () => observer.disconnect();
-  }, []);
-
-  const activeClass = mounted && isVisible ? 'is-visible' : '';
-
   return (
-    <section ref={sectionRef} className={`advantage-root ${activeClass}`} style={{ 
-      backgroundColor: '#FFFFFF', 
-      width: '100%', 
-      overflow: 'hidden',
-      padding: '120px 0'
-    }}>
-      <div className="advantage-container" style={{
-        maxWidth: '1440px',
-        margin: '0 auto',
-        padding: '0 100px',
-        position: 'relative',
-        minHeight: '400px',
-        display: 'flex',
-        flexDirection: 'column'
-      }}>
-        
-        {/* Left Text Content */}
-        <div className="advantage-content-left" style={{
-          width: '100%',
-          maxWidth: '592px',
-          zIndex: 5
-        }}>
-          <h2 style={{
-            fontFamily: 'Inter',
-            fontWeight: 600,
-            fontSize: '48px',
-            lineHeight: '58px',
-            color: '#2E2E2E',
-            marginBottom: '32px'
-          }}>
-            The <span style={{ color: '#FA4516' }}>Steinbeis</span> Advantage
-          </h2>
-          <p style={{
-            fontFamily: 'Inter',
-            fontWeight: 400,
-            fontSize: '24px',
-            lineHeight: '32px',
-            color: '#2E2E2E',
-            maxWidth: '397px',
-            marginBottom: '40px'
-          }}>
-            A practical learning experience designed to help you master German, clear exams, and unlock global opportunities.
-          </p>
-          <Link href="/contact">
-            <button className="btn-navy" style={{ 
-              width: '193px',
-              height: '61px',
-              fontSize: '24px',
-              fontWeight: 500,
-              borderRadius: '16px',
-              backgroundColor: '#2C4B82',
-              border: '1px solid #FFFFFF',
-              color: '#FFFFFF',
-              cursor: 'pointer',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center'
-            }}>
-              Enquire Now
-            </button>
-          </Link>
+    <section
+      className="advantage-root"
+      style={{
+        backgroundColor: "#FFFFFF",
+        width: "100%",
+        overflow: "hidden",
+        padding: "120px 0",
+      }}
+    >
+      <div
+        className="advantage-container"
+        style={{
+          maxWidth: "1440px",
+          margin: "0 auto",
+          padding: "0 100px",
+          position: "relative",
+          minHeight: "400px",
+          display: "flex",
+          flexDirection: "column",
+        }}
+      >
+        <div
+          className="advantage-content-left"
+          style={{
+            width: "100%",
+            maxWidth: "592px",
+            zIndex: 5,
+          }}
+        >
+          <Reveal>
+            <h2
+              style={{
+                fontFamily: "Inter",
+                fontWeight: 600,
+                fontSize: "48px",
+                lineHeight: "58px",
+                color: "#2E2E2E",
+                marginBottom: "32px",
+              }}
+            >
+              The <span style={{ color: "#FA4516" }}>Steinbeis</span> Advantage
+            </h2>
+          </Reveal>
+          <Reveal delay={0.08}>
+            <p
+              style={{
+                fontFamily: "Inter",
+                fontWeight: 400,
+                fontSize: "24px",
+                lineHeight: "32px",
+                color: "#2E2E2E",
+                maxWidth: "397px",
+                marginBottom: "40px",
+              }}
+            >
+              A practical learning experience designed to help you master German, clear exams, and unlock global opportunities.
+            </p>
+          </Reveal>
+          <Reveal delay={0.16}>
+            <Link href="/contact">
+              <button
+                className="btn-navy"
+                style={{
+                  width: "193px",
+                  height: "61px",
+                  fontSize: "24px",
+                  fontWeight: 500,
+                  borderRadius: "16px",
+                  backgroundColor: "#2C4B82",
+                  border: "1px solid #FFFFFF",
+                  color: "#FFFFFF",
+                  cursor: "pointer",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
+                Enquire Now
+              </button>
+            </Link>
+          </Reveal>
         </div>
 
-        {/* Floating Pills - Desktop Grid */}
-        <div className="advantage-pills-wrapper" style={{
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          width: '100%',
-          height: '100%',
-          pointerEvents: 'none'
-        }}>
+        <motion.div
+          className="advantage-pills-wrapper"
+          style={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            width: "100%",
+            height: "100%",
+            pointerEvents: "none",
+            perspective: 1200,
+          }}
+          initial="hidden"
+          whileInView="visible"
+          viewport={replayViewport}
+          variants={{
+            hidden: {},
+            visible: {
+              transition: { staggerChildren: 0.11, delayChildren: 0.12 },
+            },
+          }}
+        >
           {advantages.map((adv, i) => (
-            <div 
-              key={i} 
-              className="advantage-pill advantage-pill-anim"
+            <motion.div
+              key={i}
+              className="advantage-pill"
+              variants={pillVariants}
               style={{
-                position: 'absolute',
+                position: "absolute",
                 top: adv.top,
-                left: adv.left === 'auto' ? 'unset' : adv.left,
-                right: adv.right === 'auto' ? 'unset' : adv.right,
+                left: adv.left === "auto" ? "unset" : adv.left,
+                right: adv.right === "auto" ? "unset" : adv.right,
                 width: adv.width,
-                height: '88px',
+                height: "88px",
                 backgroundColor: adv.bg,
                 border: `1px solid ${adv.color}`,
                 boxShadow: `0px 0px 24px ${adv.shadow}`,
-                borderRadius: '12px',
-                display: 'flex',
-                alignItems: 'center',
-                padding: '0 24px',
-                gap: '16px',
-                pointerEvents: 'auto',
-                transition: 'transform 0.3s ease, box-shadow 0.3s ease',
-                animationDelay: adv.delay
-              } as React.CSSProperties}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.transform = 'translateY(-5px) scale(1.02)';
-                e.currentTarget.style.boxShadow = `0px 8px 32px ${adv.shadow}`;
+                borderRadius: "12px",
+                display: "flex",
+                alignItems: "center",
+                padding: "0 24px",
+                gap: "16px",
+                pointerEvents: "auto",
+                transformStyle: "preserve-3d",
               }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.transform = 'none';
-                e.currentTarget.style.boxShadow = `0px 0px 24px ${adv.shadow}`;
+              whileHover={{
+                y: -6,
+                scale: 1.03,
+                boxShadow: `0px 12px 36px ${adv.shadow}`,
+                transition: { type: "spring", stiffness: 400, damping: 22 },
               }}
             >
-              <div style={{ flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <div style={{ flexShrink: 0, display: "flex", alignItems: "center", justifyContent: "center" }}>
                 {adv.icon}
               </div>
-              <span style={{
-                fontFamily: 'Inter',
-                fontWeight: 500,
-                fontSize: '24px',
-                lineHeight: '29px',
-                color: adv.color,
-                textAlign: 'left'
-              }}>
+              <span
+                style={{
+                  fontFamily: "Inter",
+                  fontWeight: 500,
+                  fontSize: "24px",
+                  lineHeight: "29px",
+                  color: adv.color,
+                  textAlign: "left",
+                }}
+              >
                 {adv.text}
               </span>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
 
       <style jsx>{`
-        .advantage-pill-anim {
-          opacity: 0;
-          visibility: hidden;
-          transform: translateY(40px);
-        }
-        .advantage-root:not(.is-visible) .advantage-pill-anim {
-          animation: none !important;
-          opacity: 0 !important;
-          visibility: hidden !important;
-          transform: translateY(40px) !important;
-        }
-        .advantage-root.is-visible .advantage-pill-anim {
-          animation: popIn 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
-          visibility: visible;
-        }
-        @keyframes popIn {
-          0% { opacity: 0; transform: translateY(40px); }
-          100% { opacity: 1; transform: translateY(0); }
-        }
-
         @media (max-width: 1280px) {
           .advantage-pills-wrapper {
             position: relative !important;
@@ -288,17 +288,17 @@ export default function Advantage() {
           }
         }
         @media (max-width: 768px) {
-           .advantage-container {
-             padding: 0 20px !important;
-           }
-           .advantage-pill {
-             height: auto !important;
-             padding: 16px !important;
-           }
-           .advantage-pill span {
-             font-size: 18px !important;
-             line-height: normal !important;
-           }
+          .advantage-container {
+            padding: 0 20px !important;
+          }
+          .advantage-pill {
+            height: auto !important;
+            padding: 16px !important;
+          }
+          .advantage-pill span {
+            font-size: 18px !important;
+            line-height: normal !important;
+          }
         }
       `}</style>
     </section>

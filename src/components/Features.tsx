@@ -1,14 +1,22 @@
 "use client";
-import React, { useRef, useState, useEffect } from 'react';
+import React from "react";
+import { motion } from "framer-motion";
+import {
+  Reveal,
+  MotionDrawPath,
+  MotionFeatureCard,
+  featureListVariants,
+  replayViewport,
+} from "@/components/motion";
 
 const cards = [
-  { 
-    title: "Certified Trainers", 
-    desc: "Learn from certified German language experts", 
-    color: "#2C4B82", 
-    rotation: "-6.91deg", 
-    left: "2%", 
-    mt: "100px", 
+  {
+    title: "Certified Trainers",
+    desc: "Learn from certified German language experts",
+    color: "#2C4B82",
+    rotation: -6.91,
+    left: "2%",
+    mt: "100px",
     delay: "0.5s",
     icon: (
       <svg width="67" height="67" viewBox="0 0 67 67" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -18,13 +26,13 @@ const cards = [
       </svg>
     )
   },
-  { 
-    title: "Practical Learning", 
-    desc: "Interactive sessions focused on real-life communication", 
-    color: "#FFB61E", 
-    rotation: "14.26deg", 
-    left: "25%", 
-    mt: "-5px", 
+  {
+    title: "Practical Learning",
+    desc: "Interactive sessions focused on real-life communication",
+    color: "#FFB61E",
+    rotation: 14.26,
+    left: "25%",
+    mt: "-5px",
     delay: "0.7s",
     icon: (
       <svg width="73" height="73" viewBox="0 0 73 73" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -34,13 +42,13 @@ const cards = [
       </svg>
     )
   },
-  { 
-    title: "Career Support", 
-    desc: "Guidance for exams, jobs, and opportunities", 
-    color: "#25CAD8", 
-    rotation: "-10.25deg", 
-    left: "48.5%", 
-    mt: "150px", 
+  {
+    title: "Career Support",
+    desc: "Guidance for exams, jobs, and opportunities",
+    color: "#25CAD8",
+    rotation: -10.25,
+    left: "48.5%",
+    mt: "150px",
     delay: "0.9s",
     icon: (
       <svg width="70" height="70" viewBox="0 0 70 70" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -50,13 +58,13 @@ const cards = [
       </svg>
     )
   },
-  { 
-    title: "Flexible Programs", 
-    desc: "Courses designed to fit your schedule and goals", 
-    color: "#FA4516", 
-    rotation: "22.82deg", 
-    left: "72%", 
-    mt: "40px", 
+  {
+    title: "Flexible Programs",
+    desc: "Courses designed to fit your schedule and goals",
+    color: "#FA4516",
+    rotation: 22.82,
+    left: "72%",
+    mt: "40px",
     delay: "1.1s",
     icon: (
       <svg width="79" height="79" viewBox="0 0 79 79" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -69,157 +77,156 @@ const cards = [
 ];
 
 export default function Features() {
-  const sectionRef = useRef<HTMLElement>(null);
-  const [isVisible, setIsVisible] = useState(false);
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        setIsVisible(entry.isIntersecting);
-      },
-      { threshold: 0.2, rootMargin: "0px" }
-    );
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
-    }
-    return () => observer.disconnect();
-  }, []);
-
-  const activeClass = mounted && isVisible ? 'is-visible' : '';
-
   return (
-    <section ref={sectionRef} className={`features-section ${activeClass}`} style={{
-      position: 'relative',
-      width: '100%',
-      minHeight: '878px',
-      backgroundColor: '#061B42',
-      padding: '100px 0',
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'center',
-      overflow: 'hidden'
-    }}>
-      <style>{`
-        .features-dashed-ellipse {
-          opacity: 0;
-          clip-path: inset(0 100% 0 0);
-        }
-        .features-section:not(.is-visible) .features-dashed-ellipse {
-          animation: none !important;
-          clip-path: inset(0 100% 0 0) !important;
-          opacity: 0 !important;
-        }
-        .features-section.is-visible .features-dashed-ellipse {
-          animation: drawDashed 1.5s ease-in-out forwards;
-        }
-        @keyframes drawDashed {
-          0% { clip-path: inset(0 100% 0 0); opacity: 1; }
-          100% { clip-path: inset(0 0 0 0); opacity: 1; }
-        }
-
-        .features-card-anim {
-          opacity: 0;
-          visibility: hidden;
-        }
-        .features-section:not(.is-visible) .features-card-anim {
-          animation: none !important;
-          opacity: 0 !important;
-          visibility: hidden !important;
-        }
-        .features-section.is-visible .features-card-anim {
-          animation: popIn 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
-          visibility: visible;
-        }
-        @keyframes popIn {
-          0% { opacity: 0; transform: translateY(60px) var(--base-rotation); }
-          100% { opacity: 1; transform: translateY(0) var(--base-rotation); }
-        }
-      `}</style>
-
-      {/* Decorative dashed wavy line */}
-      <div className="features-dashed-ellipse" style={{
-        position: 'absolute',
-        width: '100%', height: '400px',
-        left: '0', top: '270px',
-        zIndex: 0
-      }}>
+    <section
+      className="features-section"
+      style={{
+        position: "relative",
+        width: "100%",
+        minHeight: "878px",
+        backgroundColor: "#061B42",
+        padding: "100px 0",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        overflow: "hidden",
+      }}
+    >
+      <div
+        className="features-dashed-ellipse"
+        style={{
+          position: "absolute",
+          width: "100%",
+          height: "400px",
+          left: "0",
+          top: "270px",
+          zIndex: 0,
+        }}
+      >
         <svg width="100%" height="400" viewBox="0 0 1438 400" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
-          <path d="M1.87939 0.68457C1.87939 0.68457 113.988 308.417 283.379 341.185C455.47 374.475 499.673 116.575 674.879 121.685C862.231 127.148 880.449 396.929 1067.88 397.185C1347.74 397.566 1436.38 0.68457 1436.38 0.68457" stroke="white" strokeWidth="4" strokeDasharray="6 6"/>
+          <MotionDrawPath
+            d="M1.87939 0.68457C1.87939 0.68457 113.988 308.417 283.379 341.185C455.47 374.475 499.673 116.575 674.879 121.685C862.231 127.148 880.449 396.929 1067.88 397.185C1347.74 397.566 1436.38 0.68457 1436.38 0.68457"
+            stroke="white"
+            strokeWidth={4}
+            strokeDasharray="6 6"
+          />
         </svg>
       </div>
 
-      {/* Blur Ellipses */}
-      <div style={{ position: 'absolute', width: '215px', height: '215px', right: '100px', top: '34px', background: '#0256EB', filter: 'blur(175px)', borderRadius: '50%', zIndex: 0 }} />
-      <div style={{ position: 'absolute', width: '215px', height: '215px', left: '-56px', bottom: '100px', background: '#0256EB', filter: 'blur(200px)', borderRadius: '50%', zIndex: 0 }} />
+      <div style={{ position: "absolute", width: "215px", height: "215px", right: "100px", top: "34px", background: "#0256EB", filter: "blur(175px)", borderRadius: "50%", zIndex: 0 }} />
+      <div style={{ position: "absolute", width: "215px", height: "215px", left: "-56px", bottom: "100px", background: "#0256EB", filter: "blur(200px)", borderRadius: "50%", zIndex: 0 }} />
 
-      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', zIndex: 10 }}>
-        <h2 className="features-title" style={{
-          fontFamily: 'Inter', fontWeight: 600, fontSize: '48px',
-          lineHeight: '58px', color: '#FFFFFF', textAlign: 'center', marginBottom: '24px',
-          maxWidth: '456px'
-        }}>
-          What Sets Us Apart
-        </h2>
-        <p className="features-desc" style={{
-          fontFamily: 'Inter', fontWeight: 400, fontSize: '24px',
-          lineHeight: '32px', color: '#FFFFFF', textAlign: 'center', maxWidth: '809px'
-        }}>
-          A learning experience designed to go beyond basics, focused on practical skills, expert guidance, and real career outcomes.
-        </p>
+      <div style={{ display: "flex", flexDirection: "column", alignItems: "center", zIndex: 10 }}>
+        <Reveal>
+          <h2
+            className="features-title"
+            style={{
+              fontFamily: "Inter",
+              fontWeight: 600,
+              fontSize: "48px",
+              lineHeight: "58px",
+              color: "#FFFFFF",
+              textAlign: "center",
+              marginBottom: "24px",
+              maxWidth: "456px",
+            }}
+          >
+            What Sets Us Apart
+          </h2>
+        </Reveal>
+        <Reveal delay={0.1}>
+          <p
+            className="features-desc"
+            style={{
+              fontFamily: "Inter",
+              fontWeight: 400,
+              fontSize: "24px",
+              lineHeight: "32px",
+              color: "#FFFFFF",
+              textAlign: "center",
+              maxWidth: "809px",
+            }}
+          >
+            A learning experience designed to go beyond basics, focused on practical skills, expert guidance, and real career outcomes.
+          </p>
+        </Reveal>
       </div>
 
-      <div className="features-cards-wrapper" style={{
-        position: 'relative',
-        width: '100%',
-        display: 'flex',
-        justifyContent: 'space-evenly',
-        gap: '20px',
-        marginTop: '100px',
-        zIndex: 10,
-        flexWrap: 'wrap',
-        padding: '0 40px'
-      }}>
+      <motion.div
+        className="features-cards-wrapper"
+        style={{
+          position: "relative",
+          width: "100%",
+          display: "flex",
+          justifyContent: "space-evenly",
+          gap: "20px",
+          marginTop: "100px",
+          zIndex: 10,
+          flexWrap: "wrap",
+          padding: "0 40px",
+        }}
+        variants={featureListVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={replayViewport}
+      >
         {cards.map((card, i) => (
-          <div key={i} className="features-card features-card-anim" style={{
-            width: '280px', height: '330px',
-            backgroundColor: '#FFFFFF',
-            boxShadow: '0px 10px 24px rgba(0, 0, 0, 0.25)',
-            borderRadius: '32px',
-            padding: '24px',
-            display: 'flex', flexDirection: 'column', gap: '24px',
-            marginTop: card.mt,
-            animationDelay: card.delay,
-            '--base-rotation': `rotate(${card.rotation})`,
-            transform: `rotate(${card.rotation})`,
-            transition: 'transform 0.3s ease, box-shadow 0.3s ease',
-            cursor: 'pointer'
-          } as React.CSSProperties}
-          onMouseEnter={(e) => { e.currentTarget.style.transform = `rotate(0deg) translateY(-10px) scale(1.05)`; }}
-          onMouseLeave={(e) => { e.currentTarget.style.transform = `rotate(${card.rotation})`; }}
+          <MotionFeatureCard
+            key={i}
+            rotate={card.rotation}
+            marginTop={card.mt}
+            className="features-card"
+            style={{
+              width: "280px",
+              height: "330px",
+              backgroundColor: "#FFFFFF",
+              boxShadow: "0px 10px 24px rgba(0, 0, 0, 0.25)",
+              borderRadius: "32px",
+              padding: "24px",
+              display: "flex",
+              flexDirection: "column",
+              gap: "24px",
+              cursor: "pointer",
+            }}
           >
-            <div style={{
-              width: '60px', height: '60px',
-              display: 'flex', alignItems: 'center', justifyContent: 'center'
-            }}>
+            <div
+              style={{
+                width: "60px",
+                height: "60px",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
               {card.icon}
             </div>
-            <h3 className="features-card-title" style={{
-              fontFamily: 'Inter', fontWeight: 600, fontSize: '32px',
-              lineHeight: '39px', color: card.color
-            }}>
+            <h3
+              className="features-card-title"
+              style={{
+                fontFamily: "Inter",
+                fontWeight: 600,
+                fontSize: "32px",
+                lineHeight: "39px",
+                color: card.color,
+              }}
+            >
               {card.title}
             </h3>
-            <p className="features-card-desc" style={{
-              fontFamily: 'Inter', fontWeight: 500, fontSize: '24px',
-              lineHeight: '32px', color: '#2E2E2E'
-            }}>
+            <p
+              className="features-card-desc"
+              style={{
+                fontFamily: "Inter",
+                fontWeight: 500,
+                fontSize: "24px",
+                lineHeight: "32px",
+                color: "#2E2E2E",
+              }}
+            >
               {card.desc}
             </p>
-          </div>
+          </MotionFeatureCard>
         ))}
-      </div>
+      </motion.div>
     </section>
   );
 }
