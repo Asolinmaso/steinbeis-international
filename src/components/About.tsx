@@ -1,5 +1,6 @@
 "use client";
 import React, { useState } from 'react';
+import { Reveal, RevealX } from '@/components/motion';
 
 export default function About() {
   const [activeTab, setActiveTab] = useState('vision');
@@ -22,13 +23,15 @@ export default function About() {
   const activeContent = activeTab === 'vision' ? content.vision : content.mission;
 
   return (
-    <section style={{
+    <section
+      style={{
       position: 'relative',
       width: '100%',
       minHeight: '900px',
       backgroundColor: '#FFFFFF',
       overflow: 'hidden'
-    }}>
+    }}
+    >
       <div className="about-section-inner" style={{
         display: 'flex',
         alignItems: 'center',
@@ -39,7 +42,7 @@ export default function About() {
         zIndex: 2
       }}>
         {/* Image Area */}
-        <div className="about-image-area" style={{ position: 'relative', width: '50%', height: '620px', zIndex: 2 }}>
+        <RevealX className="about-image-area" x={-56} style={{ position: 'relative', width: '50%', height: '620px', zIndex: 2 }}>
           {/* Decorative Blob */}
           <div className="about-blob" style={{
             position: 'absolute',
@@ -60,24 +63,29 @@ export default function About() {
             transform: 'rotate(-11deg)',
             zIndex: 2
           }} />
-        </div>
+        </RevealX>
 
         {/* Content Area */}
         <div className="about-content-area" style={{ width: '50%', zIndex: 2, display: 'flex', flexDirection: 'column', gap: '40px' }}>
+          <Reveal>
           <h2 className="about-title" style={{
             fontFamily: 'Inter', fontWeight: 600, fontSize: '48px',
             lineHeight: '58px', color: '#2E2E2E'
           }}>
             We Make <span style={{ color: '#FA4516' }}>German Learning</span> <br /> Easy & Career-Focused
           </h2>
+          </Reveal>
+          <Reveal delay={0.1}>
           <p className="about-desc" style={{
             fontFamily: 'Inter', fontWeight: 400, fontSize: '24px',
             lineHeight: '32px', color: '#2E2E2E'
           }}>
             We provide practical and engaging German language training designed to help students and professionals succeed in education and careers in Germany.
           </p>
+          </Reveal>
 
           {/* Vision/Mission Interactive Box */}
+          <Reveal delay={0.18}>
           <div className="about-vm-box" style={{
             position: 'relative',
             width: '100%',
@@ -154,6 +162,7 @@ export default function About() {
               </p>
             </div>
           </div>
+          </Reveal>
         </div>
       </div>
     </section>

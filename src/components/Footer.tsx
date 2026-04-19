@@ -1,9 +1,15 @@
+"use client";
+
 import React from 'react';
 import Link from 'next/link';
+import { motion } from 'framer-motion';
+import { Reveal, replayViewport, staggerItemVariants } from '@/components/motion';
 
 export default function Footer() {
   return (
-    <footer className="footer-root" style={{
+    <footer
+      className="footer-root"
+      style={{
       position: 'relative',
       width: '100%',
       minHeight: '830px',
@@ -50,6 +56,7 @@ export default function Footer() {
 
         {/* Title */}
         < div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '20px', marginBottom: '80px', marginTop: '40px' }}>
+          <Reveal>
           <h2 className="footer-title" style={{
             fontFamily: 'Inter', fontWeight: 700, fontSize: '64px',
             color: '#FFFFFF', textTransform: 'uppercase', textAlign: 'center',
@@ -57,31 +64,44 @@ export default function Footer() {
           }}>
             STEINBEIS INTERNATIONAL
           </h2>
+          </Reveal>
+          <Reveal delay={0.1}>
           <p className="footer-subtitle" style={{
             fontFamily: 'Inter', fontWeight: 400, fontSize: '24px',
             color: 'rgba(255, 255, 255, 0.8)', textAlign: 'center', maxWidth: '584px'
           }}>
             Your trusted partner for German language training and international career growth.
           </p>
+          </Reveal>
         </div >
 
         {/* Links Area */}
-        < div className="footer-links-grid" style={{
+        <motion.div
+          className="footer-links-grid"
+          style={{
           display: 'flex', justifyContent: 'space-between', width: '100%', maxWidth: '1123px',
           padding: '0 20px', marginBottom: '80px', flexWrap: 'wrap', gap: '40px'
-        }}>
+        }}
+          initial="hidden"
+          whileInView="visible"
+          viewport={replayViewport}
+          variants={{
+            hidden: {},
+            visible: { transition: { staggerChildren: 0.12, delayChildren: 0.06 } },
+          }}
+        >
           {/* Quick Links */}
-          < div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
+          <motion.div variants={staggerItemVariants} style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
             <h3 className="footer-col-title" style={{ fontFamily: 'Inter', fontWeight: 500, fontSize: '24px', color: '#FFFFFF' }}>Quick Links</h3>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
               <Link href="/" className="footer-col-link" style={{ fontFamily: 'Inter', fontWeight: 400, fontSize: '24px', color: '#FFFFFF' }}>Home</Link>
               <Link href="#courses" className="footer-col-link" style={{ fontFamily: 'Inter', fontWeight: 400, fontSize: '24px', color: '#FFFFFF' }}>Courses</Link>
               <Link href="#contact" className="footer-col-link" style={{ fontFamily: 'Inter', fontWeight: 400, fontSize: '24px', color: '#FFFFFF' }}>Contact</Link>
             </div>
-          </div >
+          </motion.div>
 
           {/* Courses */}
-          < div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
+          <motion.div variants={staggerItemVariants} style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
             <h3 className="footer-col-title" style={{ fontFamily: 'Inter', fontWeight: 500, fontSize: '24px', color: '#FFFFFF' }}>Courses</h3>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
               <span className="footer-col-link" style={{ fontFamily: 'Inter', fontWeight: 400, fontSize: '24px', color: '#FFFFFF' }}>German A1</span>
@@ -89,10 +109,10 @@ export default function Footer() {
               <span className="footer-col-link" style={{ fontFamily: 'Inter', fontWeight: 400, fontSize: '24px', color: '#FFFFFF' }}>German B1</span>
               <span className="footer-col-link" style={{ fontFamily: 'Inter', fontWeight: 400, fontSize: '24px', color: '#FFFFFF' }}>German B2</span>
             </div>
-          </div >
+          </motion.div>
 
           {/* Follow Us */}
-          < div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
+          <motion.div variants={staggerItemVariants} style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
             <h3 className="footer-col-title" style={{ fontFamily: 'Inter', fontWeight: 500, fontSize: '24px', color: '#FFFFFF' }}>Follow Us</h3>
             <div style={{ display: 'flex', gap: '15px' }}>
               <a href="https://www.facebook.com/share/18DMkNKn7e/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" style={{ width: '56px', height: '55px', borderRadius: '50%', border: '1px solid rgba(255,255,255,0.25)', display: 'flex', alignItems: 'center', justifyContent: 'center', transition: 'background-color 0.3s' }} className="footer-social-link">
@@ -106,10 +126,10 @@ export default function Footer() {
                 </svg>
               </a>
             </div>
-          </div >
+          </motion.div>
 
           {/* Contact Us */}
-          < div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
+          <motion.div variants={staggerItemVariants} style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
             <h3 className="footer-col-title" style={{ fontFamily: 'Inter', fontWeight: 500, fontSize: '24px', color: '#FFFFFF' }}>Contact Us</h3>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
@@ -134,19 +154,21 @@ export default function Footer() {
                 <span className="footer-col-link" style={{ fontFamily: 'Inter', fontWeight: 400, fontSize: '24px', color: '#FFFFFF' }}>Chennai, TamilNadu – 600041</span>
               </div>
             </div>
-          </div >
-        </div >
+          </motion.div>
+        </motion.div>
 
         {/* Divider */}
         < div style={{ width: '100%', height: '1px', backgroundColor: 'rgba(255,255,255,0.2)', marginBottom: '25px' }} />
 
         {/* Copyright */}
+        <Reveal delay={0.15}>
         <p className="footer-copyright" style={{
           fontFamily: 'Inter', fontWeight: 400, fontSize: '24px',
           color: 'rgba(255,255,255,0.8)', textAlign: 'center', paddingBottom: '30px'
         }}>
           © 2026 Steinbeis International Academy. All rights reserved. | Designed & Developed By Manvian
         </p>
+        </Reveal>
       </div >
     </footer >
   );

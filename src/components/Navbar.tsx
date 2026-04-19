@@ -9,7 +9,7 @@ export default function Navbar() {
 
   return (
     <>
-      <nav className="navbar-root">
+      <nav className="navbar-root motion-navbar">
         <div style={{ display: 'flex', alignItems: 'center' }}>
           <Link href="/">
             <img 

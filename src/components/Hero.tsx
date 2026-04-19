@@ -1,193 +1,275 @@
 "use client";
-import React, { useState, useEffect, useRef } from 'react';
-import Link from 'next/link';
+import React from "react";
+import Link from "next/link";
+import { motion } from "framer-motion";
+import { replayViewport } from "@/components/motion";
+
+const ease = [0.16, 1, 0.3, 1] as const;
+
+const heroItem = {
+  hidden: { opacity: 0, y: 32, scale: 0.94 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: { type: "spring" as const, stiffness: 78, damping: 15 },
+  },
+};
+
+const circles = [
+  { delay: 0.2, width: 863, top: 507, bg: "#0A2A66", className: "hero-circle-3" },
+  { delay: 0.4, width: 805, top: 536, bg: "#082458", className: "hero-circle-4" },
+  { delay: 0.6, width: 753, top: 562, bg: "#061C45", className: "hero-circle-5" },
+  { delay: 0.8, width: 686, top: 595, bg: "#06193B", className: "hero-circle-2" },
+  { delay: 1.0, width: 622, top: 627, bg: "#041431", className: "hero-circle-1" },
+];
+
+const pills = [
+  { text: "100% Practical Learning", left: "106px", top: "255px", right: undefined, className: "hero-pill-practical" },
+  { text: "Experienced Trainers", left: "97px", top: "425px", right: undefined, className: "hero-pill-trainers" },
+  { text: "Beginner to Advanced (A1–B2)", left: "163px", top: "93px", right: undefined, className: "hero-pill-advanced" },
+  { text: "Flexible Batch Timings", left: undefined, top: "93px", right: "50px", className: "hero-pill-batch" },
+  { text: "Visa Support Assistance", left: undefined, top: "255px", right: "-50px", className: "hero-pill-visa" },
+  { text: "German Job Guidance", left: undefined, top: "425px", right: "20px", className: "hero-pill-job" },
+];
 
 export default function Hero() {
-  const sectionRef = useRef<HTMLElement>(null);
-  const [isVisible, setIsVisible] = useState(false);
-  const [mounted, setMounted] = useState(false);
-  const [showDelayedElements, setShowDelayedElements] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        setIsVisible(entry.isIntersecting);
-        if (entry.isIntersecting) {
-          // Trigger delayed elements after 1.5s (once circles are expanding)
-          setTimeout(() => setShowDelayedElements(true), 1500);
-        } else {
-          setShowDelayedElements(false);
-        }
-      },
-      { 
-        threshold: 0.01,
-        rootMargin: "0px"
-      }
-    );
-
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
-    }
-
-    return () => observer.disconnect();
-  }, []);
-
-  const activeClass = mounted && isVisible ? 'is-visible' : '';
-  const delayedClass = mounted && showDelayedElements ? 'is-delayed-visible' : '';
-
   return (
-    <section ref={sectionRef} className={`hero-section-root ${activeClass} ${delayedClass}`} style={{
-      position: 'relative',
-      width: '100%',
-      marginTop: '120px',
-      backgroundColor: '#061B42',
-      overflow: 'hidden',
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'center'
-    }}>
-      {/* Background Ellipses */}
-      <div className="animate-rippleIn hero-circle hero-circle-3" style={{ animationDelay: '0.2s', position: 'absolute', width: '863px', height: '863px', left: 'calc(50% - 863px/2)', top: '507px', background: '#0A2A66', borderRadius: '50%' }} />
-      <div className="animate-rippleIn hero-circle hero-circle-4" style={{ animationDelay: '0.4s', position: 'absolute', width: '805px', height: '805px', left: 'calc(50% - 805px/2)', top: '536px', background: '#082458', borderRadius: '50%' }} />
-      <div className="animate-rippleIn hero-circle hero-circle-5" style={{ animationDelay: '0.6s', position: 'absolute', width: '753px', height: '753px', left: 'calc(50% - 753px/2)', top: '562px', background: '#061C45', borderRadius: '50%' }} />
-      <div className="animate-rippleIn hero-circle hero-circle-2" style={{ animationDelay: '0.8s', position: 'absolute', width: '686px', height: '686px', left: 'calc(50% - 686px/2)', top: '595px', background: '#06193B', borderRadius: '50%' }} />
-      <div className="animate-rippleIn hero-circle hero-circle-1" style={{ animationDelay: '1.0s', position: 'absolute', width: '622px', height: '622px', left: 'calc(50% - 622px/2)', top: '627px', background: '#041431', borderRadius: '50%' }} />
+    <section
+      className="hero-section-root"
+      style={{
+        position: "relative",
+        width: "100%",
+        marginTop: "120px",
+        backgroundColor: "#061B42",
+        overflow: "hidden",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+      }}
+    >
+      {circles.map((c) => (
+        <motion.div
+          key={c.className}
+          className={`hero-circle ${c.className}`}
+          style={{
+            position: "absolute",
+            width: `${c.width}px`,
+            height: `${c.width}px`,
+            left: `calc(50% - ${c.width}px/2)`,
+            top: `${c.top}px`,
+            background: c.bg,
+            borderRadius: "50%",
+          }}
+          initial={{ scale: 0.35, opacity: 0 }}
+          whileInView={{ scale: 1, opacity: 1 }}
+          viewport={replayViewport}
+          transition={{ delay: c.delay * 0.5, duration: 1.35, ease }}
+        />
+      ))}
 
-      {/* Blur Ellipses (hidden on small screens — avoids fixed layout offsets) */}
-      <div className="hero-decorative-blur" style={{ position: 'absolute', width: '215px', height: '215px', left: '1201px', top: '844px', background: '#0256EB', filter: 'blur(200px)', borderRadius: '50%' }} />
-      <div className="hero-decorative-blur" style={{ position: 'absolute', width: '215px', height: '215px', left: '1122px', top: '-54px', background: '#0256EB', filter: 'blur(200px)', borderRadius: '50%' }} />
-      <div className="hero-decorative-blur" style={{ position: 'absolute', width: '215px', height: '215px', left: '73px', top: '291px', background: '#0256EB', filter: 'blur(200px)', borderRadius: '50%' }} />
+      <div
+        className="hero-decorative-blur"
+        style={{
+          position: "absolute",
+          width: "215px",
+          height: "215px",
+          left: "1201px",
+          top: "844px",
+          background: "#0256EB",
+          filter: "blur(200px)",
+          borderRadius: "50%",
+        }}
+      />
+      <div
+        className="hero-decorative-blur"
+        style={{
+          position: "absolute",
+          width: "215px",
+          height: "215px",
+          left: "1122px",
+          top: "-54px",
+          background: "#0256EB",
+          filter: "blur(200px)",
+          borderRadius: "50%",
+        }}
+      />
+      <div
+        className="hero-decorative-blur"
+        style={{
+          position: "absolute",
+          width: "215px",
+          height: "215px",
+          left: "73px",
+          top: "291px",
+          background: "#0256EB",
+          filter: "blur(200px)",
+          borderRadius: "50%",
+        }}
+      />
 
-      {/* Main Content */}
-      <div className="hero-content-wrapper" style={{
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        gap: '40px',
-        marginTop: '80px',
-        zIndex: 10
-      }}>
-        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '24px', width: '100%' }}>
-          <h3 className="hero-subtitle" style={{
-            fontFamily: 'Inter', fontWeight: 400, fontSize: '24px',
-            lineHeight: '29px', textAlign: 'center', color: '#EDEDED'
-          }}>
+      <motion.div
+        className="hero-content-wrapper"
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          gap: "40px",
+          marginTop: "80px",
+          zIndex: 10,
+        }}
+        initial="hidden"
+        whileInView="visible"
+        viewport={replayViewport}
+        variants={{
+          hidden: {},
+          visible: {
+            transition: { staggerChildren: 0.11, delayChildren: 0.04 },
+          },
+        }}
+      >
+        <motion.div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            gap: "24px",
+            width: "100%",
+          }}
+          variants={{
+            hidden: {},
+            visible: { transition: { staggerChildren: 0.1 } },
+          }}
+        >
+          <motion.h3
+            className="hero-subtitle"
+            variants={heroItem}
+            style={{
+              fontFamily: "Inter",
+              fontWeight: 400,
+              fontSize: "24px",
+              lineHeight: "29px",
+              textAlign: "center",
+              color: "#EDEDED",
+            }}
+          >
             German Language Training in Chennai
-          </h3>
-          <h1 className="hero-title" style={{
-            fontFamily: 'Inter', fontWeight: 600, fontSize: '60px',
-            lineHeight: '70px', textAlign: 'center', color: '#FFFFFF', width: '100%'
-          }}>
-            Build Your <span style={{ color: '#FFB61E' }}>Career in Germany</span> with <br />
+          </motion.h3>
+          <motion.h1
+            className="hero-title"
+            variants={heroItem}
+            style={{
+              fontFamily: "Inter",
+              fontWeight: 600,
+              fontSize: "60px",
+              lineHeight: "70px",
+              textAlign: "center",
+              color: "#FFFFFF",
+              width: "100%",
+            }}
+          >
+            Build Your <span style={{ color: "#FFB61E" }}>Career in Germany</span> with <br />
             German Language Training
-          </h1>
-          <p className="hero-subtitle hero-description" style={{
-            fontFamily: 'Inter', fontWeight: 400, fontSize: '24px',
-            lineHeight: '29px', textAlign: 'center', color: '#EDEDED'
-          }}>
+          </motion.h1>
+          <motion.p
+            className="hero-subtitle hero-description"
+            variants={heroItem}
+            style={{
+              fontFamily: "Inter",
+              fontWeight: 400,
+              fontSize: "24px",
+              lineHeight: "29px",
+              textAlign: "center",
+              color: "#EDEDED",
+            }}
+          >
             Structured A1–B2 German courses with certified trainers, practical learning, and complete guidance for study and jobs in Germany.
-          </p>
-        </div>
+          </motion.p>
+        </motion.div>
 
-        <div className="hero-btn-row" style={{ display: 'flex', gap: '24px' }}>
+        <motion.div
+          className="hero-btn-row"
+          style={{ display: "flex", gap: "24px" }}
+          variants={heroItem}
+        >
           <Link href="/courses">
-            <button type="button" className="btn-yellow animate-fadeInUp" style={{
-              width: '236px', height: '61px', animationDelay: '1.2s'
-            }}>
+            <button
+              type="button"
+              className="btn-yellow"
+              style={{ width: "236px", height: "61px" }}
+            >
               Explore Courses
             </button>
           </Link>
           <Link href="/contact">
-            <button type="button" className="btn-yellow animate-fadeInUp" style={{
-              width: '193px', height: '61px', animationDelay: '1.4s'
-            }}>
+            <button type="button" className="btn-yellow" style={{ width: "193px", height: "61px" }}>
               Enquire Now
             </button>
           </Link>
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
 
-      {/* Hero Image & Floating Pills */}
-      <div className="hero-image-wrapper" style={{
-        position: 'relative',
-        width: '100%',
-        maxWidth: '1200px',
-        marginTop: '50px',
-        height: '714px',
-        zIndex: 10
-      }}>
-        {/* Main Hero Image */}
-        <div className="hero-main-image animate-fadeInUp" style={{
-          position: 'absolute',
-          width: '520px',
-          height: '714px',
-          left: 'calc(50% - 260px)',
-          backgroundImage: 'url(/hero-student.png)',
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          backgroundRepeat: 'no-repeat',
-          borderRadius: '24px',
-          animationDelay: '1.2s'
-        }} />
+      <motion.div
+        className="hero-image-wrapper"
+        style={{
+          position: "relative",
+          width: "100%",
+          maxWidth: "1200px",
+          marginTop: "50px",
+          height: "714px",
+          zIndex: 10,
+        }}
+        initial="hidden"
+        whileInView="visible"
+        viewport={replayViewport}
+        variants={{
+          hidden: {},
+          visible: {
+            transition: { staggerChildren: 0.1, delayChildren: 0.12 },
+          },
+        }}
+      >
+        <motion.div
+          className="hero-main-image"
+          variants={heroItem}
+          style={{
+            position: "absolute",
+            width: "520px",
+            height: "714px",
+            left: "calc(50% - 260px)",
+            backgroundImage: "url(/hero-student.png)",
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            backgroundRepeat: "no-repeat",
+            borderRadius: "24px",
+          }}
+        />
 
-        {/* Floating Feature Texts */}
-        <div className="hero-pills-container" style={{ position: 'absolute', inset: 0, zIndex: 11 }}>
-          <div style={{
-            position: 'absolute', display: 'flex', alignItems: 'center', justifyContent: 'center',
-            left: '106px', top: '255px'
-          }} className="animate-fadeInUp hero-pill hero-pill-practical">
-            <span className="hero-pill-text" style={{ fontFamily: 'Inter', fontWeight: 400, fontSize: '24px', color: '#EDEDED' }}>
-              100% Practical Learning
+        {pills.map((p) => (
+          <motion.div
+            key={p.className}
+            className={`hero-pill ${p.className}`}
+            variants={heroItem}
+            style={{
+              position: "absolute",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              left: p.left ?? "auto",
+              right: p.right ?? "auto",
+              top: p.top,
+              zIndex: 11,
+            }}
+          >
+            <span
+              className="hero-pill-text"
+              style={{ fontFamily: "Inter", fontWeight: 400, fontSize: "24px", color: "#EDEDED" }}
+            >
+              {p.text}
             </span>
-          </div>
-
-          <div style={{
-            position: 'absolute', display: 'flex', alignItems: 'center', justifyContent: 'center',
-            left: '97px', top: '425px', animationDelay: '0.2s'
-          }} className="animate-fadeInUp hero-pill hero-pill-trainers">
-            <span className="hero-pill-text" style={{ fontFamily: 'Inter', fontWeight: 400, fontSize: '24px', color: '#EDEDED' }}>
-              Experienced Trainers
-            </span>
-          </div>
-
-          <div style={{
-            position: 'absolute', display: 'flex', alignItems: 'center', justifyContent: 'center',
-            left: '163px', top: '93px', animationDelay: '0.4s'
-          }} className="animate-fadeInUp hero-pill hero-pill-advanced">
-            <span className="hero-pill-text" style={{ fontFamily: 'Inter', fontWeight: 400, fontSize: '24px', color: '#EDEDED' }}>
-              Beginner to Advanced (A1–B2)
-            </span>
-          </div>
-
-          <div style={{
-            position: 'absolute', display: 'flex', alignItems: 'center', justifyContent: 'center',
-            right: '50px', top: '93px', animationDelay: '0.1s'
-          }} className="animate-fadeInUp hero-pill hero-pill-batch">
-            <span className="hero-pill-text" style={{ fontFamily: 'Inter', fontWeight: 400, fontSize: '24px', color: '#EDEDED' }}>
-              Flexible Batch Timings
-            </span>
-          </div>
-
-          <div style={{
-            position: 'absolute', display: 'flex', alignItems: 'center', justifyContent: 'center',
-            right: '-50px', top: '255px', animationDelay: '0.3s'
-          }} className="animate-fadeInUp hero-pill hero-pill-visa">
-            <span className="hero-pill-text" style={{ fontFamily: 'Inter', fontWeight: 400, fontSize: '24px', color: '#EDEDED' }}>
-              Visa Support Assistance
-            </span>
-          </div>
-
-          <div style={{
-            position: 'absolute', display: 'flex', alignItems: 'center', justifyContent: 'center',
-            right: '20px', top: '425px', animationDelay: '0.5s'
-          }} className="animate-fadeInUp hero-pill hero-pill-job">
-            <span className="hero-pill-text" style={{ fontFamily: 'Inter', fontWeight: 400, fontSize: '24px', color: '#EDEDED' }}>
-              German Job Guidance
-            </span>
-          </div>
-        </div>
-      </div>
+          </motion.div>
+        ))}
+      </motion.div>
     </section>
   );
 }

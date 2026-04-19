@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import { Reveal, RevealX } from '@/components/motion';
 
 const FAQS = [
   {
@@ -39,7 +40,9 @@ export default function ContactPage() {
       <Navbar />
 
       {/* Hero Banner */}
-      <div className="contact-hero" style={{
+      <div
+        className="contact-hero"
+        style={{
         position: 'relative',
         width: '100%',
         minHeight: '543px',
@@ -54,40 +57,53 @@ export default function ContactPage() {
         backgroundPosition: 'center',
         padding: '0 20px',
         zIndex: 10
-      }}>
+      }}
+      >
         <div style={{ display: 'flex', flexDirection: 'column', gap: '24px', alignItems: 'center', maxWidth: '800px', textAlign: 'center' }}>
+          <Reveal>
           <h1 className="contact-hero-title" style={{
             fontFamily: 'Inter', fontWeight: 600, fontSize: '64px', lineHeight: '77px', color: '#FFFFFF'
           }}>
             Get in Touch <span style={{ color: '#FFB61E' }}>With Us</span>
           </h1>
+          </Reveal>
+          <Reveal delay={0.1}>
           <p className="contact-hero-desc" style={{
             fontFamily: 'Inter', fontWeight: 400, fontSize: '24px', lineHeight: '29px', color: '#FFFFFF'
           }}>
             Have questions or need guidance? Reach out to us and take the first step towards your learning journey with expert support.
           </p>
+          </Reveal>
         </div>
       </div>
 
       {/* Main Content Area: Contact Info + Form */}
-      <div className="contact-main-section" style={{
+      <div
+        className="contact-main-section"
+        style={{
         width: '100%', display: 'flex', justifyContent: 'center', padding: '100px 0', backgroundColor: '#FFFFFF'
-      }}>
+      }}
+      >
         <div className="contact-main-row" style={{
           width: '100%', maxWidth: '1240px', display: 'flex', flexDirection: 'row',
           justifyContent: 'space-between', padding: '0 100px', gap: '60px'
         }}>
 
           {/* Left Side: Contact Info */}
-          <div className="contact-info-col" style={{ flex: '1', display: 'flex', flexDirection: 'column', maxWidth: '500px' }}>
+          <RevealX className="contact-info-col" x={-40} style={{ flex: '1', display: 'flex', flexDirection: 'column', maxWidth: '500px' }}>
+            <Reveal>
             <h2 style={{ fontFamily: 'Inter', fontWeight: 600, fontSize: '48px', lineHeight: '58px', color: '#2E2E2E', marginBottom: '24px' }}>
               Let's Connect &<br/>
               Begin <span style={{ color: '#FA4516' }}>Your Journey</span>
             </h2>
+            </Reveal>
+            <Reveal delay={0.08}>
             <p style={{ fontFamily: 'Inter', fontWeight: 400, fontSize: '24px', lineHeight: '32px', color: '#2E2E2E', marginBottom: '40px' }}>
               Find all the ways to connect with us, from direct contact details to visiting our campus.
             </p>
+            </Reveal>
 
+            <Reveal delay={0.14}>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '32px' }}>
               {/* Phone */}
               <div style={{ display: 'flex', gap: '24px', alignItems: 'flex-start' }}>
@@ -124,17 +140,23 @@ export default function ContactPage() {
                 </div>
               </div>
             </div>
-          </div>
+            </Reveal>
+          </RevealX>
 
           {/* Right Side: Form */}
-          <div className="contact-form-col" style={{ flex: '1', display: 'flex', flexDirection: 'column', maxWidth: '600px' }}>
+          <RevealX className="contact-form-col" x={40} style={{ flex: '1', display: 'flex', flexDirection: 'column', maxWidth: '600px' }}>
+            <Reveal>
             <h2 style={{ fontFamily: 'Inter', fontWeight: 600, fontSize: '48px', lineHeight: '58px', color: '#2E2E2E', marginBottom: '16px' }}>
               Let's Get <span style={{ color: '#FA4516' }}>In Touch</span>
             </h2>
+            </Reveal>
+            <Reveal delay={0.08}>
             <p style={{ fontFamily: 'Inter', fontWeight: 400, fontSize: '24px', lineHeight: '32px', color: '#2E2E2E', marginBottom: '40px' }}>
               Let us know your concern, and we'll get back to you within 24 hours.
             </p>
+            </Reveal>
 
+            <Reveal delay={0.14}>
             <form style={{ display: 'flex', flexDirection: 'column', gap: '32px' }} onSubmit={(e) => e.preventDefault()}>
               {/* Row 1 */}
               <div className="contact-form-pair-row" style={{ display: 'flex', gap: '32px' }}>
@@ -188,29 +210,38 @@ export default function ContactPage() {
                 </button>
               </div>
             </form>
-          </div>
+            </Reveal>
+          </RevealX>
         </div>
       </div>
 
       {/* FAQ Section */}
-      <div className="contact-faq-section" style={{
+      <div
+        className="contact-faq-section"
+        style={{
         width: '100%', display: 'flex', justifyContent: 'center', padding: '100px 0', backgroundColor: '#FFFFFF'
-      }}>
+      }}
+      >
         <div className="contact-faq-row" style={{
           width: '100%', maxWidth: '1240px', display: 'flex', flexDirection: 'row',
           justifyContent: 'space-between', padding: '0 100px', gap: '60px'
         }}>
           {/* Left Side: FAQ Header & Still-have-questions Box */}
-          <div className="contact-faq-left" style={{ flex: '0 0 483px', display: 'flex', flexDirection: 'column' }}>
+          <RevealX className="contact-faq-left" x={-36} style={{ flex: '0 0 483px', display: 'flex', flexDirection: 'column' }}>
+            <Reveal>
             <h2 style={{ fontFamily: 'Inter', fontWeight: 600, fontSize: '48px', lineHeight: '58px', color: '#2E2E2E', marginBottom: '24px' }}>
               Frequently Asked<br/>
               <span style={{ color: '#FA4516' }}>Questions</span>
             </h2>
+            </Reveal>
+            <Reveal delay={0.08}>
             <p style={{ fontFamily: 'Inter', fontWeight: 400, fontSize: '24px', lineHeight: '32px', color: '#2E2E2E', opacity: 0.8, marginBottom: '40px' }}>
               Find answers to common questions about our courses, learning process, and support services.
             </p>
+            </Reveal>
 
             {/* Dark Blue Box */}
+            <Reveal delay={0.14}>
             <div className="contact-still-box" style={{
               backgroundColor: '#071B42', borderRadius: '24px', padding: '32px', display: 'flex', flexDirection: 'column', gap: '24px'
             }}>
@@ -224,14 +255,16 @@ export default function ContactPage() {
                 Enquire Now
               </button>
             </div>
-          </div>
+            </Reveal>
+          </RevealX>
 
           {/* Right Side: Accordion */}
-          <div className="contact-faq-right" style={{ flex: '1', display: 'flex', flexDirection: 'column', gap: '24px' }}>
+          <RevealX className="contact-faq-right" x={36} style={{ flex: '1', display: 'flex', flexDirection: 'column', gap: '24px' }}>
             {FAQS.map((faq, index) => {
               const isOpen = openFAQIndex === index;
               return (
-                <div key={index} style={{
+                <Reveal key={index} delay={0.04 * index}>
+                <div style={{
                   backgroundColor: '#EAF2FF', border: '1px solid #2C4B82', borderRadius: '16px',
                   padding: '24px', display: 'flex', flexDirection: 'column', gap: '16px',
                   cursor: 'pointer', transition: 'all 0.3s ease'
@@ -261,9 +294,10 @@ export default function ContactPage() {
                     </div>
                   )}
                 </div>
+                </Reveal>
               );
             })}
-          </div>
+          </RevealX>
         </div>
       </div>
 

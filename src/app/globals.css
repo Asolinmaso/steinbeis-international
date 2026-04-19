@@ -18,6 +18,170 @@
   --text-dark: #2E2E2E;
   --text-light: #EDEDED;
   --white: #FFFFFF;
+  --motion-ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --motion-ease-soft: cubic-bezier(0.22, 1, 0.36, 1);
+  --motion-duration: 0.9s;
+}
+
+/* ----- Site-wide scroll motion: use .motion-section[data-in-view] + .motion-* children ----- */
+
+@media (prefers-reduced-motion: reduce) {
+  .motion-navbar {
+    animation: none !important;
+  }
+
+  .motion-section .motion-from-bottom,
+  .motion-section .motion-from-left,
+  .motion-section .motion-from-right,
+  .motion-section .motion-scale,
+  .motion-section .motion-stagger-item,
+  .motion-section .motion-line {
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+    transition: none !important;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .motion-navbar {
+    animation: navEnter 0.75s var(--motion-ease) both;
+  }
+
+  @keyframes navEnter {
+    from {
+      opacity: 0.92;
+      transform: translateY(-16px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .motion-section:not([data-in-view="true"]) .motion-from-bottom {
+    opacity: 0;
+    transform: translate3d(0, 44px, 0) scale(0.97);
+  }
+
+  .motion-section[data-in-view="true"] .motion-from-bottom {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+    transition:
+      opacity var(--motion-duration) var(--motion-ease),
+      transform var(--motion-duration) var(--motion-ease);
+  }
+
+  .motion-section:not([data-in-view="true"]) .motion-from-left {
+    opacity: 0;
+    transform: translate3d(-48px, 0, 0);
+  }
+
+  .motion-section[data-in-view="true"] .motion-from-left {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+    transition:
+      opacity 0.85s var(--motion-ease-soft),
+      transform 0.85s var(--motion-ease-soft);
+  }
+
+  .motion-section:not([data-in-view="true"]) .motion-from-right {
+    opacity: 0;
+    transform: translate3d(48px, 0, 0);
+  }
+
+  .motion-section[data-in-view="true"] .motion-from-right {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+    transition:
+      opacity 0.85s var(--motion-ease-soft),
+      transform 0.85s var(--motion-ease-soft);
+  }
+
+  .motion-section:not([data-in-view="true"]) .motion-scale {
+    opacity: 0;
+    transform: scale(0.94);
+  }
+
+  .motion-section[data-in-view="true"] .motion-scale {
+    opacity: 1;
+    transform: scale(1);
+    transition:
+      opacity 0.8s var(--motion-ease),
+      transform 0.8s var(--motion-ease);
+  }
+
+  .motion-section:not([data-in-view="true"]) .motion-line {
+    transform: scaleX(0);
+    transform-origin: left center;
+    opacity: 0.4;
+  }
+
+  .motion-section[data-in-view="true"] .motion-line {
+    transform: scaleX(1);
+    opacity: 1;
+    transition:
+      transform 0.85s var(--motion-ease),
+      opacity 0.6s ease;
+  }
+
+  .motion-d1 {
+    transition-delay: 0.08s !important;
+  }
+
+  .motion-d2 {
+    transition-delay: 0.16s !important;
+  }
+
+  .motion-d3 {
+    transition-delay: 0.28s !important;
+  }
+
+  .motion-d4 {
+    transition-delay: 0.4s !important;
+  }
+
+  .motion-d5 {
+    transition-delay: 0.52s !important;
+  }
+
+  .motion-section:not([data-in-view="true"]) .motion-stagger-item {
+    opacity: 0;
+    transform: translate3d(-20px, 12px, 0);
+  }
+
+  .motion-section[data-in-view="true"] .motion-stagger-item {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+    transition:
+      opacity 0.65s var(--motion-ease),
+      transform 0.65s var(--motion-ease);
+  }
+
+  .motion-stagger-item:nth-child(1) {
+    transition-delay: 0.06s;
+  }
+
+  .motion-stagger-item:nth-child(2) {
+    transition-delay: 0.12s;
+  }
+
+  .motion-stagger-item:nth-child(3) {
+    transition-delay: 0.2s;
+  }
+
+  .motion-stagger-item:nth-child(4) {
+    transition-delay: 0.28s;
+  }
+
+  .motion-stagger-item:nth-child(5) {
+    transition-delay: 0.36s;
+  }
+
+  .motion-stagger-item:nth-child(6) {
+    transition-delay: 0.44s;
+  }
 }
 
 @keyframes marqueeScroll {
@@ -143,12 +307,12 @@ button {
 @keyframes fadeInUp {
   from {
     opacity: 0;
-    transform: translateY(30px);
+    transform: translateY(28px) scale(0.98);
   }
 
   to {
     opacity: 1;
-    transform: translateY(0);
+    transform: translateY(0) scale(1);
   }
 }
 
@@ -165,7 +329,12 @@ button {
 @keyframes rippleIn {
   from {
     opacity: 0;
-    transform: scale(0.5);
+    transform: scale(0.55);
+  }
+
+  55% {
+    opacity: 1;
+    transform: scale(1.04);
   }
 
   to {
@@ -182,13 +351,11 @@ button {
 
 /* Trigger animations only when parent .is-visible is present */
 .is-visible .animate-fadeInUp {
-  animation: fadeInUp 1.5s ease forwards;
-  /* Slowed from 0.7s to 1.5s */
+  animation: fadeInUp 1.05s var(--motion-ease) forwards;
 }
 
 .is-visible .animate-rippleIn {
-  animation: rippleIn 2.2s cubic-bezier(0.25, 1, 0.5, 1) forwards;
-  /* Slowed from 1s to 2.2s */
+  animation: rippleIn 2s var(--motion-ease-soft) forwards;
 }
 
 /* Maintain original classes for backward compatibility if needed, but they won't trigger without .is-visible */
@@ -389,17 +556,15 @@ button {
     height: auto !important;
     min-height: 0 !important;
     padding: 0 12px !important;
-    opacity: 0 !important;
-    visibility: hidden;
-  }
-
-  .is-delayed-visible .hero-image-wrapper {
-    visibility: visible !important;
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 10px !important;
     opacity: 1 !important;
-    animation: fadeInUp 1.5s ease forwards !important;
+    visibility: visible !important;
   }
 
   .hero-main-image {
+    grid-column: 1 / -1 !important;
     position: relative !important;
     left: auto !important;
     right: auto !important;
@@ -411,28 +576,6 @@ button {
     height: auto !important;
     transform: none !important;
     border-radius: 16px !important;
-  }
-
-  .hero-pills-container {
-    position: static !important;
-    display: grid !important;
-    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-    gap: 10px !important;
-    width: 100% !important;
-    max-width: 100% !important;
-    margin-top: 20px !important;
-    padding: 0 !important;
-    inset: auto !important;
-    z-index: 25 !important;
-    opacity: 0 !important;
-    visibility: hidden;
-  }
-
-  .is-delayed-visible .hero-pills-container {
-    visibility: visible !important;
-    opacity: 1 !important;
-    animation: fadeIn 1s ease forwards !important;
-    animation-delay: 0.35s !important;
   }
 
   .hero-pill {
