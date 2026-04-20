@@ -129,6 +129,7 @@ export default function Advantage() {
         >
           <Reveal>
             <h2
+              className="advantage-title"
               style={{
                 fontFamily: "Inter",
                 fontWeight: 600,
@@ -143,6 +144,7 @@ export default function Advantage() {
           </Reveal>
           <Reveal delay={0.08}>
             <p
+              className="advantage-desc"
               style={{
                 fontFamily: "Inter",
                 fontWeight: 400,
@@ -251,57 +253,6 @@ export default function Advantage() {
           ))}
         </motion.div>
       </div>
-
-      <style jsx>{`
-        @media (max-width: 1280px) {
-          .advantage-pills-wrapper {
-            position: relative !important;
-            display: flex !important;
-            flex-wrap: wrap !important;
-            gap: 20px !important;
-            margin-top: 60px !important;
-            height: auto !important;
-            padding: 0 40px !important;
-            justify-content: center !important;
-            pointer-events: auto !important;
-            top: unset !important;
-            left: unset !important;
-          }
-          .advantage-pill {
-            position: static !important;
-            width: 100% !important;
-            max-width: 500px !important;
-          }
-          .advantage-container {
-            padding: 0 40px !important;
-            align-items: center !important;
-            text-align: center !important;
-            min-height: auto !important;
-          }
-          .advantage-content-left {
-            max-width: 100% !important;
-            align-items: center !important;
-            display: flex !important;
-            flex-direction: column !important;
-          }
-          .advantage-content-left p {
-            max-width: 100% !important;
-          }
-        }
-        @media (max-width: 768px) {
-          .advantage-container {
-            padding: 0 20px !important;
-          }
-          .advantage-pill {
-            height: auto !important;
-            padding: 16px !important;
-          }
-          .advantage-pill span {
-            font-size: 18px !important;
-            line-height: normal !important;
-          }
-        }
-      `}</style>
     </section>
   );
 }

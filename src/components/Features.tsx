@@ -1,13 +1,43 @@
 "use client";
 import React from "react";
 import { motion } from "framer-motion";
+import type { Variants } from "framer-motion";
 import {
   Reveal,
   MotionDrawPath,
   MotionFeatureCard,
-  featureListVariants,
   replayViewport,
 } from "@/components/motion";
+
+/** Path fades in first; card row runs its own stagger so each card appears one-by-one. */
+const featuresWaveSequence: Variants = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.78,
+      delayChildren: 0.06,
+    },
+  },
+};
+
+const featuresPathReveal: Variants = {
+  hidden: { opacity: 0, scale: 0.985 },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    transition: { duration: 0.48, ease: [0.16, 1, 0.3, 1] },
+  },
+};
+
+const featuresCardRowStagger: Variants = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.52,
+      delayChildren: 0.04,
+    },
+  },
+};
 
 const cards = [
   {
@@ -93,28 +123,17 @@ export default function Features() {
         overflowY: "visible",
       }}
     >
-      <div
-        className="features-dashed-ellipse"
+      <motion.div
         style={{
-          position: "absolute",
+          position: "relative",
           width: "100%",
-          height: "400px",
-          left: "0",
-          top: "270px",
-          zIndex: 0,
-          pointerEvents: "none",
+          zIndex: 1,
         }}
+        variants={featuresWaveSequence}
+        initial="hidden"
+        whileInView="visible"
+        viewport={replayViewport}
       >
-        <svg width="100%" height="400" viewBox="0 0 1438 400" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
-          <MotionDrawPath
-            d="M1.87939 0.68457C1.87939 0.68457 113.988 308.417 283.379 341.185C455.47 374.475 499.673 116.575 674.879 121.685C862.231 127.148 880.449 396.929 1067.88 397.185C1347.74 397.566 1436.38 0.68457 1436.38 0.68457"
-            stroke="white"
-            strokeWidth={4}
-            strokeDasharray="6 6"
-          />
-        </svg>
-      </div>
-
       <div style={{ position: "absolute", width: "215px", height: "215px", right: "100px", top: "34px", background: "#0256EB", filter: "blur(175px)", borderRadius: "50%", zIndex: 0, pointerEvents: "none" }} />
       <div style={{ position: "absolute", width: "215px", height: "215px", left: "-56px", bottom: "100px", background: "#0256EB", filter: "blur(200px)", borderRadius: "50%", zIndex: 0, pointerEvents: "none" }} />
 
@@ -133,7 +152,7 @@ export default function Features() {
               maxWidth: "456px",
             }}
           >
-            What Sets Us Apart
+            What Sets <span style={{ color: "#FFB61E" }}>Us Apart</span>
           </h2>
         </Reveal>
         <Reveal delay={0.1}>
@@ -167,11 +186,56 @@ export default function Features() {
           flexWrap: "wrap",
           padding: "0 40px",
         }}
-        variants={featureListVariants}
-        initial="hidden"
-        whileInView="visible"
-        viewport={replayViewport}
+        variants={featuresCardRowStagger}
       >
+        <motion.div
+          className="features-dashed-ellipse"
+          variants={featuresPathReveal}
+          style={{
+            pointerEvents: "none",
+          }}
+        >
+          {/* Inner rotates -90deg on mobile only (CSS); keeps Framer scale separate from rotate */}
+          <div className="features-dashed-ellipse-inner">
+            <svg
+              className="features-dashed-svg features-dashed-svg-desktop"
+              width="100%"
+              height="100%"
+              viewBox="0 0 1438 400"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              preserveAspectRatio="none"
+            >
+              <MotionDrawPath
+                d="M1.87939 0.68457C1.87939 0.68457 113.988 308.417 283.379 341.185C455.47 374.475 499.673 116.575 674.879 121.685C862.231 127.148 880.449 396.929 1067.88 397.185C1347.74 397.566 1436.38 0.68457 1436.38 0.68457"
+                stroke="#FFFFFF"
+                strokeWidth={4}
+                strokeDasharray="22 18"
+                strokeLinecap="butt"
+                strokeLinejoin="miter"
+              />
+            </svg>
+            <svg
+              className="features-dashed-svg features-dashed-svg-mobile"
+              width="100%"
+              height="100%"
+              viewBox="0 0 400 1438"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              preserveAspectRatio="none"
+            >
+              <MotionDrawPath
+                d="M196 2C336 112 334 300 200 360C66 420 64 600 196 720C330 844 334 1028 204 1088C74 1148 66 1318 200 1436"
+                stroke="#FFFFFF"
+                strokeWidth={5}
+                strokeDasharray="22 18"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          </div>
+        </motion.div>
+
         {cards.map((card, i) => (
           <MotionFeatureCard
             key={i}
@@ -229,6 +293,7 @@ export default function Features() {
             </p>
           </MotionFeatureCard>
         ))}
+      </motion.div>
       </motion.div>
     </section>
   );

@@ -18,6 +18,17 @@ const testimonials = [
 ];
 
 export default function Testimonials() {
+  const [mobileIndex, setMobileIndex] = React.useState(0);
+  const totalTestimonials = testimonials.length;
+
+  const goPrev = React.useCallback(() => {
+    setMobileIndex((current) => (current - 1 + totalTestimonials) % totalTestimonials);
+  }, [totalTestimonials]);
+
+  const goNext = React.useCallback(() => {
+    setMobileIndex((current) => (current + 1) % totalTestimonials);
+  }, [totalTestimonials]);
+
   return (
     <section
       className="testimonials-section"
@@ -84,7 +95,7 @@ export default function Testimonials() {
       </Reveal>
 
       <motion.div
-        className="testimonials-cards-row"
+        className="testimonials-cards-row testimonials-cards-row-desktop"
         style={{
           display: "flex",
           gap: "40px",
@@ -179,10 +190,100 @@ export default function Testimonials() {
         ))}
       </motion.div>
 
+      <motion.div
+        className="testimonials-mobile-carousel"
+        initial="hidden"
+        whileInView="visible"
+        viewport={replayViewport}
+        variants={{
+          hidden: {},
+          visible: { transition: { delayChildren: 0.08 } },
+        }}
+      >
+        <motion.div
+          key={mobileIndex}
+          className="testimonial-card"
+          variants={staggerItemVariants}
+          initial={{ opacity: 0, x: 20 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.35 }}
+          style={{
+            position: "relative",
+            width: "599px",
+            height: "502px",
+            backgroundColor: "#FFFFFF",
+            borderRadius: "40px",
+            padding: "60px 40px 40px",
+            boxShadow: "0px 10px 30px rgba(0,0,0,0.5)",
+            display: "flex",
+            flexDirection: "column",
+            marginTop: "40px",
+          }}
+        >
+          <svg
+            style={{ position: "absolute", right: "-20px", top: "-40px", zIndex: 20 }}
+            width="175"
+            height="187"
+            viewBox="0 0 175 187"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path d="M0 0H95C139.183 0 175 35.8172 175 80V187H0V0Z" fill="#FFB61E" />
+            <path
+              d="M42.9956 105H57.2393C55.8899 110.1 52.1915 117.55 41.7961 120.15L37.9978 121.1V135H42.9956C56.8894 135 67.5347 131.15 74.5316 123.55C83.9775 113.3 83.0279 100.15 82.9779 100V65C82.9779 59.5 78.4799 55 72.9823 55H42.9956C37.498 55 33 59.5 33 65V95C33 100.5 37.498 105 42.9956 105ZM102.969 105H117.213C115.863 110.1 112.165 117.55 101.77 120.15L97.9713 121.1V135H102.969C116.863 135 127.508 131.15 134.505 123.55C143.951 113.3 143.001 100.15 142.951 100V65C142.951 59.5 138.453 55 132.956 55H102.969C97.4715 55 92.9735 59.5 92.9735 65V95C92.9735 100.5 97.4715 105 102.969 105Z"
+              fill="black"
+            />
+          </svg>
+
+          <h3
+            className="testimonial-card-title"
+            style={{
+              fontFamily: "Inter",
+              fontWeight: 600,
+              fontSize: "32px",
+              lineHeight: "35px",
+              color: "#2E2E2E",
+              maxWidth: "300px",
+              marginBottom: "10px",
+            }}
+          >
+            Student <br /> <span style={{ color: "#FA4516" }}>TESTIMONIAL</span>
+          </h3>
+          <div style={{ width: "60px", height: "2px", backgroundColor: "#FA4516", marginBottom: "20px" }} />
+
+          <p
+            className="testimonial-card-text"
+            style={{
+              fontFamily: "Inter",
+              fontWeight: 400,
+              fontSize: "24px",
+              lineHeight: "32px",
+              color: "#2E2E2E",
+              flex: 1,
+              marginTop: "10px",
+              zIndex: 2,
+            }}
+          >
+            {testimonials[mobileIndex].text}
+          </p>
+
+          <div style={{ marginTop: "auto" }}>
+            <h4 className="testimonial-card-name" style={{ fontFamily: "Inter", fontWeight: 600, fontSize: "24px", color: "#2E2E2E" }}>
+              {testimonials[mobileIndex].name}
+            </h4>
+            <span className="testimonial-card-location" style={{ fontFamily: "Inter", fontWeight: 400, fontSize: "16px", color: "#2E2E2E" }}>
+              {testimonials[mobileIndex].location}
+            </span>
+          </div>
+        </motion.div>
+      </motion.div>
+
       <Reveal delay={0.28}>
         <div className="testimonials-controls" style={{ display: "flex", gap: "40px", marginTop: "60px", zIndex: 10 }}>
           <button
             type="button"
+            onClick={goPrev}
+            aria-label="Show previous testimonial"
             style={{
               width: "60px",
               height: "60px",
@@ -198,6 +299,8 @@ export default function Testimonials() {
           </button>
           <button
             type="button"
+            onClick={goNext}
+            aria-label="Show next testimonial"
             style={{
               width: "60px",
               height: "60px",
