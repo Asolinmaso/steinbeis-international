@@ -1,6 +1,7 @@
 "use client";
 import React, { Suspense, useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
+import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { motion, replayViewport, Reveal, RevealX } from "@/components/motion";
@@ -186,6 +187,7 @@ function CoursesPageContent() {
             justifyContent: 'center'
           }}>
             <motion.div
+              className="cpage-hero-ring"
               style={{
                 position: 'absolute', width: '560px', height: '560px',
                 borderRadius: '50%', border: '1px solid #25CAD8', opacity: 0.3
@@ -196,6 +198,7 @@ function CoursesPageContent() {
               transition={{ duration: 0.9, delay: 0.35, ease: [0.22, 1, 0.36, 1] }}
             />
             <motion.div
+              className="cpage-hero-ring"
               style={{
                 position: 'absolute', width: '620px', height: '620px',
                 borderRadius: '50%', border: '1px solid #FFB61E', opacity: 0.2
@@ -207,6 +210,7 @@ function CoursesPageContent() {
             />
 
             <motion.div
+              className="cpage-hero-photo"
               style={{
                 width: '500px', height: '500px',
                 borderRadius: '24px',
@@ -225,6 +229,7 @@ function CoursesPageContent() {
             />
 
             <motion.div
+              className="cpage-hero-sparkle"
               style={{ position: 'absolute', width: '67px', height: '67px', left: '-30px', top: '150px', background: '#25CAD8', borderRadius: '50%', zIndex: 13 }}
               initial={{ opacity: 0, scale: 0 }}
               whileInView={{ opacity: 1, scale: 1 }}
@@ -232,6 +237,7 @@ function CoursesPageContent() {
               transition={{ type: 'spring', stiffness: 200, damping: 14, delay: 0.55 }}
             />
             <motion.div
+              className="cpage-hero-sparkle"
               style={{ position: 'absolute', width: '39px', height: '39px', left: '0px', bottom: '100px', background: '#FA4516', borderRadius: '50%', zIndex: 13 }}
               initial={{ opacity: 0, scale: 0 }}
               whileInView={{ opacity: 1, scale: 1 }}
@@ -239,6 +245,7 @@ function CoursesPageContent() {
               transition={{ type: 'spring', stiffness: 200, damping: 14, delay: 0.65 }}
             />
             <motion.div
+              className="cpage-hero-sparkle"
               style={{ position: 'absolute', width: '51px', height: '51px', right: '-10px', top: '100px', background: '#FFB61E', borderRadius: '50%', zIndex: 13 }}
               initial={{ opacity: 0, scale: 0 }}
               whileInView={{ opacity: 1, scale: 1 }}
@@ -322,9 +329,11 @@ function CoursesPageContent() {
               </p>
             </div>
 
-            <button className="btn-yellow" style={{ width: '193px', height: '61px', marginTop: '16px' }}>
-              Enquire Now
-            </button>
+            <Link href="/contact">
+              <button type="button" className="btn-yellow" style={{ width: '193px', height: '61px', marginTop: '16px' }}>
+                Enquire Now
+              </button>
+            </Link>
           </RevealX>
 
           {/* Right Column: Image */}

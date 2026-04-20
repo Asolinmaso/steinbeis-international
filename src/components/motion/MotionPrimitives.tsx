@@ -255,7 +255,7 @@ export function MotionFeatureCard({
   );
 }
 
-/** SVG path draw — replays with viewport. */
+/** SVG path draw — replays on viewport. Dashed/dotted strokes must not use `pathLength` (it overrides dash arrays and looks solid). */
 export function MotionDrawPath({
   d,
   stroke,
@@ -269,6 +269,8 @@ export function MotionDrawPath({
   strokeDasharray?: string;
 }) {
   const reduce = useReducedMotion();
+  const hasDash = Boolean(strokeDasharray?.trim());
+
   if (reduce) {
     return (
       <path
@@ -280,12 +282,29 @@ export function MotionDrawPath({
       />
     );
   }
+
+  if (hasDash) {
+    return (
+      <motion.path
+        d={d}
+        stroke={stroke}
+        strokeWidth={strokeWidth}
+        strokeDasharray={strokeDasharray}
+        fill="none"
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={replayViewport}
+        transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+        {...rest}
+      />
+    );
+  }
+
   return (
     <motion.path
       d={d}
       stroke={stroke}
       strokeWidth={strokeWidth}
-      strokeDasharray={strokeDasharray}
       fill="none"
       initial={{ pathLength: 0, opacity: 0 }}
       whileInView={{ pathLength: 1, opacity: 1 }}

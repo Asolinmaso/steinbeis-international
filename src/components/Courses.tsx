@@ -1,7 +1,15 @@
 "use client";
 import React from 'react';
 import Link from 'next/link';
+import { motion } from 'framer-motion';
 import { Reveal } from '@/components/motion';
+
+/** Easier to trigger on narrow viewports; stay visible after first reveal (no opacity reset on scroll-away). */
+const coursesInView = {
+  once: true,
+  amount: 0.08,
+  margin: '0px 0px 120px 0px',
+} as const;
 
 const courses = [
   {
@@ -68,9 +76,9 @@ export default function Courses() {
       <div className="courses-inner" style={{
         zIndex: 10,
         display: 'flex', flexDirection: 'column', alignItems: 'center',
-        width: '100%', maxWidth: '1240px', padding: '0 20px'
+        width: '100%', padding: '0 20px'
       }}>
-        <Reveal>
+        <Reveal viewport={coursesInView}>
         <h2 className="courses-title" style={{
           fontFamily: 'Inter', fontWeight: 600, fontSize: '48px',
           color: '#FFFFFF', textAlign: 'center', marginBottom: '20px'
@@ -79,7 +87,7 @@ export default function Courses() {
         </h2>
         </Reveal>
 
-        <Reveal delay={0.1}>
+        <Reveal delay={0.1} viewport={coursesInView}>
         <p className="courses-desc" style={{
           fontFamily: 'Inter', fontWeight: 400, fontSize: '22px',
           color: '#FFFFFF', textAlign: 'center', maxWidth: '800px',
@@ -89,9 +97,14 @@ export default function Courses() {
         </p>
         </Reveal>
 
-        {/* Carousel Container */}
-        <Reveal delay={0.16}>
-        <div style={{ width: '100%', overflow: 'hidden', paddingBottom: '20px' }}>
+        {/* Carousel — no blur on entrance (mobile Safari); once + low amount so cards stay visible */}
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={coursesInView}
+          transition={{ duration: 0.55, delay: 0.12, ease: [0.16, 1, 0.3, 1] }}
+          style={{ width: '100%', overflow: 'hidden', paddingBottom: '20px' }}
+        >
           <div className="courses-marquee-container">
             {[...courses, ...courses].map((course, i) => (
               <div key={i} className="courses-carousel-card" style={{
@@ -135,10 +148,9 @@ export default function Courses() {
               </div>
             ))}
           </div>
-        </div>
-        </Reveal>
+        </motion.div>
 
-        <Reveal delay={0.22}>
+        <Reveal delay={0.22} viewport={coursesInView}>
         <Link href="/courses">
           <button className="btn-yellow" style={{ marginTop: '50px' }}>
             Explore Details

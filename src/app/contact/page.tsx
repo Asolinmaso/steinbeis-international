@@ -27,12 +27,67 @@ const FAQS = [
   }
 ];
 
+type FormStatus = "idle" | "submitting" | "success" | "error";
+
 export default function ContactPage() {
   const [openFAQIndex, setOpenFAQIndex] = useState<number | null>(0);
+
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [course, setCourse] = useState("");
+  const [message, setMessage] = useState("");
+  const [formStatus, setFormStatus] = useState<FormStatus>("idle");
+  const [formError, setFormError] = useState<string | null>(null);
 
   const toggleFAQ = (index: number) => {
     setOpenFAQIndex(openFAQIndex === index ? null : index);
   };
+
+  async function handleContactSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    setFormError(null);
+    setFormStatus("submitting");
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          firstName,
+          lastName,
+          email,
+          phone,
+          course,
+          message,
+        }),
+      });
+
+      const data = (await res.json().catch(() => ({}))) as {
+        error?: string;
+      };
+
+      if (!res.ok) {
+        setFormStatus("error");
+        setFormError(
+          data.error ?? "Something went wrong. Please try again."
+        );
+        return;
+      }
+
+      setFormStatus("success");
+      setFirstName("");
+      setLastName("");
+      setEmail("");
+      setPhone("");
+      setCourse("");
+      setMessage("");
+    } catch {
+      setFormStatus("error");
+      setFormError("Network error. Please check your connection and try again.");
+    }
+  }
 
   return (
     <main style={{ position: 'relative', width: '100%' }}>
@@ -157,14 +212,35 @@ export default function ContactPage() {
             </Reveal>
 
             <Reveal delay={0.14}>
-            <form style={{ display: 'flex', flexDirection: 'column', gap: '32px' }} onSubmit={(e) => e.preventDefault()}>
+            <form
+              style={{ display: 'flex', flexDirection: 'column', gap: '32px' }}
+              onSubmit={handleContactSubmit}
+              noValidate
+            >
               {/* Row 1 */}
               <div className="contact-form-pair-row" style={{ display: 'flex', gap: '32px' }}>
-                <input type="text" placeholder="First Name" className="contact-form-input" style={{
+                <input
+                  type="text"
+                  name="firstName"
+                  autoComplete="given-name"
+                  required
+                  value={firstName}
+                  onChange={(e) => setFirstName(e.target.value)}
+                  placeholder="First Name"
+                  className="contact-form-input"
+                  style={{
                   flex: 1, border: 'none', borderBottom: '1px solid #C4C4C4', padding: '12px 0',
                   fontFamily: 'Inter', fontSize: '20px', outline: 'none', backgroundColor: 'transparent'
                 }} />
-                <input type="text" placeholder="Last Name" className="contact-form-input" style={{
+                <input
+                  type="text"
+                  name="lastName"
+                  autoComplete="family-name"
+                  value={lastName}
+                  onChange={(e) => setLastName(e.target.value)}
+                  placeholder="Last Name"
+                  className="contact-form-input"
+                  style={{
                   flex: 1, border: 'none', borderBottom: '1px solid #C4C4C4', padding: '12px 0',
                   fontFamily: 'Inter', fontSize: '20px', outline: 'none', backgroundColor: 'transparent'
                 }} />
@@ -172,42 +248,103 @@ export default function ContactPage() {
 
               {/* Row 2 */}
               <div className="contact-form-pair-row" style={{ display: 'flex', gap: '32px' }}>
-                <input type="email" placeholder="Email" className="contact-form-input" style={{
+                <input
+                  type="email"
+                  name="email"
+                  autoComplete="email"
+                  required
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="Email"
+                  className="contact-form-input"
+                  style={{
                   flex: 1, border: 'none', borderBottom: '1px solid #C4C4C4', padding: '12px 0',
                   fontFamily: 'Inter', fontSize: '20px', outline: 'none', backgroundColor: 'transparent'
                 }} />
                 <div style={{ flex: 1, display: 'flex', borderBottom: '1px solid #C4C4C4', padding: '12px 0', alignItems: 'center' }}>
                   <span style={{ fontFamily: 'Inter', fontSize: '20px', color: '#2E2E2E', marginRight: '16px' }}>+91</span>
-                  <input type="tel" placeholder="Phone number" className="contact-form-input" style={{
+                  <input
+                    type="tel"
+                    name="phone"
+                    autoComplete="tel-national"
+                    inputMode="numeric"
+                    value={phone}
+                    onChange={(e) => setPhone(e.target.value)}
+                    placeholder="Phone number"
+                    className="contact-form-input"
+                    style={{
                     border: 'none', flex: 1, fontFamily: 'Inter', fontSize: '20px', outline: 'none', backgroundColor: 'transparent'
                   }} />
                 </div>
               </div>
 
               <select
-                defaultValue=""
+                name="course"
+                required
+                value={course}
+                onChange={(e) => setCourse(e.target.value)}
                 style={{
                   width: '100%', border: 'none', borderBottom: '1px solid #C4C4C4', padding: '12px 0',
                   fontFamily: 'Inter', fontSize: '20px', outline: 'none', backgroundColor: 'transparent', appearance: 'none',
-                  color: '#2E2E2E'
+                  color: course ? '#2E2E2E' : '#888888'
                 }}
               >
                 <option value="" disabled>Select Course</option>
-                <option value="A1">German A1</option>
-                <option value="A2">German A2</option>
-                <option value="B1">German B1</option>
-                <option value="B2">German B2</option>
+                <option value="German A1">German A1</option>
+                <option value="German A2">German A2</option>
+                <option value="German B1">German B1</option>
+                <option value="German B2">German B2</option>
               </select>
 
-              <textarea placeholder="Message" rows={3} style={{
+              <textarea
+                name="message"
+                required
+                value={message}
+                onChange={(e) => setMessage(e.target.value)}
+                placeholder="Message"
+                rows={3}
+                style={{
                 width: '100%', border: 'none', borderBottom: '1px solid #C4C4C4', padding: '12px 0',
                 fontFamily: 'Inter', fontSize: '20px', outline: 'none', resize: 'vertical', backgroundColor: 'transparent'
-              }}></textarea>
+              }} />
 
-              <div style={{ display: 'flex', justifyContent: 'flex-start', marginTop: '16px' }}>
-                <button type="submit" className="btn-yellow" style={{ padding: '16px 40px' }}>
-                  Send Message
-                </button>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', marginTop: '16px' }}>
+                <div style={{ display: 'flex', justifyContent: 'flex-start' }}>
+                  <button
+                    type="submit"
+                    className="btn-yellow"
+                    style={{ padding: '16px 40px' }}
+                    disabled={formStatus === 'submitting'}
+                  >
+                    {formStatus === 'submitting' ? 'Sending…' : 'Send Message'}
+                  </button>
+                </div>
+                {formStatus === 'success' && (
+                  <p
+                    role="status"
+                    style={{
+                      fontFamily: 'Inter',
+                      fontSize: '18px',
+                      color: '#1B5E20',
+                      margin: 0,
+                    }}
+                  >
+                    Thank you — your message was sent. We will get back to you soon.
+                  </p>
+                )}
+                {formStatus === 'error' && formError && (
+                  <p
+                    role="alert"
+                    style={{
+                      fontFamily: 'Inter',
+                      fontSize: '18px',
+                      color: '#C62828',
+                      margin: 0,
+                    }}
+                  >
+                    {formError}
+                  </p>
+                )}
               </div>
             </form>
             </Reveal>

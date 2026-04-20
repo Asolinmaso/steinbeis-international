@@ -58,7 +58,7 @@ const pills: {
   { text: "Visa Support Assistance", top: "255px", right: "-50px", className: "hero-pill-visa", floatDelay: "0.9s" },
   { text: "German Job Guidance", top: "425px", right: "20px", className: "hero-pill-job", floatDelay: "1.35s" },
   { text: "100% Practical Learning", left: "106px", top: "255px", className: "hero-pill-practical", floatDelay: "1.8s" },
-  { text: "Experienced Trainers", left: "97px", top: "425px", className: "hero-pill-trainers", floatDelay: "2.25s" },
+  { text: "experienced Trainers", left: "97px", top: "425px", className: "hero-pill-trainers", floatDelay: "2.25s" },
 ];
 
 export default function Hero() {
@@ -264,6 +264,12 @@ export default function Hero() {
           },
         }}
       >
+        <div className="hero-mobile-ellipses" aria-hidden="true">
+          <div className="hero-mobile-ellipse hero-mobile-ellipse--4" />
+          <div className="hero-mobile-ellipse hero-mobile-ellipse--5" />
+          <div className="hero-mobile-ellipse hero-mobile-ellipse--2" />
+          <div className="hero-mobile-ellipse hero-mobile-ellipse--1" />
+        </div>
         <motion.div
           className="hero-main-image"
           variants={heroMainImageReveal}
