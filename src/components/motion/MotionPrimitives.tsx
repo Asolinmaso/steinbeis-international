@@ -261,12 +261,14 @@ export function MotionDrawPath({
   stroke,
   strokeWidth,
   strokeDasharray,
+  strokeLinecap,
   ...rest
 }: Omit<SVGMotionProps<SVGPathElement>, "d" | "stroke" | "strokeWidth"> & {
   d: string;
   stroke: string;
   strokeWidth: number;
   strokeDasharray?: string;
+  strokeLinecap?: "butt" | "round" | "square";
 }) {
   const reduce = useReducedMotion();
   const hasDash = Boolean(strokeDasharray?.trim());
@@ -278,6 +280,7 @@ export function MotionDrawPath({
         stroke={stroke}
         strokeWidth={strokeWidth}
         strokeDasharray={strokeDasharray}
+        strokeLinecap={strokeLinecap}
         fill="none"
       />
     );
@@ -305,6 +308,8 @@ export function MotionDrawPath({
       d={d}
       stroke={stroke}
       strokeWidth={strokeWidth}
+      strokeDasharray={strokeDasharray}
+      strokeLinecap={strokeLinecap}
       fill="none"
       initial={{ pathLength: 0, opacity: 0 }}
       whileInView={{ pathLength: 1, opacity: 1 }}

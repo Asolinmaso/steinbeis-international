@@ -12,9 +12,9 @@ export default function Navbar() {
       <nav className="navbar-root motion-navbar">
         <div style={{ display: 'flex', alignItems: 'center' }}>
           <Link href="/">
-            <img 
-              src="/logo.png" 
-              alt="Steinbeis International Logo" 
+            <img
+              src="/logo.png"
+              alt="Steinbeis International Logo"
               className="navbar-logo"
             />
           </Link>
@@ -81,7 +81,7 @@ export default function Navbar() {
         </div>
 
         {/* Desktop enquire button */}
-        <Link href="/contact">
+        <Link href="/contact#contact-form">
           <button className="navbar-enquire btn-yellow">
             Enquire Now
           </button>
@@ -113,7 +113,7 @@ export default function Navbar() {
           style={{ fontWeight: pathname === '/contact' ? 700 : 400, borderBottom: '1px solid #f0f0f0', paddingBottom: '12px' }}>
           Contact Us
         </Link>
-        <Link href="/contact" onClick={() => setMenuOpen(false)}>
+        <Link href="/contact#contact-form" onClick={() => setMenuOpen(false)}>
           <button className="btn-yellow" style={{ width: '100%' }}>
             Enquire Now
           </button>
