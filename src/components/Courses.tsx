@@ -1,7 +1,15 @@
 "use client";
 import React from 'react';
 import Link from 'next/link';
+import { motion } from 'framer-motion';
 import { Reveal } from '@/components/motion';
+
+/** Easier to trigger on narrow viewports; stay visible after first reveal (no opacity reset on scroll-away). */
+const coursesInView = {
+  once: true,
+  amount: 0.08,
+  margin: '0px 0px 120px 0px',
+} as const;
 
 const courses = [
   {

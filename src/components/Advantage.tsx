@@ -15,7 +15,7 @@ const advantages = [
     left: "885px",
     right: "unset",
     width: "495px",
-    icon: <Image src="/exam.png" alt="Exams" width={40} height={40} />,
+    icon: <Image src="/exam.png" alt="Exams" width={40} height={40} style={{ width: 'auto', height: 'auto' }} />,
   },
   {
     text: "Affordable Fee Structure",
@@ -25,7 +25,7 @@ const advantages = [
     top: "130px",
     left: "560px",
     width: "381px",
-    icon: <Image src="/Group.png" alt="Fees" width={40} height={40} />,
+    icon: <Image src="/Group.png" alt="Fees" width={50} height={50} style={{ width: 'auto', height: 'auto' }} />,
   },
   {
     text: "Study Materials Included",
@@ -35,7 +35,7 @@ const advantages = [
     top: "130px",
     left: "975px",
     width: "405px",
-    icon: <Image src="/book.png" alt="Books" width={40} height={40} />,
+    icon: <Image src="/book.png" alt="Books" width={50} height={50} style={{ width: 'auto', height: 'auto' }} />,
   },
   {
     text: "Hostel Accommodation",
@@ -45,7 +45,7 @@ const advantages = [
     top: "258px",
     left: "585px",
     width: "366px",
-    icon: <Image src="/hostel.png" alt="Hostel" width={40} height={40} />,
+    icon: <Image src="/hostel.png" alt="Hostel" width={50} height={50} style={{ width: 'auto', height: 'auto' }} />,
   },
   {
     text: "Flexible Learning Timings",
@@ -55,12 +55,8 @@ const advantages = [
     top: "258px",
     left: "975px",
     width: "405px",
-    icon: (
-      <svg width="40" height="40" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="16" cy="16" r="11" stroke="#FA4516" strokeWidth="2.5" />
-        <path d="M16 10V16L20 20" stroke="#FA4516" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
-      </svg>
-    ),
+    icon: <Image src="/time.png" alt="time" width={50} height={50} style={{ width: 'auto', height: 'auto' }} />,
+
   },
 ];
 
@@ -109,6 +105,7 @@ export default function Advantage() {
         >
           <Reveal>
             <h2
+              className="advantage-title"
               style={{
                 fontFamily: "Inter",
                 fontWeight: 600,
@@ -123,6 +120,7 @@ export default function Advantage() {
           </Reveal>
           <Reveal delay={0.08}>
             <p
+              className="advantage-desc"
               style={{
                 fontFamily: "Inter",
                 fontWeight: 400,

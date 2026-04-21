@@ -264,6 +264,12 @@ export default function Hero() {
           },
         }}
       >
+        <div className="hero-mobile-ellipses" aria-hidden="true">
+          <div className="hero-mobile-ellipse hero-mobile-ellipse--4" />
+          <div className="hero-mobile-ellipse hero-mobile-ellipse--5" />
+          <div className="hero-mobile-ellipse hero-mobile-ellipse--2" />
+          <div className="hero-mobile-ellipse hero-mobile-ellipse--1" />
+        </div>
         <motion.div
           className="hero-main-image"
           variants={heroMainImageReveal}
