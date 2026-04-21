@@ -27,8 +27,110 @@ const FAQS = [
   }
 ];
 
+const COUNTRY_CODES = [
+  { code: '+91', label: 'IN (+91)' },
+  { code: '+49', label: 'DE (+49)' },
+  { code: '+1', label: 'US (+1)' },
+  { code: '+44', label: 'UK (+44)' },
+  { code: '+61', label: 'AU (+61)' },
+  { code: '+971', label: 'UAE (+971)' },
+  { code: '+65', label: 'SG (+65)' },
+  { code: '+33', label: 'FR (+33)' },
+  { code: '+39', label: 'IT (+39)' },
+  { code: '+31', label: 'NL (+31)' },
+  { code: '+41', label: 'CH (+41)' },
+  { code: '+43', label: 'AT (+43)' },
+  { code: '+32', label: 'BE (+32)' },
+  { code: '+46', label: 'SE (+46)' },
+  { code: '+47', label: 'NO (+47)' },
+  { code: '+45', label: 'DK (+45)' },
+  { code: '+358', label: 'FI (+358)' },
+  { code: '+353', label: 'IE (+353)' },
+  { code: '+351', label: 'PT (+351)' },
+  { code: '+30', label: 'GR (+30)' },
+  { code: '+420', label: 'CZ (+420)' },
+  { code: '+48', label: 'PL (+48)' },
+  { code: '+36', label: 'HU (+36)' },
+  { code: '+40', label: 'RO (+40)' },
+  { code: '+359', label: 'BG (+359)' },
+  { code: '+421', label: 'SK (+421)' },
+  { code: '+386', label: 'SI (+386)' },
+  { code: '+372', label: 'EE (+372)' },
+  { code: '+371', label: 'LV (+371)' },
+  { code: '+370', label: 'LT (+370)' },
+  { code: '+356', label: 'MT (+356)' },
+  { code: '+357', label: 'CY (+357)' },
+  { code: '+352', label: 'LU (+352)' },
+  { code: '+354', label: 'IS (+354)' },
+  { code: '+94', label: 'LK (+94)' },
+  { code: '+977', label: 'NP (+977)' },
+  { code: '+880', label: 'BD (+880)' },
+  { code: '+92', label: 'PK (+92)' },
+  { code: '+93', label: 'AF (+93)' },
+  { code: '+960', label: 'MV (+960)' },
+  { code: '+975', label: 'BT (+975)' },
+  { code: '+95', label: 'MM (+95)' },
+  { code: '+66', label: 'TH (+66)' },
+  { code: '+60', label: 'MY (+60)' },
+  { code: '+62', label: 'ID (+62)' },
+  { code: '+63', label: 'PH (+63)' },
+  { code: '+84', label: 'VN (+84)' },
+  { code: '+855', label: 'KH (+855)' },
+  { code: '+856', label: 'LA (+856)' },
+  { code: '+673', label: 'BN (+673)' },
+  { code: '+670', label: 'TL (+670)' },
+  { code: '+82', label: 'KR (+82)' },
+  { code: '+886', label: 'TW (+886)' },
+  { code: '+852', label: 'HK (+852)' },
+  { code: '+853', label: 'MO (+853)' },
+  { code: '+972', label: 'IL (+972)' },
+  { code: '+966', label: 'SA (+966)' },
+  { code: '+965', label: 'KW (+965)' },
+  { code: '+968', label: 'OM (+968)' },
+  { code: '+974', label: 'QA (+974)' },
+  { code: '+973', label: 'BH (+973)' },
+  { code: '+962', label: 'JO (+962)' },
+  { code: '+961', label: 'LB (+961)' },
+  { code: '+963', label: 'SY (+963)' },
+  { code: '+964', label: 'IQ (+964)' },
+  { code: '+967', label: 'YE (+967)' },
+  { code: '+20', label: 'EG (+20)' },
+  { code: '+212', label: 'MA (+212)' },
+  { code: '+213', label: 'DZ (+213)' },
+  { code: '+216', label: 'TN (+216)' },
+  { code: '+218', label: 'LY (+218)' },
+  { code: '+249', label: 'SD (+249)' },
+  { code: '+251', label: 'ET (+251)' },
+  { code: '+254', label: 'KE (+254)' },
+  { code: '+255', label: 'TZ (+255)' },
+  { code: '+256', label: 'UG (+256)' },
+  { code: '+234', label: 'NG (+234)' },
+  { code: '+233', label: 'GH (+233)' },
+  { code: '+27', label: 'ZA (+27)' },
+  { code: '+55', label: 'BR (+55)' },
+  { code: '+54', label: 'AR (+54)' },
+  { code: '+56', label: 'CL (+56)' },
+  { code: '+57', label: 'CO (+57)' },
+  { code: '+51', label: 'PE (+51)' },
+  { code: '+58', label: 'VE (+58)' },
+  { code: '+52', label: 'MX (+52)' },
+  { code: '+506', label: 'CR (+506)' },
+  { code: '+507', label: 'PA (+507)' },
+  { code: '+593', label: 'EC (+593)' },
+  { code: '+598', label: 'UY (+598)' },
+  { code: '+595', label: 'PY (+595)' },
+  { code: '+591', label: 'BO (+591)' },
+  { code: '+7', label: 'RU (+7)' },
+  { code: '+380', label: 'UA (+380)' },
+  { code: '+90', label: 'TR (+90)' },
+  { code: '+98', label: 'IR (+98)' },
+  { code: '+7', label: 'KZ (+7)' },
+  { code: '+998', label: 'UZ (+998)' },
+];
+
 export default function ContactPage() {
   const [openFAQIndex, setOpenFAQIndex] = useState<number | null>(0);
+  const [selectedCountryCode, setSelectedCountryCode] = useState('+91');
 
   const toggleFAQ = (index: number) => {
     setOpenFAQIndex(openFAQIndex === index ? null : index);
@@ -43,36 +145,36 @@ export default function ContactPage() {
       <div
         className="contact-hero"
         style={{
-        position: 'relative',
-        width: '100%',
-        minHeight: '543px',
-        marginTop: '120px',
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'center',
-        backgroundColor: '#061B42',
-        backgroundImage: 'linear-gradient(0deg, rgba(6, 27, 66, 0.8), rgba(6, 27, 66, 0.8)), url(/contact_banner_bg.png)',
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        padding: '0 20px',
-        zIndex: 10
-      }}
+          position: 'relative',
+          width: '100%',
+          minHeight: '543px',
+          marginTop: '120px',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center',
+          backgroundColor: '#061B42',
+          backgroundImage: 'linear-gradient(0deg, rgb(6 27 66 / 36%),rgb(6 27 66 / 0%)), url(/contact_banner_bg.png)',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          padding: '0 20px',
+          zIndex: 10
+        }}
       >
         <div style={{ display: 'flex', flexDirection: 'column', gap: '24px', alignItems: 'center', maxWidth: '800px', textAlign: 'center' }}>
           <Reveal>
-          <h1 className="contact-hero-title" style={{
-            fontFamily: 'Inter', fontWeight: 600, fontSize: '64px', lineHeight: '77px', color: '#FFFFFF'
-          }}>
-            Get in Touch <span style={{ color: '#FFB61E' }}>With Us</span>
-          </h1>
+            <h1 className="contact-hero-title" style={{
+              fontFamily: 'Inter', fontWeight: 600, fontSize: '64px', lineHeight: '77px', color: '#FFFFFF'
+            }}>
+              Get in Touch <span style={{ color: '#FFB61E' }}>With Us</span>
+            </h1>
           </Reveal>
           <Reveal delay={0.1}>
-          <p className="contact-hero-desc" style={{
-            fontFamily: 'Inter', fontWeight: 400, fontSize: '24px', lineHeight: '29px', color: '#FFFFFF'
-          }}>
-            Have questions or need guidance? Reach out to us and take the first step towards your learning journey with expert support.
-          </p>
+            <p className="contact-hero-desc" style={{
+              fontFamily: 'Inter', fontWeight: 400, fontSize: '24px', lineHeight: '29px', color: '#FFFFFF'
+            }}>
+              Have questions or need guidance? Reach out to us and take the first step towards your learning journey with expert support.
+            </p>
           </Reveal>
         </div>
       </div>
@@ -81,135 +183,194 @@ export default function ContactPage() {
       <div
         className="contact-main-section"
         style={{
-        width: '100%', display: 'flex', justifyContent: 'center', padding: '100px 0', backgroundColor: '#FFFFFF'
-      }}
+          width: '100%', display: 'flex', justifyContent: 'center', padding: '100px 0', backgroundColor: '#FFFFFF'
+        }}
       >
         <div className="contact-main-row" style={{
-          width: '100%', maxWidth: '1240px', display: 'flex', flexDirection: 'row',
+          width: '100%', maxWidth: '1440px', display: 'flex', flexDirection: 'row',
           justifyContent: 'space-between', padding: '0 100px', gap: '60px'
         }}>
 
           {/* Left Side: Contact Info */}
-          <RevealX className="contact-info-col" x={-40} style={{ flex: '1', display: 'flex', flexDirection: 'column', maxWidth: '500px' }}>
+          <RevealX className="contact-info-col" x={-40} style={{ flex: '0 0 483px', display: 'flex', flexDirection: 'column' }}>
             <Reveal>
-            <h2 style={{ fontFamily: 'Inter', fontWeight: 600, fontSize: '48px', lineHeight: '58px', color: '#2E2E2E', marginBottom: '24px' }}>
-              Let's Connect &<br/>
-              Begin <span style={{ color: '#FA4516' }}>Your Journey</span>
-            </h2>
+              <h2 style={{ fontFamily: 'Inter', fontWeight: 600, fontSize: '48px', lineHeight: '58px', color: '#2E2E2E', marginBottom: '20px' }}>
+                Let&apos;s Connect &<br />
+                Begin <span style={{ color: '#FA4516' }}>Your Journey</span>
+              </h2>
             </Reveal>
             <Reveal delay={0.08}>
-            <p style={{ fontFamily: 'Inter', fontWeight: 400, fontSize: '24px', lineHeight: '32px', color: '#2E2E2E', marginBottom: '40px' }}>
-              Find all the ways to connect with us, from direct contact details to visiting our campus.
-            </p>
+              <p style={{ fontFamily: 'Inter', fontWeight: 400, fontSize: '18px', lineHeight: '28px', color: '#4A4A4A', marginBottom: '48px', maxWidth: '440px' }}>
+                Find all the ways to connect with us, from direct contact details to visiting our campus.
+              </p>
             </Reveal>
 
             <Reveal delay={0.14}>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '32px' }}>
-              {/* Phone */}
-              <div style={{ display: 'flex', gap: '24px', alignItems: 'flex-start' }}>
-                <div style={{ width: '60px', height: '60px', backgroundColor: '#25CAD8', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-                  <span style={{ fontSize: '24px' }}>📞</span>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '32px' }}>
+                {/* Phone */}
+                <div style={{ display: 'flex', gap: '20px', alignItems: 'center' }}>
+                  <div style={{ width: '48px', height: '48px', backgroundColor: '#00BDD6', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                    <img src="/call.png" alt="Call" style={{ width: '20px', height: '20px', objectFit: 'contain', filter: 'brightness(0) invert(1)' }} />
+                  </div>
+                  <div style={{ display: 'flex', flexDirection: 'column' }}>
+                    <span style={{ fontFamily: 'Inter', fontWeight: 600, fontSize: '18px', color: '#2E2E2E' }}>Contact</span>
+                    <span style={{ fontFamily: 'Inter', fontWeight: 400, fontSize: '18px', color: '#4A4A4A' }}>09600116858</span>
+                  </div>
                 </div>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                  <span style={{ fontFamily: 'Inter', fontWeight: 600, fontSize: '24px', color: '#2E2E2E' }}>Contact</span>
-                  <span className="contact-info-detail" style={{ fontFamily: 'Inter', fontWeight: 400, fontSize: '24px', color: '#2E2E2E' }}>09600116858</span>
-                </div>
-              </div>
 
-              {/* Email */}
-              <div style={{ display: 'flex', gap: '24px', alignItems: 'flex-start' }}>
-                <div style={{ width: '60px', height: '60px', backgroundColor: '#25CAD8', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-                  <span style={{ fontSize: '24px' }}>✉️</span>
+                {/* Email */}
+                <div style={{ display: 'flex', gap: '20px', alignItems: 'center' }}>
+                  <div style={{ width: '48px', height: '48px', backgroundColor: '#00BDD6', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                    <img src="/email.png" alt="Email" style={{ width: '20px', height: '20px', objectFit: 'contain', filter: 'brightness(0) invert(1)' }} />
+                  </div>
+                  <div style={{ display: 'flex', flexDirection: 'column' }}>
+                    <span style={{ fontFamily: 'Inter', fontWeight: 600, fontSize: '18px', color: '#2E2E2E' }}>E-mail</span>
+                    <span style={{ fontFamily: 'Inter', fontWeight: 400, fontSize: '18px', color: '#4A4A4A', wordBreak: 'break-word' }}>steinbeisinternational@gmail.com</span>
+                  </div>
                 </div>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                  <span style={{ fontFamily: 'Inter', fontWeight: 600, fontSize: '24px', color: '#2E2E2E' }}>E-mail</span>
-                  <span className="contact-info-detail" style={{ fontFamily: 'Inter', fontWeight: 400, fontSize: '24px', color: '#2E2E2E', wordBreak: 'break-word' }}>steinbeisinternational@gmail.com</span>
-                </div>
-              </div>
 
-              {/* Address */}
-              <div style={{ display: 'flex', gap: '24px', alignItems: 'flex-start' }}>
-                <div style={{ width: '60px', height: '60px', backgroundColor: '#25CAD8', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-                  <span style={{ fontSize: '24px' }}>📍</span>
-                </div>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                  <span style={{ fontFamily: 'Inter', fontWeight: 600, fontSize: '24px', color: '#2E2E2E' }}>Address</span>
-                  <span className="contact-info-detail" style={{ fontFamily: 'Inter', fontWeight: 400, fontSize: '24px', lineHeight: '32px', color: '#2E2E2E' }}>
-                    Building No. 1/288, East Coast Road, Kottivakkam, Near Tamil Matrimony Office, Thiruvanmiyur, Chennai, Tamil Nadu – 600041
-                  </span>
+                {/* Address */}
+                <div style={{ display: 'flex', gap: '20px', alignItems: 'flex-start' }}>
+                  <div style={{ width: '48px', height: '48px', backgroundColor: '#00BDD6', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, marginTop: '4px' }}>
+                    <img src="/location.png" alt="Location" style={{ width: '20px', height: '20px', objectFit: 'contain', filter: 'brightness(0) invert(1)' }} />
+                  </div>
+                  <div style={{ display: 'flex', flexDirection: 'column' }}>
+                    <span style={{ fontFamily: 'Inter', fontWeight: 600, fontSize: '18px', color: '#2E2E2E' }}>Address</span>
+                    <span style={{ fontFamily: 'Inter', fontWeight: 400, fontSize: '18px', lineHeight: '26px', color: '#4A4A4A' }}>
+                      2nd Floor, 1/228, ECR Main Road,<br />
+                      Kottivakkam, Thiruvanmiyur, Chennai,<br />
+                      Tamil Nadu – 600041
+                    </span>
+                  </div>
                 </div>
               </div>
-            </div>
             </Reveal>
           </RevealX>
 
           {/* Right Side: Form */}
-          <RevealX className="contact-form-col" x={40} style={{ flex: '1', display: 'flex', flexDirection: 'column', maxWidth: '600px' }}>
+          <RevealX id="contact-form" className="contact-form-col" x={40} style={{ flex: '1', display: 'flex', flexDirection: 'column' }}>
             <Reveal>
-            <h2 style={{ fontFamily: 'Inter', fontWeight: 600, fontSize: '48px', lineHeight: '58px', color: '#2E2E2E', marginBottom: '16px' }}>
-              Let's Get <span style={{ color: '#FA4516' }}>In Touch</span>
-            </h2>
+              <h2 style={{ fontFamily: 'Inter', fontWeight: 600, fontSize: '48px', lineHeight: '58px', color: '#2E2E2E', marginBottom: '8px' }}>
+                Let&apos;s Get <span style={{ color: '#FA4516' }}>In Touch</span>
+              </h2>
             </Reveal>
             <Reveal delay={0.08}>
-            <p style={{ fontFamily: 'Inter', fontWeight: 400, fontSize: '24px', lineHeight: '32px', color: '#2E2E2E', marginBottom: '40px' }}>
-              Let us know your concern, and we'll get back to you within 24 hours.
-            </p>
+              <p style={{ fontFamily: 'Inter', fontWeight: 400, fontSize: '24px', lineHeight: '28px', color: '#4A4A4A', marginBottom: '32px' }}>
+                Let us know your concern, and we&apos;ll get back to<br /> you within 24 hours.
+              </p>
             </Reveal>
 
             <Reveal delay={0.14}>
-            <form style={{ display: 'flex', flexDirection: 'column', gap: '32px' }} onSubmit={(e) => e.preventDefault()}>
-              {/* Row 1 */}
-              <div className="contact-form-pair-row" style={{ display: 'flex', gap: '32px' }}>
-                <input type="text" placeholder="First Name" className="contact-form-input" style={{
-                  flex: 1, border: 'none', borderBottom: '1px solid #C4C4C4', padding: '12px 0',
-                  fontFamily: 'Inter', fontSize: '20px', outline: 'none', backgroundColor: 'transparent'
-                }} />
-                <input type="text" placeholder="Last Name" className="contact-form-input" style={{
-                  flex: 1, border: 'none', borderBottom: '1px solid #C4C4C4', padding: '12px 0',
-                  fontFamily: 'Inter', fontSize: '20px', outline: 'none', backgroundColor: 'transparent'
-                }} />
-              </div>
-
-              {/* Row 2 */}
-              <div className="contact-form-pair-row" style={{ display: 'flex', gap: '32px' }}>
-                <input type="email" placeholder="Email" className="contact-form-input" style={{
-                  flex: 1, border: 'none', borderBottom: '1px solid #C4C4C4', padding: '12px 0',
-                  fontFamily: 'Inter', fontSize: '20px', outline: 'none', backgroundColor: 'transparent'
-                }} />
-                <div style={{ flex: 1, display: 'flex', borderBottom: '1px solid #C4C4C4', padding: '12px 0', alignItems: 'center' }}>
-                  <span style={{ fontFamily: 'Inter', fontSize: '20px', color: '#2E2E2E', marginRight: '16px' }}>+91</span>
-                  <input type="tel" placeholder="Phone number" className="contact-form-input" style={{
-                    border: 'none', flex: 1, fontFamily: 'Inter', fontSize: '20px', outline: 'none', backgroundColor: 'transparent'
-                  }} />
+              <form style={{ display: 'flex', flexDirection: 'column', gap: '24px' }} onSubmit={(e) => e.preventDefault()}>
+                {/* Row 1 */}
+                <div style={{ display: 'flex', gap: '32px' }}>
+                  <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                    <label style={{ fontFamily: 'Inter', fontSize: '14px', color: '#666' }}>First Name</label>
+                    <input type="text" className="contact-form-input" style={{
+                      border: 'none', borderBottom: '1px solid #C4C4C4', padding: '4px 0 12px',
+                      fontFamily: 'Inter', fontSize: '16px', outline: 'none', backgroundColor: 'transparent'
+                    }} />
+                  </div>
+                  <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                    <label style={{ fontFamily: 'Inter', fontSize: '14px', color: '#666' }}>Last Name</label>
+                    <input type="text" className="contact-form-input" style={{
+                      border: 'none', borderBottom: '1px solid #C4C4C4', padding: '4px 0 12px',
+                      fontFamily: 'Inter', fontSize: '16px', outline: 'none', backgroundColor: 'transparent'
+                    }} />
+                  </div>
                 </div>
-              </div>
 
-              <select
-                defaultValue=""
-                style={{
-                  width: '100%', border: 'none', borderBottom: '1px solid #C4C4C4', padding: '12px 0',
-                  fontFamily: 'Inter', fontSize: '20px', outline: 'none', backgroundColor: 'transparent', appearance: 'none',
-                  color: '#2E2E2E'
-                }}
-              >
-                <option value="" disabled>Select Course</option>
-                <option value="A1">German A1</option>
-                <option value="A2">German A2</option>
-                <option value="B1">German B1</option>
-                <option value="B2">German B2</option>
-              </select>
+                {/* Row 2 */}
+                <div style={{ display: 'flex', gap: '32px' }}>
+                  <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                    <label style={{ fontFamily: 'Inter', fontSize: '14px', color: '#666' }}>Email</label>
+                    <input type="email" className="contact-form-input" style={{
+                      border: 'none', borderBottom: '1px solid #C4C4C4', padding: '4px 0 12px',
+                      fontFamily: 'Inter', fontSize: '16px', outline: 'none', backgroundColor: 'transparent'
+                    }} />
+                  </div>
+                  <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                    <label style={{ fontFamily: 'Inter', fontSize: '14px', color: '#666' }}>Phone Number</label>
+                    <div style={{ display: 'flex', borderBottom: '1px solid #C4C4C4', padding: '4px 0 12px', alignItems: 'center' }}>
+                      <div style={{ display: 'flex', alignItems: 'center', position: 'relative' }}>
+                        <select
+                          value={selectedCountryCode}
+                          onChange={(e) => setSelectedCountryCode(e.target.value)}
+                          style={{
+                            border: 'none',
+                            backgroundColor: 'transparent',
+                            fontFamily: 'Inter',
+                            fontSize: '16px',
+                            color: '#2E2E2E',
+                            outline: 'none',
+                            cursor: 'pointer',
+                            appearance: 'none',
+                            paddingRight: '15px',
+                            zIndex: 1
+                          }}
+                        >
+                          {COUNTRY_CODES.filter((item, index, self) =>
+                            index === self.findIndex((t) => (t.label === item.label))
+                          ).map((item) => (
+                            <option key={item.label} value={item.code} style={{ color: '#2E2E2E' }}>
+                              {item.label}
+                            </option>
+                          ))}
+                        </select>
+                        <div style={{ position: 'absolute', right: '0', pointerEvents: 'none', display: 'flex', alignItems: 'center' }}>
+                          <svg width="8" height="6" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M1 1L6 6L11 1" stroke="#2E2E2E" strokeWidth="2" strokeLinecap="round" />
+                          </svg>
+                        </div>
+                      </div>
+                      <div style={{ width: '1px', height: '20px', backgroundColor: '#C4C4C4', margin: '0 12px' }}></div>
+                      <input type="tel" className="contact-form-input" placeholder="Phone number" style={{
+                        border: 'none', flex: 1, fontFamily: 'Inter', fontSize: '16px', outline: 'none', backgroundColor: 'transparent'
+                      }} />
+                    </div>
+                  </div>
+                </div>
 
-              <textarea placeholder="Message" rows={3} style={{
-                width: '100%', border: 'none', borderBottom: '1px solid #C4C4C4', padding: '12px 0',
-                fontFamily: 'Inter', fontSize: '20px', outline: 'none', resize: 'vertical', backgroundColor: 'transparent'
-              }}></textarea>
+                {/* Row 3: Select */}
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', position: 'relative' }}>
+                  <label style={{ fontFamily: 'Inter', fontSize: '14px', color: '#666' }}>Select Course</label>
+                  <select
+                    defaultValue=""
+                    style={{
+                      width: '100%', border: 'none', borderBottom: '1px solid #C4C4C4', padding: '4px 0 12px',
+                      fontFamily: 'Inter', fontSize: '16px', outline: 'none', backgroundColor: 'transparent', appearance: 'none',
+                      color: '#2E2E2E'
+                    }}
+                  >
+                    <option value="" disabled></option>
+                    <option value="A1">German A1</option>
+                    <option value="A2">German A2</option>
+                    <option value="B1">German B1</option>
+                    <option value="B2">German B2</option>
+                  </select>
+                  <div style={{ position: 'absolute', right: '0', bottom: '15px', pointerEvents: 'none' }}>
+                    <svg width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M1 1L6 6L11 1" stroke="#2E2E2E" strokeWidth="2" strokeLinecap="round" />
+                    </svg>
+                  </div>
+                </div>
 
-              <div style={{ display: 'flex', justifyContent: 'flex-start', marginTop: '16px' }}>
-                <button type="submit" className="btn-yellow" style={{ padding: '16px 40px' }}>
-                  Send Message
-                </button>
-              </div>
-            </form>
+                {/* Row 4: Message */}
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                  <label style={{ fontFamily: 'Inter', fontSize: '14px', color: '#666' }}>Message</label>
+                  <textarea rows={1} style={{
+                    width: '100%', border: 'none', borderBottom: '1px solid #C4C4C4', padding: '4px 0 12px',
+                    fontFamily: 'Inter', fontSize: '16px', outline: 'none', resize: 'none', backgroundColor: 'transparent',
+                    minHeight: '100px'
+                  }}></textarea>
+                </div>
+
+                <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '8px' }}>
+                  <button type="submit" className="btn-yellow" style={{ padding: '12px 32px', borderRadius: '12px', fontWeight: 600, fontSize: '16px', backgroundColor: '#FFB61E' }}>
+                    Send Message
+                  </button>
+                </div>
+              </form>
             </Reveal>
           </RevealX>
         </div>
@@ -219,8 +380,8 @@ export default function ContactPage() {
       <div
         className="contact-faq-section"
         style={{
-        width: '100%', display: 'flex', justifyContent: 'center', padding: '100px 0', backgroundColor: '#FFFFFF'
-      }}
+          width: '100%', display: 'flex', justifyContent: 'center', padding: '100px 0', backgroundColor: '#FFFFFF'
+        }}
       >
         <div className="contact-faq-row" style={{
           width: '100%', maxWidth: '1240px', display: 'flex', flexDirection: 'row',
@@ -229,32 +390,34 @@ export default function ContactPage() {
           {/* Left Side: FAQ Header & Still-have-questions Box */}
           <RevealX className="contact-faq-left" x={-36} style={{ flex: '0 0 483px', display: 'flex', flexDirection: 'column' }}>
             <Reveal>
-            <h2 style={{ fontFamily: 'Inter', fontWeight: 600, fontSize: '48px', lineHeight: '58px', color: '#2E2E2E', marginBottom: '24px' }}>
-              Frequently Asked<br/>
-              <span style={{ color: '#FA4516' }}>Questions</span>
-            </h2>
+              <h2 style={{ fontFamily: 'Inter', fontWeight: 600, fontSize: '48px', lineHeight: '58px', color: '#2E2E2E', marginBottom: '24px' }}>
+                Frequently Asked<br />
+                <span style={{ color: '#FA4516' }}>Questions</span>
+              </h2>
             </Reveal>
             <Reveal delay={0.08}>
-            <p style={{ fontFamily: 'Inter', fontWeight: 400, fontSize: '24px', lineHeight: '32px', color: '#2E2E2E', opacity: 0.8, marginBottom: '40px' }}>
-              Find answers to common questions about our courses, learning process, and support services.
-            </p>
+              <p style={{ fontFamily: 'Inter', fontWeight: 400, fontSize: '24px', lineHeight: '32px', color: '#2E2E2E', opacity: 0.8, marginBottom: '270px' }}>
+                Find answers to common questions about our courses, learning process, and support services.
+              </p>
             </Reveal>
 
             {/* Dark Blue Box */}
             <Reveal delay={0.14}>
-            <div className="contact-still-box" style={{
-              backgroundColor: '#071B42', borderRadius: '24px', padding: '32px', display: 'flex', flexDirection: 'column', gap: '24px'
-            }}>
-              <h3 style={{ fontFamily: 'Inter', fontWeight: 600, fontSize: '32px', color: '#FFFFFF' }}>
-                Still have questions?
-              </h3>
-              <p style={{ fontFamily: 'Inter', fontWeight: 400, fontSize: '20px', lineHeight: '28px', color: '#FFFFFF', opacity: 0.9 }}>
-                Our team is here to help you with the right guidance and support.
-              </p>
-              <button className="btn-yellow" style={{ alignSelf: 'flex-start' }}>
-                Enquire Now
-              </button>
-            </div>
+              <div className="contact-still-box" style={{
+                backgroundColor: '#071B42', borderRadius: '24px', padding: '32px', display: 'flex', flexDirection: 'column', gap: '24px'
+              }}>
+                <h3 style={{ fontFamily: 'Inter', fontWeight: 600, fontSize: '32px', color: '#FFFFFF' }}>
+                  Still have questions?
+                </h3>
+                <p style={{ fontFamily: 'Inter', fontWeight: 400, fontSize: '20px', lineHeight: '28px', color: '#FFFFFF', opacity: 0.9 }}>
+                  Our team is here to help you with the right guidance and support.
+                </p>
+                <a href="#contact-form">
+                  <button className="btn-yellow" style={{ alignSelf: 'flex-start' }}>
+                    Enquire Now
+                  </button>
+                </a>
+              </div>
             </Reveal>
           </RevealX>
 
@@ -264,36 +427,36 @@ export default function ContactPage() {
               const isOpen = openFAQIndex === index;
               return (
                 <Reveal key={index} delay={0.04 * index}>
-                <div style={{
-                  backgroundColor: '#EAF2FF', border: '1px solid #2C4B82', borderRadius: '16px',
-                  padding: '24px', display: 'flex', flexDirection: 'column', gap: '16px',
-                  cursor: 'pointer', transition: 'all 0.3s ease'
-                }} onClick={() => toggleFAQ(index)}>
+                  <div style={{
+                    backgroundColor: '#EAF2FF', border: '1px solid #2C4B82', borderRadius: '16px',
+                    padding: '24px', display: 'flex', flexDirection: 'column', gap: '16px',
+                    cursor: 'pointer', transition: 'all 0.3s ease'
+                  }} onClick={() => toggleFAQ(index)}>
 
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                    <h4 className="contact-faq-q" style={{ fontFamily: 'Inter', fontWeight: 600, fontSize: '24px', color: '#2E2E2E', margin: 0, paddingRight: '20px' }}>
-                      {faq.question}
-                    </h4>
-                    <div style={{
-                      width: '40px', height: '40px', backgroundColor: '#2C4B82', borderRadius: '50%',
-                      display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0,
-                      transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)',
-                      transition: 'transform 0.3s ease'
-                    }}>
-                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M6 9L12 15L18 9" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
-                      </svg>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                      <h4 className="contact-faq-q" style={{ fontFamily: 'Inter', fontWeight: 600, fontSize: '24px', color: '#2E2E2E', margin: 0, paddingRight: '20px' }}>
+                        {faq.question}
+                      </h4>
+                      <div style={{
+                        width: '40px', height: '40px', backgroundColor: '#2C4B82', borderRadius: '50%',
+                        display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0,
+                        transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)',
+                        transition: 'transform 0.3s ease'
+                      }}>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M6 9L12 15L18 9" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+                        </svg>
+                      </div>
                     </div>
+
+                    {isOpen && (
+                      <div style={{ borderTop: '1px solid rgba(44,75,130,0.2)', paddingTop: '16px' }}>
+                        <p className="contact-faq-a" style={{ fontFamily: 'Inter', fontWeight: 400, fontSize: '20px', lineHeight: '30px', color: '#2E2E2E', margin: 0 }}>
+                          {faq.answer}
+                        </p>
+                      </div>
+                    )}
                   </div>
-
-                  {isOpen && (
-                    <div style={{ borderTop: '1px solid rgba(44,75,130,0.2)', paddingTop: '16px' }}>
-                      <p className="contact-faq-a" style={{ fontFamily: 'Inter', fontWeight: 400, fontSize: '20px', lineHeight: '30px', color: '#2E2E2E', margin: 0 }}>
-                        {faq.answer}
-                      </p>
-                    </div>
-                  )}
-                </div>
                 </Reveal>
               );
             })}
@@ -311,7 +474,7 @@ export default function ContactPage() {
           overflow: 'hidden', border: '1px solid #E0E0E0'
         }}>
           <iframe
-            src="https://maps.google.com/maps?q=Building%20No.%201/288,%20East%20Coast%20Road,%20Kottivakkam,%20Chennai&t=&z=15&ie=UTF8&iwloc=&output=embed"
+            src="https://maps.google.com/maps?q=2nd%20Floor,%201/228,%20ECR%20Main%20Road,%20Kottivakkam,%20Thiruvanmiyur,%20Chennai,%20Tamil%20Nadu%20600041&t=&z=17&ie=UTF8&iwloc=&output=embed"
             width="100%"
             height="100%"
             style={{ border: 0 }}
