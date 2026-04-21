@@ -278,7 +278,7 @@ export default function ContactPage() {
                 {/* Phone */}
                 <div style={{ display: 'flex', gap: '20px', alignItems: 'center' }}>
                   <div style={{ width: '48px', height: '48px', backgroundColor: '#00BDD6', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-                    <img src="/call.png" alt="Call" style={{ width: '20px', height: '20px', objectFit: 'contain', filter: 'brightness(0) invert(1)' }} />
+                    <img src="/call.png" alt="Call" style={{ width: '20px', height: '20px', objectFit: 'contain', filter: 'brightness(0)' }} />
                   </div>
                   <div style={{ display: 'flex', flexDirection: 'column' }}>
                     <span style={{ fontFamily: 'Inter', fontWeight: 600, fontSize: '18px', color: '#2E2E2E' }}>Contact</span>
@@ -289,7 +289,7 @@ export default function ContactPage() {
                 {/* Email */}
                 <div style={{ display: 'flex', gap: '20px', alignItems: 'center' }}>
                   <div style={{ width: '48px', height: '48px', backgroundColor: '#00BDD6', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-                    <img src="/email.png" alt="Email" style={{ width: '20px', height: '20px', objectFit: 'contain', filter: 'brightness(0) invert(1)' }} />
+                    <img src="/email.png" alt="Email" style={{ width: '20px', height: '20px', objectFit: 'contain', filter: 'brightness(0)' }} />
                   </div>
                   <div style={{ display: 'flex', flexDirection: 'column' }}>
                     <span style={{ fontFamily: 'Inter', fontWeight: 600, fontSize: '18px', color: '#2E2E2E' }}>E-mail</span>
@@ -300,7 +300,7 @@ export default function ContactPage() {
                 {/* Address */}
                 <div style={{ display: 'flex', gap: '20px', alignItems: 'flex-start' }}>
                   <div style={{ width: '48px', height: '48px', backgroundColor: '#00BDD6', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, marginTop: '4px' }}>
-                    <img src="/location.png" alt="Location" style={{ width: '20px', height: '20px', objectFit: 'contain', filter: 'brightness(0) invert(1)' }} />
+                    <img src="/location.png" alt="Location" style={{ width: '20px', height: '20px', objectFit: 'contain', filter: 'brightness(0)' }} />
                   </div>
                   <div style={{ display: 'flex', flexDirection: 'column' }}>
                     <span style={{ fontFamily: 'Inter', fontWeight: 600, fontSize: '18px', color: '#2E2E2E' }}>Address</span>
