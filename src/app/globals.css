@@ -779,7 +779,7 @@ button {
     font-weight: 400 !important;
     color: #FFFFFF !important;
     white-space: normal !important;
-    text-align: center !important;
+    text-align: left !important;
     width: 100% !important;
     text-wrap: balance !important;
   }
@@ -792,44 +792,44 @@ button {
 
   /* Frame positions — 460×518 box; origin = student image top */
   .hero-pill-advanced {
-    left: 1.09% !important;
+    left: 10.09% !important;
     right: auto !important;
     top: 10.05% !important;
     max-width: 160px !important;
   }
 
   .hero-pill-batch {
-    left: 50.09% !important;
+    left: 58.09% !important;
     right: auto !important;
     top: 10.05% !important;
     max-width: 139px !important;
   }
 
   .hero-pill-practical {
-    left: -1.48% !important;
+    left: 2.48% !important;
     right: auto !important;
-    top: 31.08% !important;
+    top: 38.08% !important;
     max-width: 139px !important;
   }
 
   .hero-pill-visa {
-    left: 66% !important;
+    left: 69% !important;
     right: auto !important;
-    top: 32.05% !important;
+    top: 38.05% !important;
     max-width: 124px !important;
   }
 
   .hero-pill-trainers {
-    left: -3.74% !important;
+    left: -2.74% !important;
     right: auto !important;
-    top: 50.85% !important;
+    top: 70.85% !important;
     max-width: 115px !important;
   }
 
   .hero-pill-job {
-    left: 76.3% !important;
+    left: 80.3% !important;
     right: auto !important;
-    top: 50.04% !important;
+    top: 70.04% !important;
     max-width: 140px !important;
   }
 
