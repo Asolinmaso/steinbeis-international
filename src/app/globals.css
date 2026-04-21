@@ -1369,14 +1369,14 @@ button {
   }
 
   .courses-title {
-    font-size: 26px !important;
-    line-height: 34px !important;
+    font-size: clamp(28px, 8vw, 40px) !important;
+    line-height: 1.2 !important;
   }
 
   .courses-desc {
-    font-size: 16px !important;
-    line-height: 24px !important;
-    margin-bottom: 32px !important;
+    font-size: 14px !important;
+    line-height: 1.4 !important;
+    margin-bottom: 24px !important;
   }
 
   .courses-carousel-card {
@@ -1469,7 +1469,9 @@ button {
 /* ----- CTA Component ----- */
 @media (max-width: 768px) {
   .cta-section {
-    padding: 48px 25px 56px !important;
+    padding: 7px 25px 120px !important;
+    border-bottom: none !important;
+    box-shadow: none !important;
   }
 }
 
@@ -1479,11 +1481,27 @@ button {
     border-top-left-radius: 70px !important;
     border-top-right-radius: 70px !important;
     padding-top: 60px !important;
+    border: none !important;
+    box-shadow: none !important;
+    outline: none !important;
+    margin-top: -3px !important;
+    background-color: transparent !important;
+
+    /* ADD THESE: */
+    border-top: none !important;
+    margin-top: -4px !important;
+    /* slightly more overlap to hide the seam */
   }
 
   .footer-shape-container {
     border-top-left-radius: 40px !important;
     border-top-right-radius: 40px !important;
+    border: none !important;
+    box-shadow: none !important;
+    outline: none !important;
+
+    /* ADD THIS: */
+    border-top: none !important;
   }
 
   .footer-logo-container {
@@ -1642,7 +1660,7 @@ button {
 
   /* Hero */
   .cpage-hero {
-    padding: 40px 0 !important;
+    padding: 60px 0 !important;
     margin-top: 72px !important;
   }
 
@@ -1809,7 +1827,7 @@ button {
   /* Path section */
   .cpage-path-section {
     height: auto !important;
-    padding: 60px 20px !important;
+    padding: 80px 20px !important;
     display: flex !important;
     flex-direction: column !important;
     align-items: center !important;
@@ -1875,28 +1893,40 @@ button {
     width: 100% !important;
     max-width: 480px !important;
     margin: 0 auto !important;
-    padding: 50px 25px !important;
+    padding: 60px 25px 120px !important;
+    border: none !important;
+    box-shadow: none !important;
   }
 
   .cpage-ready-container {
     position: relative !important;
-    width: 100% !important;
+    width: 90% !important;
     max-width: 460px !important;
     height: auto !important;
     min-height: 0 !important;
     margin: 0 auto !important;
     border-radius: 32px !important;
-    background: #ffb61e !important;
+    background: transparent !important;
     display: flex !important;
     flex-direction: column !important;
     align-items: center !important;
-    padding: 48px 0 28px !important;
-    gap: 32px !important;
-    overflow: hidden !important;
+    padding: 0 !important;
+    gap: 0 !important;
+    overflow: visible !important;
   }
 
   .cpage-ready-yellow-bg {
-    display: none !important;
+    display: block !important;
+    position: absolute !important;
+    top: 20px !important;
+    bottom: -40px !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    width: 88% !important;
+    background: #FFB61E !important;
+    border-radius: 28px !important;
+    z-index: 0 !important;
+    height: 841px !important;
   }
 
   .cpage-ready-content {
@@ -1907,10 +1937,11 @@ button {
     width: 100% !important;
     max-width: 358px !important;
     height: auto !important;
-    padding: 0 16px !important;
+    padding: 85px 24px 32px !important;
     margin: 0 auto !important;
     align-items: center !important;
     text-align: center !important;
+    z-index: 2 !important;
   }
 
   .cpage-ready-title {
@@ -1972,10 +2003,11 @@ button {
     max-width: 460px !important;
     height: auto !important;
     aspect-ratio: 460 / 445 !important;
-    margin: 0 !important;
+    margin: 0 auto -10px !important;
     border-radius: 32px !important;
     background-size: cover !important;
     background-position: center !important;
+    z-index: 2 !important;
   }
 }
 
@@ -1984,7 +2016,7 @@ button {
   .contact-hero {
     margin-top: 72px !important;
     min-height: 300px !important;
-    padding: 48px 20px !important;
+    padding: 60px 20px !important;
   }
 
   .contact-hero-title {
@@ -1998,7 +2030,7 @@ button {
   }
 
   .contact-main-section {
-    padding: 60px 0 !important;
+    padding: 80px 0 !important;
   }
 
   .contact-main-row {
@@ -2052,7 +2084,7 @@ button {
   }
 
   .contact-faq-section {
-    padding: 20px 0 60px !important;
+    padding: 40px 0 80px !important;
   }
 
   .contact-faq-row {
@@ -2119,7 +2151,7 @@ button {
   }
 
   .contact-map-wrapper {
-    padding: 0 16px 60px !important;
+    padding: 0 16px 100px !important;
     height: 320px !important;
   }
 }
@@ -2133,4 +2165,12 @@ button {
   .footer-bg-image {
     background-image: url('/footer.png') !important;
   }
+
+}
+
+.footer-root {
+  border: none !important;
+  box-shadow: none !important;
+  outline: none !important;
+  margin-top: -3px !important;
 }

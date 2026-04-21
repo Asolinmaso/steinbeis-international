@@ -685,7 +685,7 @@ export default function ContactPage() {
       {/* Map Section */}
       <div className="contact-map-wrapper" style={{
         width: '100%', height: '600px', display: 'flex', justifyContent: 'center', alignItems: 'center',
-        padding: '0 100px 60px 100px'
+        padding: '0 100px 120px 100px'
       }}>
         <div style={{
           width: '100%', maxWidth: '1240px', height: '100%', borderRadius: '24px',
