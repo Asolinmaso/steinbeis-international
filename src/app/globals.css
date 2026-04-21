@@ -659,99 +659,99 @@ button {
     border-radius: 16px !important;
   }
 
-  /* ----- Home hero visual (mobile): fixed visibility ----- */
+  /* ----- Home hero visual (mobile): concentric circles + student + floating labels — Figma 428px ref ----- */
   .hero-mobile-ellipses {
     display: block !important;
     position: absolute !important;
-    inset: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    top: 0 !important;
+    bottom: 0 !important;
     width: 100% !important;
     height: 100% !important;
-    z-index: 5 !important;
-    /* Above the wrapper background */
-    background: transparent !important;
-    /* Section root already has the color */
-    pointer-events: none !important;
+    z-index: 1 !important;
   }
 
   .hero-mobile-ellipse {
     position: absolute !important;
     border-radius: 50% !important;
-    pointer-events: none !important;
-    display: block !important;
-  }
-
-  /* Teal orbit line */
-  .hero-mobile-ellipse--4 {
-    width: 320px !important;
-    height: 320px !important;
-    top: 50% !important;
     left: 50% !important;
-    transform: translate(-50%, -50%) !important;
-    background: transparent !important;
-    border: 3px solid #25CAD8 !important;
-    z-index: 1 !important;
-    opacity: 0.8 !important;
+    transform: translateX(-50%) !important;
+    pointer-events: none !important;
   }
 
-  /* Decorative Spheres - higher z-index than main image */
-  /* Cyan dot */
+  /* Ellipse 4 — outermost (498px @ 428px frame) */
+  .hero-mobile-ellipse--4 {
+    width: 116.36% !important;
+    max-width: 498px !important;
+    aspect-ratio: 1 !important;
+    top: 6.95% !important;
+    background: #082458 !important;
+    z-index: 0 !important;
+  }
+
+  /* Ellipse 5 — outer (466px @ 428px frame) */
   .hero-mobile-ellipse--5 {
-    width: 42px !important;
-    height: 42px !important;
-    left: calc(50% - 178px) !important;
-    top: calc(50% - 40px) !important;
-    background: #25CAD8 !important;
-    z-index: 10 !important;
-    box-shadow: 0 0 30px rgba(37, 202, 216, 0.4);
+    width: 108.88% !important;
+    max-width: 466px !important;
+    aspect-ratio: 1 !important;
+    top: 10.04% !important;
+    background: #061c45 !important;
+    z-index: 1 !important;
   }
 
-  /* Yellow dot */
-  .hero-mobile-ellipse--1 {
-    width: 38px !important;
-    height: 38px !important;
-    left: calc(50% + 130px) !important;
-    top: calc(50% - 140px) !important;
-    background: #FFB61E !important;
-    z-index: 10 !important;
-    box-shadow: 0 0 30px rgba(255, 182, 30, 0.4);
-  }
-
-  /* Orange dot */
+  /* Ellipse 2 — middle */
   .hero-mobile-ellipse--2 {
-    width: 22px !important;
-    height: 22px !important;
-    left: calc(50% - 110px) !important;
-    top: calc(50% + 130px) !important;
-    background: #FA4516 !important;
-    z-index: 10 !important;
-    box-shadow: 0 0 20px rgba(250, 69, 22, 0.35);
+    width: 99.07% !important;
+    max-width: 424px !important;
+    aspect-ratio: 1 !important;
+    top: 14.09% !important;
+    background: #06193b !important;
+    z-index: 2 !important;
+  }
+
+  /* Ellipse 1 — inner (+0.5px horizontal nudge per Figma) */
+  .hero-mobile-ellipse--1 {
+    width: 89.95% !important;
+    max-width: 385px !important;
+    aspect-ratio: 1 !important;
+    top: 17.76% !important;
+    left: 50% !important;
+    transform: translateX(calc(-50% + 0.5px)) !important;
+    background: #041431 !important;
+    z-index: 3 !important;
   }
 
   .hero-image-wrapper {
     position: relative !important;
-    width: 100% !important;
-    max-width: 428px !important;
-    margin-top: 40px !important;
+    inset: auto !important;
+    top: auto !important;
+    left: auto !important;
+    width: min(460px, calc(100vw - 12px)) !important;
+    max-width: 460px !important;
+    margin-top: 16px !important;
     margin-inline: auto !important;
-    height: 400px !important;
-    overflow: visible !important;
-    z-index: 10 !important;
+    height: clamp(340px, 82vw, 413px) !important;
+    min-height: 0 !important;
+    aspect-ratio: auto !important;
+    padding: 0 !important;
+    display: block !important;
+    opacity: 1 !important;
+    overflow: hidden !important;
   }
 
+  /* Reduced student image for better mobile balance */
   .hero-main-image {
     position: absolute !important;
     left: 50% !important;
-    top: 50% !important;
-    width: 260px !important;
-    height: 260px !important;
-    transform: translate(-50%, -50%) !important;
-    border-radius: 50% !important;
+    top: 60% !important;
+    width: 270px !important;
+    height: 300px !important;
+    border-radius: 24px !important;
     background-size: cover !important;
     background-position: center top !important;
-    z-index: 6 !important;
-    /* Between orbit (1) and spheres (10) */
-    border: 6px solid #061B42 !important;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    z-index: 4 !important;
+    transform: translate(-50%, -50%) !important;
   }
 
   .hero-pill {
@@ -796,7 +796,7 @@ button {
     left: 64.09% !important;
     right: auto !important;
     top: 4.05% !important;
-    max-width: 132px !important;
+    max-width: 139px !important;
   }
 
   .hero-pill-practical {
@@ -814,17 +814,17 @@ button {
   }
 
   .hero-pill-trainers {
-    left: -0.74% !important;
+    left: -2.74% !important;
     right: auto !important;
     top: 59.85% !important;
-    max-width: 125px !important;
+    max-width: 115px !important;
   }
 
   .hero-pill-job {
     left: 73.3% !important;
     right: auto !important;
     top: 60.04% !important;
-    max-width: 122px !important;
+    max-width: 140px !important;
   }
 
   .hero-pill-text {
