@@ -172,7 +172,7 @@ function CoursesPageContent() {
 
             <Reveal delay={0.18}>
               <Link href="/contact">
-                <button className="btn-yellow" style={{ height: '61px', fontSize: '20px' }}>
+                <button className="btn-yellow" style={{ height: '61px', fontSize: '20px', textAlign: 'center' }}>
                   Enquire Now
                 </button>
               </Link>
