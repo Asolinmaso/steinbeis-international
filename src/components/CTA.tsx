@@ -82,8 +82,8 @@ export default function CTA() {
             Take the first step towards building your future with structured learning, expert guidance, and real career opportunities.
           </p>
 
-          <div className="cpage-ready-btn-row" style={{ display: "flex", flexDirection: "row", gap: "32px" }}>
-            <Link href="/courses">
+          <div className="cpage-ready-btn-row" style={{ display: "flex", flexDirection: "row", gap: "24px" }}>
+            <Link href="/courses#course-levels">
               <button
                 className="cpage-ready-btn"
                 type="button"
@@ -91,15 +91,15 @@ export default function CTA() {
                   display: "flex",
                   justifyContent: "center",
                   alignItems: "center",
-                  padding: "16px 24px",
-                  width: "236px",
-                  height: "61px",
-                  backgroundColor: "#2C4B82",
-                  border: "1px solid #FFFFFF",
-                  borderRadius: "16px",
+                  padding: "12px 24px",
+                  width: "210px",
+                  height: "52px",
+                  backgroundColor: "#061B42",
+                  border: "none",
+                  borderRadius: "12px",
                   fontFamily: "Inter",
                   fontWeight: 500,
-                  fontSize: "24px",
+                  fontSize: "20px",
                   color: "#FFFFFF",
                   cursor: "pointer",
                 }}
@@ -107,7 +107,7 @@ export default function CTA() {
                 Explore Courses
               </button>
             </Link>
-            <Link href="/contact">
+            <Link href="/contact#contact-form">
               <button
                 className="cpage-ready-btn"
                 type="button"
@@ -115,15 +115,15 @@ export default function CTA() {
                   display: "flex",
                   justifyContent: "center",
                   alignItems: "center",
-                  padding: "16px 24px",
-                  width: "193px",
-                  height: "61px",
-                  backgroundColor: "#2C4B82",
-                  border: "1px solid #FFFFFF",
-                  borderRadius: "16px",
+                  padding: "12px 24px",
+                  width: "170px",
+                  height: "52px",
+                  backgroundColor: "#061B42",
+                  border: "none",
+                  borderRadius: "12px",
                   fontFamily: "Inter",
                   fontWeight: 500,
-                  fontSize: "24px",
+                  fontSize: "20px",
                   color: "#FFFFFF",
                   cursor: "pointer",
                 }}

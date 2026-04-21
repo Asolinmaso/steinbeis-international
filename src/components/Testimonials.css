@@ -1,0 +1,104 @@
+.testimonials-section {
+  position: relative;
+  width: 100%;
+  min-height: 800px;
+  background-color: #061b42;
+  padding: 100px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow-x: hidden;
+  overflow-y: visible;
+}
+
+/* Mobile Background Grid */
+@media (max-width: 768px) {
+  .testimonials-section {
+    background-image: 
+      linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+    background-size: 40px 40px;
+    padding: 60px 20px !important;
+    min-height: auto !important;
+  }
+
+  .testimonials-title {
+    font-size: 32px !important;
+    line-height: 40px !important;
+    max-width: 280px !important;
+    margin-bottom: 16px !important;
+  }
+
+  .testimonials-subtitle {
+    font-size: 16px !important;
+    line-height: 24px !important;
+    max-width: 280px !important;
+    margin-bottom: 40px !important;
+    color: rgba(255, 255, 255, 0.8) !important;
+  }
+
+  .testimonial-card {
+    width: 100% !important;
+    max-width: 320px !important;
+    height: auto !important;
+    min-height: 400px !important;
+    padding: 40px 24px !important;
+    border-radius: 32px !important;
+    margin-top: 20px !important;
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.3) !important;
+  }
+
+  .testimonial-card-title {
+    font-size: 24px !important;
+    line-height: 28px !important;
+  }
+
+  .testimonial-card-text {
+    font-size: 16px !important;
+    line-height: 24px !important;
+    margin-top: 20px !important;
+  }
+
+  .testimonial-card-name {
+    font-size: 18px !important;
+  }
+
+  .testimonial-card-location {
+    font-size: 14px !important;
+  }
+
+  /* Navigation Buttons */
+  .testimonials-nav {
+    display: flex !important;
+    gap: 20px;
+    margin-top: 40px;
+  }
+
+  .nav-btn {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .nav-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: #ffffff;
+  }
+
+  .nav-btn svg {
+    stroke: #ffffff;
+  }
+}
+
+@media (min-width: 769px) {
+  .testimonials-nav {
+    display: none !important;
+  }
+}

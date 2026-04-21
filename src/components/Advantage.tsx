@@ -1,5 +1,6 @@
 "use client";
 import React from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { Reveal, replayViewport } from "@/components/motion";
@@ -9,76 +10,55 @@ const advantages = [
     text: "Mock Exams & Real-world Practice",
     bg: "#EAF2FF",
     color: "#2C4B82",
-    shadow: "rgba(44, 75, 130, 0.5)",
-    top: "0px",
-    left: "auto",
-    right: "0px",
-    width: "496px",
-    icon: (
-      <svg width="40" height="40" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <rect width="32" height="32" rx="16" fill="transparent"/>
-        <path d="M22 10H10C8.89543 10 8 10.8954 8 12V22C8 23.1046 8.89543 24 10 24H22C23.1046 24 24 23.1046 24 22V12C24 10.8954 23.1046 10 22 10Z" stroke="#2C4B82" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-        <path d="M12 14H20M12 18H20M12 21H16" stroke="#2C4B82" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-        <path d="M22 14L23 15L24 14" stroke="#2C4B82" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" opacity="0.6"/>
-      </svg>
-    ),
+    shadow: "rgba(44, 75, 130, 0.4)",
+    top: "-30px",
+    left: "885px",
+    right: "unset",
+    width: "495px",
+    icon: <Image src="/exam.png" alt="Exams" width={40} height={40} />,
   },
   {
     text: "Affordable Fee Structure",
     bg: "#FFF7E5",
     color: "#FFB61E",
-    shadow: "rgba(255, 182, 30, 0.5)",
+    shadow: "rgba(255, 182, 30, 0.4)",
     top: "130px",
-    left: "580px",
+    left: "560px",
     width: "381px",
-    icon: (
-      <svg width="40" height="40" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="16" cy="16" r="14" stroke="#FFB61E" strokeWidth="2"/>
-        <path d="M11 12H21M11 16H21M18 10L13 22" stroke="#FFB61E" strokeWidth="2" strokeLinecap="round"/>
-      </svg>
-    ),
+    icon: <Image src="/Group.png" alt="Fees" width={40} height={40} />,
   },
   {
     text: "Study Materials Included",
     bg: "#EEFEFF",
     color: "#25CAD8",
-    shadow: "rgba(37, 202, 216, 0.5)",
+    shadow: "rgba(37, 202, 216, 0.4)",
     top: "130px",
-    left: "980px",
-    width: "394px",
-    icon: (
-      <svg width="40" height="40" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M8 24S10 22 16 22S24 24 24 24V10S22 8 16 8S8 10 8 10V24Z" stroke="#25CAD8" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-        <path d="M16 8V22" stroke="#25CAD8" strokeWidth="2" strokeLinecap="round"/>
-      </svg>
-    ),
+    left: "975px",
+    width: "405px",
+    icon: <Image src="/book.png" alt="Books" width={40} height={40} />,
   },
   {
     text: "Hostel Accommodation",
     bg: "#EEFEFF",
     color: "#25CAD8",
-    shadow: "rgba(37, 202, 216, 0.5)",
+    shadow: "rgba(37, 202, 216, 0.4)",
     top: "258px",
-    left: "600px",
+    left: "585px",
     width: "366px",
-    icon: (
-      <svg width="40" height="40" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M6 26V10L16 6L26 10V26M6 16H26M11 16V26M16 16V26M21 16V26" stroke="#25CAD8" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-      </svg>
-    ),
+    icon: <Image src="/hostel.png" alt="Hostel" width={40} height={40} />,
   },
   {
     text: "Flexible Learning Timings",
     bg: "#FFECE7",
     color: "#FA4516",
-    shadow: "rgba(250, 69, 22, 0.5)",
+    shadow: "rgba(250, 69, 22, 0.4)",
     top: "258px",
-    left: "985px",
-    width: "390px",
+    left: "975px",
+    width: "405px",
     icon: (
       <svg width="40" height="40" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="16" cy="16" r="10" stroke="#FA4516" strokeWidth="2"/>
-        <path d="M16 10V16L20 20" stroke="#FA4516" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+        <circle cx="16" cy="16" r="11" stroke="#FA4516" strokeWidth="2.5" />
+        <path d="M16 10V16L20 20" stroke="#FA4516" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
       </svg>
     ),
   },
@@ -114,7 +94,7 @@ export default function Advantage() {
           margin: "0 auto",
           padding: "0 100px",
           position: "relative",
-          minHeight: "400px",
+          minHeight: "440px",
           display: "flex",
           flexDirection: "column",
         }}
@@ -157,7 +137,7 @@ export default function Advantage() {
             </p>
           </Reveal>
           <Reveal delay={0.16}>
-            <Link href="/contact">
+            <Link href="/contact#contact-form">
               <button
                 className="btn-navy"
                 style={{
@@ -167,7 +147,7 @@ export default function Advantage() {
                   fontWeight: 500,
                   borderRadius: "16px",
                   backgroundColor: "#2C4B82",
-                  border: "1px solid #FFFFFF",
+                  border: "none",
                   color: "#FFFFFF",
                   cursor: "pointer",
                   display: "flex",
@@ -302,6 +282,6 @@ export default function Advantage() {
           }
         }
       `}</style>
-    </section>
+    </section >
   );
 }
