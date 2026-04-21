@@ -23,7 +23,7 @@ export default function Offerings() {
           </Reveal>
           <Reveal delay={0.08}>
             <p className="offerings-desc">
-            Comprehensive programs designed to support your learning journey with structured training, exam preparation, and career-focused guidance.            </p>
+              Comprehensive programs designed to support your learning journey with structured training, exam preparation, and career-focused guidance.            </p>
           </Reveal>
           <motion.ul
             className="offerings-list"
@@ -47,8 +47,27 @@ export default function Offerings() {
             ))}
           </motion.ul>
         </div>
-        <RevealX x={56} className="offerings-image-col" delay={0.12}>
-          <div className="offerings-image-frame">
+        <RevealX x={56} className="offerings-image-col" delay={0.12} viewport={{ once: true }}>
+          <div className="offerings-image-frame" style={{ position: 'relative' }}>
+            {/* Background Decorative Rectangle */}
+            <div style={{
+              position: 'absolute',
+              width: '120%',
+              height: '120%',
+              left: '50%',
+              top: '50%',
+              transform: 'translate(-50%, -50%)',
+              zIndex: 1
+            }}>
+              <Image
+                src="/Rectangle 20.png"
+                alt=""
+                fill
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 60vw, 800px"
+                style={{ objectFit: 'contain' }}
+              />
+            </div>
+
             <Image
               src="/key_offerings_image.png"
               alt="Key offerings: language training, exams, and placement support"
@@ -56,6 +75,7 @@ export default function Offerings() {
               height={564}
               className="offerings-key-img"
               sizes="(max-width: 768px) min(100vw - 40px, 400px), (max-width: 1200px) 45vw, 480px"
+              style={{ position: 'relative', zIndex: 2 }}
             />
           </div>
         </RevealX>

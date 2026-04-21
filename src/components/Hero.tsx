@@ -53,13 +53,13 @@ const pills: {
   className: string;
   floatDelay: string;
 }[] = [
-  { text: "Beginner to Advanced (A1–B2)", left: "163px", top: "93px", className: "hero-pill-advanced", floatDelay: "0s" },
-  { text: "Flexible Batch Timings", top: "93px", right: "50px", className: "hero-pill-batch", floatDelay: "0.45s" },
-  { text: "Visa Support Assistance", top: "255px", right: "-50px", className: "hero-pill-visa", floatDelay: "0.9s" },
-  { text: "German Job Guidance", top: "425px", right: "20px", className: "hero-pill-job", floatDelay: "1.35s" },
-  { text: "100% Practical Learning", left: "106px", top: "255px", className: "hero-pill-practical", floatDelay: "1.8s" },
-  { text: "experienced Trainers", left: "97px", top: "425px", className: "hero-pill-trainers", floatDelay: "2.25s" },
-];
+    { text: "Beginner to Advanced (A1–B2)", left: "110px", top: "93px", className: "hero-pill-advanced", floatDelay: "0s" },
+    { text: "Flexible Batch Timings", top: "93px", right: "110px", className: "hero-pill-batch", floatDelay: "0.45s" },
+    { text: "100% Practical Learning", left: "40px", top: "259px", className: "hero-pill-practical", floatDelay: "1.8s" },
+    { text: "Visa Support Assistance", top: "259px", right: "40px", className: "hero-pill-visa", floatDelay: "0.9s" },
+    { text: "experienced Trainers", left: "47px", top: "425px", className: "hero-pill-trainers", floatDelay: "2.25s" },
+    { text: "German Job Guidance", top: "425px", right: "40px", className: "hero-pill-job", floatDelay: "1.35s" },
+  ];
 
 export default function Hero() {
   return (
@@ -227,7 +227,7 @@ export default function Hero() {
           style={{ display: "flex", gap: "24px" }}
           variants={heroItem}
         >
-          <Link href="/courses">
+          <Link href="/courses#course-levels">
             <button
               type="button"
               className="btn-yellow"
@@ -236,7 +236,7 @@ export default function Hero() {
               Explore Courses
             </button>
           </Link>
-          <Link href="/contact">
+          <Link href="/contact#contact-form">
             <button type="button" className="btn-yellow" style={{ width: "193px", height: "61px" }}>
               Enquire Now
             </button>
@@ -251,7 +251,7 @@ export default function Hero() {
           width: "100%",
           maxWidth: "1200px",
           marginTop: "50px",
-          height: "714px",
+          height: "615px",
           zIndex: 10,
         }}
         initial="hidden"
@@ -275,9 +275,9 @@ export default function Hero() {
           variants={heroMainImageReveal}
           style={{
             position: "absolute",
-            width: "520px",
-            height: "714px",
-            left: "calc(50% - 260px)",
+            width: "546px",
+            height: "615px",
+            left: "calc(50% - 273px)",
             backgroundImage: "url(/hero-student.png)",
             backgroundSize: "cover",
             backgroundPosition: "center",
