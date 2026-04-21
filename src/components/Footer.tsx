@@ -19,9 +19,8 @@ export default function Footer() {
         flexDirection: 'column',
         alignItems: 'center',
         paddingTop: '150px',
-        marginTop: '-3px',
-        borderWidth: 0,
-        borderStyle: 'none',
+        marginTop: '-20px',
+        border: 'none',
         outline: 'none',
         boxShadow: 'none'
       }}>
@@ -170,7 +169,8 @@ export default function Footer() {
           </motion.div>
         </motion.div>
 
-        {/* Divider removed */}
+        {/* Divider */}
+        <div style={{ width: '100%', height: '1px', backgroundColor: 'rgba(255,255,255,0.2)', margin: '40px 0' }} />
 
         {/* Copyright */}
         <Reveal delay={0.15}>
