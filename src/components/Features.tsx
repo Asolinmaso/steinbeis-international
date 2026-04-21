@@ -107,11 +107,13 @@ export default function Features() {
       >
         <svg width="100%" viewBox="0 0 1438 400" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
           <motion.path
-            d="M 0 20 C 80 20, 160 280, 360 320 C 540 355, 620 80, 720 85 C 820 90, 900 340, 1080 345 C 1260 350, 1360 20, 1438 20"
+            d="M 1.87939 0.68457 C 1.87939 0.68457 113.988 308.417 283.379 341.185 C 455.47 374.475 499.673 116.575 674.879 121.685 C 862.231 127.148 880.449 396.929 1067.88 397.185 C 1347.74 397.566 1436.38 0.68457 1436.38 0.68457"
             stroke="white"
-            strokeWidth={6}
-            strokeDasharray="1 22"
-            strokeLinecap="round"
+            strokeWidth={4}
+            strokeDasharray="22, 18"
+            strokeLinecap="butt"
+            strokeLinejoin="miter"
+            opacity={1}
             fill="none"
             animate={{
               strokeDashoffset: [0, -46],
