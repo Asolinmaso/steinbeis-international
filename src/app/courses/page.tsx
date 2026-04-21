@@ -407,31 +407,59 @@ function CoursesPageContent() {
           }}>
             <div className="cpage-path-dashes" style={{ position: 'absolute', left: '220px', top: '49.36px' }}>
               <svg width="140" height="18" viewBox="0 0 140 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M0.361328 2.3196C54.7751 15.806 84.991 15.9807 139.376 2.3196" stroke="white" strokeWidth="3" strokeDasharray="3.6 15" strokeLinecap="round" />
+                <motion.path
+                  d="M0.361328 2.3196C54.7751 15.806 84.991 15.9807 139.376 2.3196"
+                  stroke="white"
+                  strokeWidth="3"
+                  strokeDasharray="3.6 15"
+                  strokeLinecap="round"
+                  animate={{ strokeDashoffset: [0, -18.6] }}
+                  transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
+                />
               </svg>
             </div>
             <div className="cpage-path-dashes" style={{ position: 'absolute', left: '554px', top: '36px' }}>
               <svg width="140" height="18" viewBox="0 0 140 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M0.361328 15.6804C54.7751 2.19404 84.991 2.01931 139.376 15.6804" stroke="white" strokeWidth="3" strokeDasharray="3.6 15" strokeLinecap="round" />
+                <motion.path
+                  d="M0.361328 15.6804C54.7751 2.19404 84.991 2.01931 139.376 15.6804"
+                  stroke="white"
+                  strokeWidth="3"
+                  strokeDasharray="3.6 15"
+                  strokeLinecap="round"
+                  animate={{ strokeDashoffset: [0, -18.6] }}
+                  transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
+                />
               </svg>
             </div>
             <div className="cpage-path-dashes" style={{ position: 'absolute', left: '883px', top: '49.36px' }}>
               <svg width="140" height="18" viewBox="0 0 140 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M0.361328 2.3196C54.7751 15.806 84.991 15.9807 139.376 2.3196" stroke="white" strokeWidth="3" strokeDasharray="3.6 15" strokeLinecap="round" />
+                <motion.path
+                  d="M0.361328 2.3196C54.7751 15.806 84.991 15.9807 139.376 2.3196"
+                  stroke="white"
+                  strokeWidth="3"
+                  strokeDasharray="3.6 15"
+                  strokeLinecap="round"
+                  animate={{ strokeDashoffset: [0, -18.6] }}
+                  transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
+                />
               </svg>
             </div>
 
             {STEPS.map((step, idx) => (
               <React.Fragment key={idx}>
                 <Reveal delay={0.08 * idx} className="cpage-path-step" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '20px', width: '259px', zIndex: 10 }}>
-                  <div style={{
-                    width: '100px', height: '100px', backgroundColor: '#FFB61E', borderRadius: '100px',
-                    display: 'flex', alignItems: 'center', justifyContent: 'center'
-                  }}>
+                  <motion.div
+                    style={{
+                      width: '100px', height: '100px', backgroundColor: '#FFB61E', borderRadius: '100px',
+                      display: 'flex', alignItems: 'center', justifyContent: 'center'
+                    }}
+                    whileInView={{ scale: [1, 1.05, 1] }}
+                    transition={{ duration: 2, repeat: Infinity, ease: "easeInOut", delay: idx * 0.2 }}
+                  >
                     <span style={{ fontFamily: 'Inter', fontWeight: 600, fontSize: '24px', color: '#2E2E2E' }}>
                       {step.number}
                     </span>
-                  </div>
+                  </motion.div>
                   <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '12px' }}>
                     <h3 className="cpage-path-step-title" style={{
                       fontFamily: 'Inter', fontWeight: 600, fontSize: '32px', lineHeight: '39px', textAlign: 'center', color: '#FFFFFF',
