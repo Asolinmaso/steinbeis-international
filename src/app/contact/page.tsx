@@ -29,104 +29,103 @@ const FAQS = [
 ];
 
 const COUNTRY_CODES = [
-  { code: '+91', label: 'IN (+91)' },
-  { code: '+49', label: 'DE (+49)' },
-  { code: '+1', label: 'US (+1)' },
-  { code: '+44', label: 'UK (+44)' },
-  { code: '+61', label: 'AU (+61)' },
-  { code: '+971', label: 'UAE (+971)' },
-  { code: '+65', label: 'SG (+65)' },
-  { code: '+33', label: 'FR (+33)' },
-  { code: '+39', label: 'IT (+39)' },
-  { code: '+31', label: 'NL (+31)' },
-  { code: '+41', label: 'CH (+41)' },
-  { code: '+43', label: 'AT (+43)' },
-  { code: '+32', label: 'BE (+32)' },
-  { code: '+46', label: 'SE (+46)' },
-  { code: '+47', label: 'NO (+47)' },
-  { code: '+45', label: 'DK (+45)' },
-  { code: '+358', label: 'FI (+358)' },
-  { code: '+353', label: 'IE (+353)' },
-  { code: '+351', label: 'PT (+351)' },
-  { code: '+30', label: 'GR (+30)' },
-  { code: '+420', label: 'CZ (+420)' },
-  { code: '+48', label: 'PL (+48)' },
-  { code: '+36', label: 'HU (+36)' },
-  { code: '+40', label: 'RO (+40)' },
-  { code: '+359', label: 'BG (+359)' },
-  { code: '+421', label: 'SK (+421)' },
-  { code: '+386', label: 'SI (+386)' },
-  { code: '+372', label: 'EE (+372)' },
-  { code: '+371', label: 'LV (+371)' },
-  { code: '+370', label: 'LT (+370)' },
-  { code: '+356', label: 'MT (+356)' },
-  { code: '+357', label: 'CY (+357)' },
-  { code: '+352', label: 'LU (+352)' },
-  { code: '+354', label: 'IS (+354)' },
-  { code: '+94', label: 'LK (+94)' },
-  { code: '+977', label: 'NP (+977)' },
-  { code: '+880', label: 'BD (+880)' },
-  { code: '+92', label: 'PK (+92)' },
-  { code: '+93', label: 'AF (+93)' },
-  { code: '+960', label: 'MV (+960)' },
-  { code: '+975', label: 'BT (+975)' },
-  { code: '+95', label: 'MM (+95)' },
-  { code: '+66', label: 'TH (+66)' },
-  { code: '+60', label: 'MY (+60)' },
-  { code: '+62', label: 'ID (+62)' },
-  { code: '+63', label: 'PH (+63)' },
-  { code: '+84', label: 'VN (+84)' },
-  { code: '+855', label: 'KH (+855)' },
-  { code: '+856', label: 'LA (+856)' },
-  { code: '+673', label: 'BN (+673)' },
-  { code: '+670', label: 'TL (+670)' },
-  { code: '+82', label: 'KR (+82)' },
-  { code: '+886', label: 'TW (+886)' },
-  { code: '+852', label: 'HK (+852)' },
-  { code: '+853', label: 'MO (+853)' },
-  { code: '+972', label: 'IL (+972)' },
-  { code: '+966', label: 'SA (+966)' },
-  { code: '+965', label: 'KW (+965)' },
-  { code: '+968', label: 'OM (+968)' },
-  { code: '+974', label: 'QA (+974)' },
-  { code: '+973', label: 'BH (+973)' },
-  { code: '+962', label: 'JO (+962)' },
-  { code: '+961', label: 'LB (+961)' },
-  { code: '+963', label: 'SY (+963)' },
-  { code: '+964', label: 'IQ (+964)' },
-  { code: '+967', label: 'YE (+967)' },
-  { code: '+20', label: 'EG (+20)' },
-  { code: '+212', label: 'MA (+212)' },
-  { code: '+213', label: 'DZ (+213)' },
-  { code: '+216', label: 'TN (+216)' },
-  { code: '+218', label: 'LY (+218)' },
-  { code: '+249', label: 'SD (+249)' },
-  { code: '+251', label: 'ET (+251)' },
-  { code: '+254', label: 'KE (+254)' },
-  { code: '+255', label: 'TZ (+255)' },
-  { code: '+256', label: 'UG (+256)' },
-  { code: '+234', label: 'NG (+234)' },
-  { code: '+233', label: 'GH (+233)' },
-  { code: '+27', label: 'ZA (+27)' },
-  { code: '+55', label: 'BR (+55)' },
-  { code: '+54', label: 'AR (+54)' },
-  { code: '+56', label: 'CL (+56)' },
-  { code: '+57', label: 'CO (+57)' },
-  { code: '+51', label: 'PE (+51)' },
-  { code: '+58', label: 'VE (+58)' },
-  { code: '+52', label: 'MX (+52)' },
-  { code: '+506', label: 'CR (+506)' },
-  { code: '+507', label: 'PA (+507)' },
-  { code: '+593', label: 'EC (+593)' },
-  { code: '+598', label: 'UY (+598)' },
-  { code: '+595', label: 'PY (+595)' },
-  { code: '+591', label: 'BO (+591)' },
-  { code: '+7', label: 'RU (+7)' },
-  { code: '+380', label: 'UA (+380)' },
-  { code: '+90', label: 'TR (+90)' },
-  { code: '+98', label: 'IR (+98)' },
-  { code: '+7', label: 'KZ (+7)' },
-  { code: '+998', label: 'UZ (+998)' },
+  { code: '+91', label: '+91' },
+  { code: '+49', label: '+49' },
+  { code: '+1', label: '+1' },
+  { code: '+44', label: '+44' },
+  { code: '+61', label: '+61' },
+  { code: '+971', label: '+971' },
+  { code: '+65', label: '+65' },
+  { code: '+33', label: '+33' },
+  { code: '+39', label: '+39' },
+  { code: '+31', label: '+31' },
+  { code: '+41', label: '+41' },
+  { code: '+43', label: '+43' },
+  { code: '+32', label: '+32' },
+  { code: '+46', label: '+46' },
+  { code: '+47', label: '+47' },
+  { code: '+45', label: '+45' },
+  { code: '+358', label: '+358' },
+  { code: '+353', label: '+353' },
+  { code: '+351', label: '+351' },
+  { code: '+30', label: '+30' },
+  { code: '+420', label: '+420' },
+  { code: '+48', label: '+48' },
+  { code: '+36', label: '+36' },
+  { code: '+40', label: '+40' },
+  { code: '+359', label: '+359' },
+  { code: '+421', label: '+421' },
+  { code: '+386', label: '+386' },
+  { code: '+372', label: '+372' },
+  { code: '+371', label: '+371' },
+  { code: '+370', label: '+370' },
+  { code: '+356', label: '+356' },
+  { code: '+357', label: '+357' },
+  { code: '+352', label: '+352' },
+  { code: '+354', label: '+354' },
+  { code: '+94', label: '+94' },
+  { code: '+977', label: '+977' },
+  { code: '+880', label: '+880' },
+  { code: '+92', label: '+92' },
+  { code: '+93', label: '+93' },
+  { code: '+960', label: '+960' },
+  { code: '+975', label: '+975' },
+  { code: '+95', label: '+95' },
+  { code: '+66', label: '+66' },
+  { code: '+60', label: '+60' },
+  { code: '+62', label: '+62' },
+  { code: '+63', label: '+63' },
+  { code: '+84', label: '+84' },
+  { code: '+855', label: '+855' },
+  { code: '+856', label: '+856' },
+  { code: '+673', label: '+673' },
+  { code: '+670', label: '+670' },
+  { code: '+82', label: '+82' },
+  { code: '+886', label: '+886' },
+  { code: '+852', label: '+852' },
+  { code: '+853', label: '+853' },
+  { code: '+972', label: '+972' },
+  { code: '+966', label: '+966' },
+  { code: '+965', label: '+965' },
+  { code: '+968', label: '+968' },
+  { code: '+974', label: '+974' },
+  { code: '+973', label: '+973' },
+  { code: '+962', label: '+962' },
+  { code: '+961', label: '+961' },
+  { code: '+963', label: '+963' },
+  { code: '+964', label: '+964' },
+  { code: '+967', label: '+967' },
+  { code: '+20', label: '+20' },
+  { code: '+212', label: '+212' },
+  { code: '+213', label: '+213' },
+  { code: '+216', label: '+216' },
+  { code: '+218', label: '+218' },
+  { code: '+249', label: '+249' },
+  { code: '+251', label: '+251' },
+  { code: '+254', label: '+254' },
+  { code: '+255', label: '+255' },
+  { code: '+256', label: '+256' },
+  { code: '+234', label: '+234' },
+  { code: '+233', label: '+233' },
+  { code: '+27', label: '+27' },
+  { code: '+55', label: '+55' },
+  { code: '+54', label: '+54' },
+  { code: '+56', label: '+56' },
+  { code: '+57', label: '+57' },
+  { code: '+51', label: '+51' },
+  { code: '+58', label: '+58' },
+  { code: '+52', label: '+52' },
+  { code: '+506', label: '+506' },
+  { code: '+507', label: '+507' },
+  { code: '+593', label: '+593' },
+  { code: '+598', label: '+598' },
+  { code: '+595', label: '+595' },
+  { code: '+591', label: '+591' },
+  { code: '+7', label: '+7' },
+  { code: '+380', label: '+380' },
+  { code: '+90', label: '+90' },
+  { code: '+98', label: '+98' },
+  { code: '+998', label: '+998' },
 ];
 
 export default function ContactPage() {
@@ -159,7 +158,7 @@ export default function ContactPage() {
           firstName,
           lastName,
           email,
-          phone,
+          phone: `${selectedCountryCode} ${phone}`,
           course,
           message,
         }),
@@ -365,7 +364,39 @@ export default function ContactPage() {
                       fontFamily: 'Inter', fontSize: '20px', outline: 'none', backgroundColor: 'transparent'
                     }} />
                   <div style={{ flex: 1, display: 'flex', borderBottom: '1px solid #C4C4C4', padding: '12px 0', alignItems: 'center' }}>
-                    <span style={{ fontFamily: 'Inter', fontSize: '20px', color: '#2E2E2E', marginRight: '16px' }}>+91</span>
+                    <div style={{ position: 'relative', display: 'flex', alignItems: 'center', marginRight: '16px' }}>
+                      <select
+                        value={selectedCountryCode}
+                        onChange={(e) => setSelectedCountryCode(e.target.value)}
+                        style={{
+                          appearance: 'none',
+                          border: 'none',
+                          backgroundColor: 'transparent',
+                          fontFamily: 'Inter',
+                          fontSize: '20px',
+                          color: '#2E2E2E',
+                          cursor: 'pointer',
+                          paddingRight: '24px',
+                          outline: 'none',
+                          width: 'auto'
+                        }}
+                      >
+                        {COUNTRY_CODES.map((c, i) => (
+                          <option key={i} value={c.code}>
+                            {c.label}
+                          </option>
+                        ))}
+                      </select>
+                      <svg
+                        width="10"
+                        height="6"
+                        viewBox="0 0 10 6"
+                        fill="none"
+                        style={{ position: 'absolute', right: '0', pointerEvents: 'none' }}
+                      >
+                        <path d="M0 0L5 6L10 0H0Z" fill="#2E2E2E" />
+                      </svg>
+                    </div>
                     <input
                       type="tel"
                       name="phone"
@@ -381,23 +412,34 @@ export default function ContactPage() {
                   </div>
                 </div>
 
-                <select
-                  name="course"
-                  required
-                  value={course}
-                  onChange={(e) => setCourse(e.target.value)}
-                  style={{
-                    width: '100%', border: 'none', borderBottom: '1px solid #C4C4C4', padding: '12px 0',
-                    fontFamily: 'Inter', fontSize: '20px', outline: 'none', backgroundColor: 'transparent', appearance: 'none',
-                    color: course ? '#2E2E2E' : '#888888'
-                  }}
-                >
-                  <option value="" disabled>Select Course</option>
-                  <option value="German A1">German A1</option>
-                  <option value="German A2">German A2</option>
-                  <option value="German B1">German B1</option>
-                  <option value="German B2">German B2</option>
-                </select>
+                <div style={{ position: 'relative', width: '100%' }}>
+                  <select
+                    name="course"
+                    required
+                    value={course}
+                    onChange={(e) => setCourse(e.target.value)}
+                    style={{
+                      width: '100%', border: 'none', borderBottom: '1px solid #C4C4C4', padding: '12px 0',
+                      fontFamily: 'Inter', fontSize: '20px', outline: 'none', backgroundColor: 'transparent', appearance: 'none',
+                      color: course ? '#2E2E2E' : '#888888', cursor: 'pointer'
+                    }}
+                  >
+                    <option value="" disabled>Select Course</option>
+                    <option value="German A1">German A1</option>
+                    <option value="German A2">German A2</option>
+                    <option value="German B1">German B1</option>
+                    <option value="German B2">German B2</option>
+                  </select>
+                  <svg
+                    width="12"
+                    height="8"
+                    viewBox="0 0 12 8"
+                    fill="none"
+                    style={{ position: 'absolute', right: '0', top: '50%', transform: 'translateY(-50%)', pointerEvents: 'none' }}
+                  >
+                    <path d="M0 0L6 8L12 0H0Z" fill="#2E2E2E" />
+                  </svg>
+                </div>
 
                 <textarea
                   name="message"
@@ -412,7 +454,7 @@ export default function ContactPage() {
                   }} />
 
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', marginTop: '16px' }}>
-                  <div style={{ display: 'flex', justifyContent: 'flex-start' }}>
+                  <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
                     <button
                       type="submit"
                       className="btn-yellow"

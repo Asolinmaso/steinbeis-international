@@ -166,7 +166,7 @@ export default function Testimonials() {
                   marginBottom: "10px",
                 }}
               >
-                Student <br /> <span style={{ color: "#FA4516" }}>TESTIMONIAL</span>
+                Student <br /> <span style={{ color: "#FA4516" }}>Testimonial</span>
               </h3>
               <div style={{ width: "60px", height: "2px", backgroundColor: "#FA4516", marginBottom: "20px" }} />
 
