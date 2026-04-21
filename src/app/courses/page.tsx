@@ -262,7 +262,7 @@ function CoursesPageContent() {
       <div
         id="course-levels"
         className="cpage-levels-section"
-        style={{ position: 'relative', width: '100%', marginTop: '100px', paddingBottom: '100px', display: 'flex', flexDirection: 'column', alignItems: 'center', backgroundColor: '#FFFFFF' }}
+        style={{ position: 'relative', width: '100%', marginTop: '120px', paddingBottom: '120px', display: 'flex', flexDirection: 'column', alignItems: 'center', backgroundColor: '#FFFFFF' }}
       >
 
         {/* Tabs Bar */}
@@ -296,7 +296,7 @@ function CoursesPageContent() {
         {/* Level Details Content */}
         <div className="cpage-detail-row" style={{
           display: 'flex', flexDirection: 'row', width: '100%', maxWidth: '1240px',
-          gap: '60px', padding: '0 20px', justifyContent: 'space-between', alignItems: 'flex-start'
+          gap: '80px', padding: '0 20px', justifyContent: 'space-between', alignItems: 'flex-start'
         }}>
           {/* Left Column: Text */}
           <RevealX className="cpage-detail-text" x={-36} style={{ flex: '1', display: 'flex', flexDirection: 'column', gap: '40px' }}>
@@ -472,7 +472,7 @@ function CoursesPageContent() {
       <div
         className="cpage-ready-outer"
         style={{
-          position: 'relative', width: '100%', display: 'flex', justifyContent: 'center', paddingTop: '120px', paddingBottom: '120px'
+          position: 'relative', width: '100%', display: 'flex', justifyContent: 'center', paddingTop: '120px', paddingBottom: '180px'
         }}
       >
         <div className="cpage-ready-container" style={{
