@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { Reveal, RevealX } from '@/components/motion';
+type FormStatus = "idle" | "submitting" | "success" | "error";
 
 const FAQS = [
   {
@@ -132,9 +133,62 @@ export default function ContactPage() {
   const [openFAQIndex, setOpenFAQIndex] = useState<number | null>(0);
   const [selectedCountryCode, setSelectedCountryCode] = useState('+91');
 
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [course, setCourse] = useState("");
+  const [message, setMessage] = useState("");
+  const [formStatus, setFormStatus] = useState<FormStatus>("idle");
+  const [formError, setFormError] = useState<string | null>(null);
+
   const toggleFAQ = (index: number) => {
     setOpenFAQIndex(openFAQIndex === index ? null : index);
   };
+
+  async function handleContactSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    setFormError(null);
+    setFormStatus("submitting");
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          firstName,
+          lastName,
+          email,
+          phone,
+          course,
+          message,
+        }),
+      });
+
+      const data = (await res.json().catch(() => ({}))) as {
+        error?: string;
+      };
+
+      if (!res.ok) {
+        setFormStatus("error");
+        setFormError(
+          data.error ?? "Something went wrong. Please try again."
+        );
+        return;
+      }
+
+      setFormStatus("success");
+      setFirstName("");
+      setLastName("");
+      setEmail("");
+      setPhone("");
+      setCourse("");
+      setMessage("");
+    } catch {
+      setFormStatus("error");
+      setFormError("Network error. Please check your connection and try again.");
+    }
+  }
 
   return (
     <main style={{ position: 'relative', width: '100%' }}>
@@ -261,114 +315,139 @@ export default function ContactPage() {
             </Reveal>
 
             <Reveal delay={0.14}>
-              <form style={{ display: 'flex', flexDirection: 'column', gap: '24px' }} onSubmit={(e) => e.preventDefault()}>
+              <form
+                style={{ display: 'flex', flexDirection: 'column', gap: '32px' }}
+                onSubmit={handleContactSubmit}
+                noValidate
+              >
                 {/* Row 1 */}
-                <div style={{ display: 'flex', gap: '32px' }}>
-                  <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                    <label style={{ fontFamily: 'Inter', fontSize: '14px', color: '#666' }}>First Name</label>
-                    <input type="text" className="contact-form-input" style={{
-                      border: 'none', borderBottom: '1px solid #C4C4C4', padding: '4px 0 12px',
-                      fontFamily: 'Inter', fontSize: '16px', outline: 'none', backgroundColor: 'transparent'
+                <div className="contact-form-pair-row" style={{ display: 'flex', gap: '32px' }}>
+                  <input
+                    type="text"
+                    name="firstName"
+                    autoComplete="given-name"
+                    required
+                    value={firstName}
+                    onChange={(e) => setFirstName(e.target.value)}
+                    placeholder="First Name"
+                    className="contact-form-input"
+                    style={{
+                      flex: 1, border: 'none', borderBottom: '1px solid #C4C4C4', padding: '12px 0',
+                      fontFamily: 'Inter', fontSize: '20px', outline: 'none', backgroundColor: 'transparent'
                     }} />
-                  </div>
-                  <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                    <label style={{ fontFamily: 'Inter', fontSize: '14px', color: '#666' }}>Last Name</label>
-                    <input type="text" className="contact-form-input" style={{
-                      border: 'none', borderBottom: '1px solid #C4C4C4', padding: '4px 0 12px',
-                      fontFamily: 'Inter', fontSize: '16px', outline: 'none', backgroundColor: 'transparent'
+                  <input
+                    type="text"
+                    name="lastName"
+                    autoComplete="family-name"
+                    value={lastName}
+                    onChange={(e) => setLastName(e.target.value)}
+                    placeholder="Last Name"
+                    className="contact-form-input"
+                    style={{
+                      flex: 1, border: 'none', borderBottom: '1px solid #C4C4C4', padding: '12px 0',
+                      fontFamily: 'Inter', fontSize: '20px', outline: 'none', backgroundColor: 'transparent'
                     }} />
-                  </div>
                 </div>
 
                 {/* Row 2 */}
-                <div style={{ display: 'flex', gap: '32px' }}>
-                  <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                    <label style={{ fontFamily: 'Inter', fontSize: '14px', color: '#666' }}>Email</label>
-                    <input type="email" className="contact-form-input" style={{
-                      border: 'none', borderBottom: '1px solid #C4C4C4', padding: '4px 0 12px',
-                      fontFamily: 'Inter', fontSize: '16px', outline: 'none', backgroundColor: 'transparent'
-                    }} />
-                  </div>
-                  <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                    <label style={{ fontFamily: 'Inter', fontSize: '14px', color: '#666' }}>Phone Number</label>
-                    <div style={{ display: 'flex', borderBottom: '1px solid #C4C4C4', padding: '4px 0 12px', alignItems: 'center' }}>
-                      <div style={{ display: 'flex', alignItems: 'center', position: 'relative' }}>
-                        <select
-                          value={selectedCountryCode}
-                          onChange={(e) => setSelectedCountryCode(e.target.value)}
-                          style={{
-                            border: 'none',
-                            backgroundColor: 'transparent',
-                            fontFamily: 'Inter',
-                            fontSize: '16px',
-                            color: '#2E2E2E',
-                            outline: 'none',
-                            cursor: 'pointer',
-                            appearance: 'none',
-                            paddingRight: '15px',
-                            zIndex: 1
-                          }}
-                        >
-                          {COUNTRY_CODES.filter((item, index, self) =>
-                            index === self.findIndex((t) => (t.label === item.label))
-                          ).map((item) => (
-                            <option key={item.label} value={item.code} style={{ color: '#2E2E2E' }}>
-                              {item.label}
-                            </option>
-                          ))}
-                        </select>
-                        <div style={{ position: 'absolute', right: '0', pointerEvents: 'none', display: 'flex', alignItems: 'center' }}>
-                          <svg width="8" height="6" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M1 1L6 6L11 1" stroke="#2E2E2E" strokeWidth="2" strokeLinecap="round" />
-                          </svg>
-                        </div>
-                      </div>
-                      <div style={{ width: '1px', height: '20px', backgroundColor: '#C4C4C4', margin: '0 12px' }}></div>
-                      <input type="tel" className="contact-form-input" placeholder="Phone number" style={{
-                        border: 'none', flex: 1, fontFamily: 'Inter', fontSize: '16px', outline: 'none', backgroundColor: 'transparent'
-                      }} />
-                    </div>
-                  </div>
-                </div>
-
-                {/* Row 3: Select */}
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', position: 'relative' }}>
-                  <label style={{ fontFamily: 'Inter', fontSize: '14px', color: '#666' }}>Select Course</label>
-                  <select
-                    defaultValue=""
+                <div className="contact-form-pair-row" style={{ display: 'flex', gap: '32px' }}>
+                  <input
+                    type="email"
+                    name="email"
+                    autoComplete="email"
+                    required
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="Email"
+                    className="contact-form-input"
                     style={{
-                      width: '100%', border: 'none', borderBottom: '1px solid #C4C4C4', padding: '4px 0 12px',
-                      fontFamily: 'Inter', fontSize: '16px', outline: 'none', backgroundColor: 'transparent', appearance: 'none',
-                      color: '#2E2E2E'
-                    }}
-                  >
-                    <option value="" disabled></option>
-                    <option value="A1">German A1</option>
-                    <option value="A2">German A2</option>
-                    <option value="B1">German B1</option>
-                    <option value="B2">German B2</option>
-                  </select>
-                  <div style={{ position: 'absolute', right: '0', bottom: '15px', pointerEvents: 'none' }}>
-                    <svg width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M1 1L6 6L11 1" stroke="#2E2E2E" strokeWidth="2" strokeLinecap="round" />
-                    </svg>
+                      flex: 1, border: 'none', borderBottom: '1px solid #C4C4C4', padding: '12px 0',
+                      fontFamily: 'Inter', fontSize: '20px', outline: 'none', backgroundColor: 'transparent'
+                    }} />
+                  <div style={{ flex: 1, display: 'flex', borderBottom: '1px solid #C4C4C4', padding: '12px 0', alignItems: 'center' }}>
+                    <span style={{ fontFamily: 'Inter', fontSize: '20px', color: '#2E2E2E', marginRight: '16px' }}>+91</span>
+                    <input
+                      type="tel"
+                      name="phone"
+                      autoComplete="tel-national"
+                      inputMode="numeric"
+                      value={phone}
+                      onChange={(e) => setPhone(e.target.value)}
+                      placeholder="Phone number"
+                      className="contact-form-input"
+                      style={{
+                        border: 'none', flex: 1, fontFamily: 'Inter', fontSize: '20px', outline: 'none', backgroundColor: 'transparent'
+                      }} />
                   </div>
                 </div>
 
-                {/* Row 4: Message */}
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                  <label style={{ fontFamily: 'Inter', fontSize: '14px', color: '#666' }}>Message</label>
-                  <textarea rows={1} style={{
-                    width: '100%', border: 'none', borderBottom: '1px solid #C4C4C4', padding: '4px 0 12px',
-                    fontFamily: 'Inter', fontSize: '16px', outline: 'none', resize: 'none', backgroundColor: 'transparent',
-                    minHeight: '100px'
-                  }}></textarea>
-                </div>
+                <select
+                  name="course"
+                  required
+                  value={course}
+                  onChange={(e) => setCourse(e.target.value)}
+                  style={{
+                    width: '100%', border: 'none', borderBottom: '1px solid #C4C4C4', padding: '12px 0',
+                    fontFamily: 'Inter', fontSize: '20px', outline: 'none', backgroundColor: 'transparent', appearance: 'none',
+                    color: course ? '#2E2E2E' : '#888888'
+                  }}
+                >
+                  <option value="" disabled>Select Course</option>
+                  <option value="German A1">German A1</option>
+                  <option value="German A2">German A2</option>
+                  <option value="German B1">German B1</option>
+                  <option value="German B2">German B2</option>
+                </select>
 
-                <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '8px' }}>
-                  <button type="submit" className="btn-yellow" style={{ padding: '12px 32px', borderRadius: '12px', fontWeight: 600, fontSize: '16px', backgroundColor: '#FFB61E' }}>
-                    Send Message
-                  </button>
+                <textarea
+                  name="message"
+                  required
+                  value={message}
+                  onChange={(e) => setMessage(e.target.value)}
+                  placeholder="Message"
+                  rows={3}
+                  style={{
+                    width: '100%', border: 'none', borderBottom: '1px solid #C4C4C4', padding: '12px 0',
+                    fontFamily: 'Inter', fontSize: '20px', outline: 'none', resize: 'vertical', backgroundColor: 'transparent'
+                  }} />
+
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', marginTop: '16px' }}>
+                  <div style={{ display: 'flex', justifyContent: 'flex-start' }}>
+                    <button
+                      type="submit"
+                      className="btn-yellow"
+                      style={{ padding: '16px 40px' }}
+                      disabled={formStatus === 'submitting'}
+                    >
+                      {formStatus === 'submitting' ? 'Sending…' : 'Send Message'}
+                    </button>
+                  </div>
+                  {formStatus === 'success' && (
+                    <p
+                      role="status"
+                      style={{
+                        fontFamily: 'Inter',
+                        fontSize: '18px',
+                        color: '#1B5E20',
+                        margin: 0,
+                      }}
+                    >
+                      Thank you — your message was sent. We will get back to you soon.
+                    </p>
+                  )}
+                  {formStatus === 'error' && formError && (
+                    <p
+                      role="alert"
+                      style={{
+                        fontFamily: 'Inter',
+                        fontSize: '18px',
+                        color: '#C62828',
+                        margin: 0,
+                      }}
+                    >
+                      {formError}
+                    </p>
+                  )}
                 </div>
               </form>
             </Reveal>

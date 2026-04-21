@@ -63,6 +63,7 @@ export default function Offerings() {
                 src="/Rectangle 20.png"
                 alt=""
                 fill
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 60vw, 800px"
                 style={{ objectFit: 'contain' }}
               />
             </div>

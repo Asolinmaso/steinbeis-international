@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Reveal, replayViewport, staggerItemVariants } from "@/components/motion";
+import Image from "next/image";
 import "./Testimonials.css";
 
 const testimonials = [
@@ -213,28 +214,23 @@ export default function Testimonials() {
                 flexDirection: "column",
               }}
             >
-              {/* Mobile Quote Block */}
+              {/* Mobile Quote Image */}
               <div
                 style={{
                   position: "absolute",
-                  right: "0",
-                  top: "0",
-                  width: "100px",
-                  height: "100px",
-                  backgroundColor: "#FFB61E",
-                  borderRadius: "0 32px 0 60px",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
+                  right: "-30px",
+                  top: "-35px",
+                  width: "120px",
+                  height: "120px",
                   zIndex: 20,
                 }}
               >
-                <svg width="40" height="30" viewBox="0 0 51 38" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path
-                    d="M10.825 37.5H23.9167L31.2 21.0833V0.5H0.5V21.0833H11.775L4.49167 37.5H10.825ZM30.6083 37.5H43.7L50.9833 21.0833V0.5H20.2833V21.0833H31.5583L24.275 37.5H30.6083Z"
-                    fill="black"
-                  />
-                </svg>
+                <Image
+                  src="/comma.png"
+                  alt="quote"
+                  fill
+                  style={{ objectFit: 'contain' }}
+                />
               </div>
 
               <h3

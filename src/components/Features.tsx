@@ -1,6 +1,7 @@
 "use client";
 import React from "react";
 import { motion } from "framer-motion";
+import "./Features.css";
 import {
   Reveal,
   MotionDrawPath,
@@ -78,33 +79,9 @@ const cards = [
 
 export default function Features() {
   return (
-    <section
-      className="features-section"
-      style={{
-        position: "relative",
-        width: "100%",
-        minHeight: "878px",
-        backgroundColor: "#061B42",
-        padding: "100px 0",
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        overflowX: "hidden",
-        overflowY: "visible",
-      }}
-    >
-      <div
-        className="features-dashed-ellipse"
-        style={{
-          position: "absolute",
-          width: "100%",
-          height: "400px",
-          left: "0",
-          top: "270px",
-          zIndex: 0,
-          pointerEvents: "none",
-        }}
-      >
+    <section className="features-section">
+      {/* Desktop Animated Line */}
+      <div className="features-dashed-line-desktop">
         <svg width="100%" viewBox="0 0 1438 400" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
           <motion.path
             d="M 1.87939 0.68457 C 1.87939 0.68457 113.988 308.417 283.379 341.185 C 455.47 374.475 499.673 116.575 674.879 121.685 C 862.231 127.148 880.449 396.929 1067.88 397.185 C 1347.74 397.566 1436.38 0.68457 1436.38 0.68457"
@@ -125,7 +102,30 @@ export default function Features() {
             }}
           />
         </svg>
+      </div>
 
+      {/* Mobile Animated Line */}
+      <div className="features-dashed-line-mobile">
+        <svg width="100%" height={1500} viewBox="0 0 400 1500" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+          <motion.path
+            d="M 80 0 C 80 150, 320 150, 320 300 S 80 450, 80 600 S 320 750, 320 900 S 80 1050, 80 1200 S 320 1350, 320 1500"
+            stroke="white"
+            strokeWidth={4}
+            strokeDasharray="22, 18"
+            strokeLinecap="butt"
+            strokeLinejoin="miter"
+            opacity={1}
+            fill="none"
+            animate={{
+              strokeDashoffset: [0, -46],
+            }}
+            transition={{
+              duration: 2.5,
+              repeat: Infinity,
+              ease: "linear",
+            }}
+          />
+        </svg>
       </div>
 
       <div style={{ position: "absolute", width: "215px", height: "215px", right: "100px", top: "34px", background: "#0256EB", filter: "blur(175px)", borderRadius: "50%", zIndex: 0, pointerEvents: "none" }} />
@@ -169,17 +169,6 @@ export default function Features() {
 
       <motion.div
         className="features-cards-wrapper"
-        style={{
-          position: "relative",
-          width: "100%",
-          display: "flex",
-          justifyContent: "space-evenly",
-          gap: "20px",
-          marginTop: "100px",
-          zIndex: 10,
-          flexWrap: "wrap",
-          padding: "0 40px",
-        }}
         variants={featureListVariants}
         initial="hidden"
         whileInView="visible"
