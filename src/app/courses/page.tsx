@@ -171,7 +171,7 @@ function CoursesPageContent() {
             </Reveal>
 
             <Reveal delay={0.18}>
-              <Link href="/contact#contact-form">
+              <Link href="/contact">
                 <button className="btn-yellow" style={{ height: '61px', fontSize: '20px' }}>
                   Enquire Now
                 </button>
@@ -331,7 +331,7 @@ function CoursesPageContent() {
               </p>
             </div>
 
-            <Link href="/contact#contact-form">
+            <Link href="/contact">
               <button className="btn-yellow" style={{ height: '61px', marginTop: '8px' }}>
                 Enquire Now
               </button>
@@ -422,30 +422,47 @@ function CoursesPageContent() {
             </div>
 
             {STEPS.map((step, idx) => (
-              <Reveal key={idx} delay={0.08 * idx} className="cpage-path-step" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '20px', width: '259px', zIndex: 10 }}>
-                <div style={{
-                  width: '100px', height: '100px', backgroundColor: '#FFB61E', borderRadius: '100px',
-                  display: 'flex', alignItems: 'center', justifyContent: 'center'
-                }}>
-                  <span style={{ fontFamily: 'Inter', fontWeight: 600, fontSize: '24px', color: '#2E2E2E' }}>
-                    {step.number}
-                  </span>
-                </div>
-                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '12px' }}>
-                  <h3 className="cpage-path-step-title" style={{
-                    fontFamily: 'Inter', fontWeight: 600, fontSize: '32px', lineHeight: '39px', textAlign: 'center', color: '#FFFFFF',
-                    minHeight: '78px', maxWidth: '200px'
+              <React.Fragment key={idx}>
+                <Reveal delay={0.08 * idx} className="cpage-path-step" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '20px', width: '259px', zIndex: 10 }}>
+                  <div style={{
+                    width: '100px', height: '100px', backgroundColor: '#FFB61E', borderRadius: '100px',
+                    display: 'flex', alignItems: 'center', justifyContent: 'center'
                   }}>
-                    {step.title}
-                  </h3>
-                  <p className="cpage-path-step-desc" style={{
-                    fontFamily: 'Inter', fontWeight: 400, fontSize: '20px', lineHeight: '28px', textAlign: 'center', color: '#FFFFFF',
-                    maxWidth: '191px', opacity: 0.9
-                  }}>
-                    {step.desc}
-                  </p>
-                </div>
-              </Reveal>
+                    <span style={{ fontFamily: 'Inter', fontWeight: 600, fontSize: '24px', color: '#2E2E2E' }}>
+                      {step.number}
+                    </span>
+                  </div>
+                  <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '12px' }}>
+                    <h3 className="cpage-path-step-title" style={{
+                      fontFamily: 'Inter', fontWeight: 600, fontSize: '32px', lineHeight: '39px', textAlign: 'center', color: '#FFFFFF',
+                      minHeight: '78px', maxWidth: '200px'
+                    }}>
+                      {step.title}
+                    </h3>
+                    <p className="cpage-path-step-desc" style={{
+                      fontFamily: 'Inter', fontWeight: 400, fontSize: '20px', lineHeight: '28px', textAlign: 'center', color: '#FFFFFF',
+                      maxWidth: '191px', opacity: 0.9
+                    }}>
+                      {step.desc}
+                    </p>
+                  </div>
+                </Reveal>
+                {idx < STEPS.length - 1 && (
+                  <div className="cpage-path-mobile-connector" style={{ display: 'none' }}>
+                    <svg width="60" height="100" viewBox="0 0 60 100" fill="none">
+                      <motion.path
+                        d={idx % 2 === 0 ? "M30 0C50 33 50 66 30 100" : "M30 0C10 33 10 66 30 100"}
+                        stroke="white"
+                        strokeWidth="3"
+                        strokeDasharray="6 8"
+                        strokeLinecap="round"
+                        animate={{ strokeDashoffset: [0, -14] }}
+                        transition={{ duration: 1.5, repeat: Infinity, ease: "linear" }}
+                      />
+                    </svg>
+                  </div>
+                )}
+              </React.Fragment>
             ))}
           </div>
         </div>
@@ -517,7 +534,7 @@ function CoursesPageContent() {
                   Explore Courses
                 </button>
               </Link>
-              <Link href="/contact#contact-form">
+              <Link href="/contact">
                 <button className="cpage-ready-btn" style={{
                   display: 'flex', justifyContent: 'center', alignItems: 'center', padding: '16px 36px',
                   backgroundColor: '#2C4B82', border: 'none',

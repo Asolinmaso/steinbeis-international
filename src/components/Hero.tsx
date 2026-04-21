@@ -236,7 +236,7 @@ export default function Hero() {
               Explore Courses
             </button>
           </Link>
-          <Link href="/contact#contact-form">
+          <Link href="/contact">
             <button type="button" className="btn-yellow" style={{ width: "193px", height: "61px" }}>
               Enquire Now
             </button>

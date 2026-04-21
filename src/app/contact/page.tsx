@@ -1,5 +1,6 @@
 "use client";
 import React, { useState } from 'react';
+import Link from 'next/link';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { Reveal, RevealX } from '@/components/motion';
@@ -401,9 +402,9 @@ export default function ContactPage() {
                         height="6"
                         viewBox="0 0 10 6"
                         fill="none"
-                        style={{ 
-                          position: 'absolute', 
-                          right: '0', 
+                        style={{
+                          position: 'absolute',
+                          right: '0',
                           pointerEvents: 'none',
                           transform: countryDropdownOpen ? 'rotate(180deg)' : 'none',
                           transition: 'transform 0.2s ease'
@@ -484,10 +485,10 @@ export default function ContactPage() {
                       height="8"
                       viewBox="0 0 12 8"
                       fill="none"
-                      style={{ 
+                      style={{
                         transform: courseDropdownOpen ? 'rotate(180deg)' : 'none',
                         transition: 'transform 0.2s ease',
-                        pointerEvents: 'none' 
+                        pointerEvents: 'none'
                       }}
                     >
                       <path d="M0 0L6 8L12 0H0Z" fill="#2E2E2E" />
@@ -549,7 +550,7 @@ export default function ContactPage() {
                   }} />
 
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', marginTop: '16px' }}>
-                  <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+                  <div className="contact-submit-container" style={{ display: 'flex', justifyContent: 'flex-end' }}>
                     <button
                       type="submit"
                       className="btn-yellow"
@@ -604,21 +605,22 @@ export default function ContactPage() {
           justifyContent: 'space-between', padding: '0 100px', gap: '60px'
         }}>
           {/* Left Side: FAQ Header & Still-have-questions Box */}
-          <RevealX className="contact-faq-left" x={-36} style={{ flex: '0 0 483px', display: 'flex', flexDirection: 'column' }}>
-            <Reveal>
-              <h2 style={{ fontFamily: 'Inter', fontWeight: 600, fontSize: '48px', lineHeight: '58px', color: '#2E2E2E', marginBottom: '24px' }}>
-                Frequently Asked<br />
-                <span style={{ color: '#FA4516' }}>Questions</span>
-              </h2>
-            </Reveal>
-            <Reveal delay={0.08}>
-              <p style={{ fontFamily: 'Inter', fontWeight: 400, fontSize: '24px', lineHeight: '32px', color: '#2E2E2E', opacity: 0.8, marginBottom: '270px' }}>
-                Find answers to common questions about our courses, learning process, and support services.
-              </p>
-            </Reveal>
+          <div className="contact-faq-left-column" style={{ flex: '0 0 483px', display: 'flex', flexDirection: 'column' }}>
+            <RevealX className="contact-faq-left" x={-36}>
+              <Reveal>
+                <h2 style={{ fontFamily: 'Inter', fontWeight: 600, fontSize: '48px', lineHeight: '58px', color: '#2E2E2E', marginBottom: '24px' }}>
+                  Frequently Asked<br />
+                  <span style={{ color: '#FA4516' }}>Questions</span>
+                </h2>
+              </Reveal>
+              <Reveal delay={0.08}>
+                <p style={{ fontFamily: 'Inter', fontWeight: 400, fontSize: '24px', lineHeight: '32px', color: '#2E2E2E', opacity: 0.8, marginBottom: '270px' }}>
+                  Find answers to common questions about our courses, learning process, and support services.
+                </p>
+              </Reveal>
+            </RevealX>
 
-            {/* Dark Blue Box */}
-            <Reveal delay={0.14}>
+            <RevealX className="contact-faq-qbox" x={-36} delay={0.14}>
               <div className="contact-still-box" style={{
                 backgroundColor: '#071B42', borderRadius: '24px', padding: '32px', display: 'flex', flexDirection: 'column', gap: '24px'
               }}>
@@ -628,14 +630,14 @@ export default function ContactPage() {
                 <p style={{ fontFamily: 'Inter', fontWeight: 400, fontSize: '20px', lineHeight: '28px', color: '#FFFFFF', opacity: 0.9 }}>
                   Our team is here to help you with the right guidance and support.
                 </p>
-                <a href="#contact-form">
+                <Link href="/contact">
                   <button className="btn-yellow" style={{ alignSelf: 'flex-start' }}>
                     Enquire Now
                   </button>
-                </a>
+                </Link>
               </div>
-            </Reveal>
-          </RevealX>
+            </RevealX>
+          </div>
 
           {/* Right Side: Accordion */}
           <RevealX className="contact-faq-right" x={36} style={{ flex: '1', display: 'flex', flexDirection: 'column', gap: '24px' }}>
