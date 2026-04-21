@@ -10,6 +10,7 @@ import {
   validateContactPayload,
   type ContactFieldErrors,
 } from '@/lib/contact-validation';
+import { subscriberDigitBounds } from '@/lib/contact-phone-rules';
 
 type FormStatus = "idle" | "submitting" | "success" | "error";
 
@@ -163,6 +164,14 @@ export default function ContactPage() {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
+  /** Keep national digits within the selected country’s allowed length (e.g. +91 → max 10). */
+  React.useEffect(() => {
+    const bounds = subscriberDigitBounds(selectedCountryCode);
+    const maxDigits = bounds?.[1];
+    if (maxDigits == null) return;
+    setPhone((prev) => prev.replace(/\D/g, "").slice(0, maxDigits));
+  }, [selectedCountryCode]);
+
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -181,6 +190,9 @@ export default function ContactPage() {
       return next;
     });
   }
+
+  const nationalPhoneMaxDigits =
+    subscriberDigitBounds(selectedCountryCode)?.[1] ?? 15;
 
   function focusFirstFieldError(errors: ContactFieldErrors) {
     requestAnimationFrame(() => {
@@ -559,10 +571,15 @@ export default function ContactPage() {
                       name="phone"
                       autoComplete="tel-national"
                       inputMode="numeric"
+                      maxLength={nationalPhoneMaxDigits}
                       value={phone}
                       onChange={(e) => {
                         clearFieldError("phone");
-                        setPhone(e.target.value.replace(/\D/g, "").slice(0, 15));
+                        setPhone(
+                          e.target.value
+                            .replace(/\D/g, "")
+                            .slice(0, nationalPhoneMaxDigits)
+                        );
                       }}
                       placeholder="Phone number"
                       className={`contact-form-input${fieldErrors.phone ? " contact-form-input--error" : ""}`}
