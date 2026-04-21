@@ -135,7 +135,7 @@ export default function Advantage() {
             </p>
           </Reveal>
           <Reveal delay={0.16}>
-            <Link href="/contact#contact-form">
+            <Link href="/contact">
               <button
                 className="btn-navy"
                 style={{

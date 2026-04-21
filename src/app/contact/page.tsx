@@ -1,5 +1,6 @@
 "use client";
 import React, { useState } from 'react';
+import Link from 'next/link';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { Reveal, RevealX } from '@/components/motion';
@@ -131,6 +132,20 @@ const COUNTRY_CODES = [
 export default function ContactPage() {
   const [openFAQIndex, setOpenFAQIndex] = useState<number | null>(0);
   const [selectedCountryCode, setSelectedCountryCode] = useState('+91');
+  const [countryDropdownOpen, setCountryDropdownOpen] = useState(false);
+  const [courseDropdownOpen, setCourseDropdownOpen] = useState(false);
+
+  React.useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      const target = event.target as HTMLElement;
+      if (!target.closest('.custom-dropdown-container')) {
+        setCountryDropdownOpen(false);
+        setCourseDropdownOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
 
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -364,38 +379,80 @@ export default function ContactPage() {
                       fontFamily: 'Inter', fontSize: '20px', outline: 'none', backgroundColor: 'transparent'
                     }} />
                   <div style={{ flex: 1, display: 'flex', borderBottom: '1px solid #C4C4C4', padding: '12px 0', alignItems: 'center' }}>
-                    <div style={{ position: 'relative', display: 'flex', alignItems: 'center', marginRight: '16px' }}>
-                      <select
-                        value={selectedCountryCode}
-                        onChange={(e) => setSelectedCountryCode(e.target.value)}
+                    <div className="custom-dropdown-container" style={{ position: 'relative', display: 'flex', alignItems: 'center', marginRight: '16px' }}>
+                      <div
+                        onClick={() => setCountryDropdownOpen(!countryDropdownOpen)}
                         style={{
-                          appearance: 'none',
-                          border: 'none',
-                          backgroundColor: 'transparent',
+                          display: 'flex',
+                          alignItems: 'center',
                           fontFamily: 'Inter',
                           fontSize: '20px',
                           color: '#2E2E2E',
                           cursor: 'pointer',
                           paddingRight: '24px',
                           outline: 'none',
-                          width: 'auto'
+                          width: 'auto',
+                          userSelect: 'none'
                         }}
                       >
-                        {COUNTRY_CODES.map((c, i) => (
-                          <option key={i} value={c.code}>
-                            {c.label}
-                          </option>
-                        ))}
-                      </select>
+                        {selectedCountryCode}
+                      </div>
                       <svg
                         width="10"
                         height="6"
                         viewBox="0 0 10 6"
                         fill="none"
-                        style={{ position: 'absolute', right: '0', pointerEvents: 'none' }}
+                        style={{
+                          position: 'absolute',
+                          right: '0',
+                          pointerEvents: 'none',
+                          transform: countryDropdownOpen ? 'rotate(180deg)' : 'none',
+                          transition: 'transform 0.2s ease'
+                        }}
                       >
                         <path d="M0 0L5 6L10 0H0Z" fill="#2E2E2E" />
                       </svg>
+
+                      {countryDropdownOpen && (
+                        <div
+                          style={{
+                            position: 'absolute',
+                            top: 'calc(100% + 8px)',
+                            left: '0',
+                            width: '90px',
+                            maxHeight: '300px',
+                            backgroundColor: '#FFFFFF',
+                            boxShadow: '0 4px 20px rgba(0,0,0,0.15)',
+                            borderRadius: '8px',
+                            overflowY: 'auto',
+                            zIndex: 100,
+                            padding: '8px 0'
+                          }}
+                        >
+                          {COUNTRY_CODES.map((c, i) => (
+                            <div
+                              key={i}
+                              onClick={() => {
+                                setSelectedCountryCode(c.code);
+                                setCountryDropdownOpen(false);
+                              }}
+                              style={{
+                                padding: '10px 16px',
+                                fontFamily: 'Inter',
+                                fontSize: '18px',
+                                color: '#2E2E2E',
+                                cursor: 'pointer',
+                                backgroundColor: selectedCountryCode === c.code ? '#F2F2F2' : 'transparent',
+                                transition: 'background-color 0.2s ease'
+                              }}
+                              onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = '#F2F2F2')}
+                              onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = selectedCountryCode === c.code ? '#F2F2F2' : 'transparent')}
+                            >
+                              {c.label}
+                            </div>
+                          ))}
+                        </div>
+                      )}
                     </div>
                     <input
                       type="tel"
@@ -412,33 +469,72 @@ export default function ContactPage() {
                   </div>
                 </div>
 
-                <div style={{ position: 'relative', width: '100%' }}>
-                  <select
-                    name="course"
-                    required
-                    value={course}
-                    onChange={(e) => setCourse(e.target.value)}
+                <div className="custom-dropdown-container" style={{ position: 'relative', width: '100%' }}>
+                  <div
+                    onClick={() => setCourseDropdownOpen(!courseDropdownOpen)}
                     style={{
                       width: '100%', border: 'none', borderBottom: '1px solid #C4C4C4', padding: '12px 0',
-                      fontFamily: 'Inter', fontSize: '20px', outline: 'none', backgroundColor: 'transparent', appearance: 'none',
-                      color: course ? '#2E2E2E' : '#888888', cursor: 'pointer'
+                      fontFamily: 'Inter', fontSize: '20px', outline: 'none', backgroundColor: 'transparent',
+                      color: course ? '#2E2E2E' : '#888888', cursor: 'pointer', display: 'flex', justifyContent: 'space-between',
+                      alignItems: 'center', userSelect: 'none'
                     }}
                   >
-                    <option value="" disabled>Select Course</option>
-                    <option value="German A1">German A1</option>
-                    <option value="German A2">German A2</option>
-                    <option value="German B1">German B1</option>
-                    <option value="German B2">German B2</option>
-                  </select>
-                  <svg
-                    width="12"
-                    height="8"
-                    viewBox="0 0 12 8"
-                    fill="none"
-                    style={{ position: 'absolute', right: '0', top: '50%', transform: 'translateY(-50%)', pointerEvents: 'none' }}
-                  >
-                    <path d="M0 0L6 8L12 0H0Z" fill="#2E2E2E" />
-                  </svg>
+                    {course || 'Select Course'}
+                    <svg
+                      width="12"
+                      height="8"
+                      viewBox="0 0 12 8"
+                      fill="none"
+                      style={{
+                        transform: courseDropdownOpen ? 'rotate(180deg)' : 'none',
+                        transition: 'transform 0.2s ease',
+                        pointerEvents: 'none'
+                      }}
+                    >
+                      <path d="M0 0L6 8L12 0H0Z" fill="#2E2E2E" />
+                    </svg>
+                  </div>
+
+                  {courseDropdownOpen && (
+                    <div
+                      style={{
+                        position: 'absolute',
+                        top: 'calc(100% + 1px)',
+                        left: '0',
+                        width: '100%',
+                        backgroundColor: '#FFFFFF',
+                        boxShadow: '0 4px 20px rgba(0,0,0,0.15)',
+                        borderRadius: '0 0 8px 8px',
+                        zIndex: 100,
+                        padding: '8px 0',
+                        border: '1px solid #E0E0E0',
+                        borderTop: 'none'
+                      }}
+                    >
+                      {['German A1', 'German A2', 'German B1', 'German B2'].map((c, i) => (
+                        <div
+                          key={i}
+                          onClick={() => {
+                            setCourse(c);
+                            setCourseDropdownOpen(false);
+                          }}
+                          style={{
+                            padding: '12px 16px',
+                            fontFamily: 'Inter',
+                            fontSize: '18px',
+                            color: '#2E2E2E',
+                            cursor: 'pointer',
+                            backgroundColor: course === c ? '#F2F2F2' : 'transparent',
+                            transition: 'background-color 0.2s ease'
+                          }}
+                          onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = '#F2F2F2')}
+                          onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = course === c ? '#F2F2F2' : 'transparent')}
+                        >
+                          {c}
+                        </div>
+                      ))}
+                    </div>
+                  )}
                 </div>
 
                 <textarea
@@ -454,7 +550,7 @@ export default function ContactPage() {
                   }} />
 
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', marginTop: '16px' }}>
-                  <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+                  <div className="contact-submit-container" style={{ display: 'flex', justifyContent: 'flex-end' }}>
                     <button
                       type="submit"
                       className="btn-yellow"
@@ -509,21 +605,22 @@ export default function ContactPage() {
           justifyContent: 'space-between', padding: '0 100px', gap: '60px'
         }}>
           {/* Left Side: FAQ Header & Still-have-questions Box */}
-          <RevealX className="contact-faq-left" x={-36} style={{ flex: '0 0 483px', display: 'flex', flexDirection: 'column' }}>
-            <Reveal>
-              <h2 style={{ fontFamily: 'Inter', fontWeight: 600, fontSize: '48px', lineHeight: '58px', color: '#2E2E2E', marginBottom: '24px' }}>
-                Frequently Asked<br />
-                <span style={{ color: '#FA4516' }}>Questions</span>
-              </h2>
-            </Reveal>
-            <Reveal delay={0.08}>
-              <p style={{ fontFamily: 'Inter', fontWeight: 400, fontSize: '24px', lineHeight: '32px', color: '#2E2E2E', opacity: 0.8, marginBottom: '270px' }}>
-                Find answers to common questions about our courses, learning process, and support services.
-              </p>
-            </Reveal>
+          <div className="contact-faq-left-column" style={{ flex: '0 0 483px', display: 'flex', flexDirection: 'column' }}>
+            <RevealX className="contact-faq-left" x={-36}>
+              <Reveal>
+                <h2 style={{ fontFamily: 'Inter', fontWeight: 600, fontSize: '48px', lineHeight: '58px', color: '#2E2E2E', marginBottom: '24px' }}>
+                  Frequently Asked<br />
+                  <span style={{ color: '#FA4516' }}>Questions</span>
+                </h2>
+              </Reveal>
+              <Reveal delay={0.08}>
+                <p style={{ fontFamily: 'Inter', fontWeight: 400, fontSize: '24px', lineHeight: '32px', color: '#2E2E2E', opacity: 0.8, marginBottom: '270px' }}>
+                  Find answers to common questions about our courses, learning process, and support services.
+                </p>
+              </Reveal>
+            </RevealX>
 
-            {/* Dark Blue Box */}
-            <Reveal delay={0.14}>
+            <RevealX className="contact-faq-qbox" x={-36} delay={0.14}>
               <div className="contact-still-box" style={{
                 backgroundColor: '#071B42', borderRadius: '24px', padding: '32px', display: 'flex', flexDirection: 'column', gap: '24px'
               }}>
@@ -533,14 +630,14 @@ export default function ContactPage() {
                 <p style={{ fontFamily: 'Inter', fontWeight: 400, fontSize: '20px', lineHeight: '28px', color: '#FFFFFF', opacity: 0.9 }}>
                   Our team is here to help you with the right guidance and support.
                 </p>
-                <a href="#contact-form">
+                <Link href="/contact">
                   <button className="btn-yellow" style={{ alignSelf: 'flex-start' }}>
                     Enquire Now
                   </button>
-                </a>
+                </Link>
               </div>
-            </Reveal>
-          </RevealX>
+            </RevealX>
+          </div>
 
           {/* Right Side: Accordion */}
           <RevealX className="contact-faq-right" x={36} style={{ flex: '1', display: 'flex', flexDirection: 'column', gap: '24px' }}>
