@@ -221,7 +221,7 @@ function CoursesPageContent() {
                 backgroundPosition: 'center',
                 overflow: 'hidden',
                 position: 'relative',
-                boxShadow: '0 20px 40px rgba(0,0,0,0.3)',
+                boxShadow: 'rgba(0, 0, 0, 0) 0px 20px 40px',
                 zIndex: 12
               }}
               initial={{ opacity: 0, scale: 0.92, y: 28 }}
@@ -507,8 +507,8 @@ function CoursesPageContent() {
               <Link href="#course-levels">
                 <button className="cpage-ready-btn" style={{
                   display: 'flex', justifyContent: 'center', alignItems: 'center', padding: '16px 36px',
-                  backgroundColor: '#061B42', border: 'none',
-                  borderRadius: '100px', fontFamily: 'Inter', fontWeight: 600, fontSize: '20px', color: '#FFFFFF', cursor: 'pointer',
+                  backgroundColor: '#2C4B82', border: 'none',
+                  borderRadius: '16px', fontFamily: 'Inter', fontWeight: 600, fontSize: '20px', color: '#FFFFFF', cursor: 'pointer',
                   transition: 'all 0.3s ease'
                 }}
                   onMouseEnter={(e) => e.currentTarget.style.transform = 'translateY(-2px)'}
@@ -520,8 +520,8 @@ function CoursesPageContent() {
               <Link href="/contact#contact-form">
                 <button className="cpage-ready-btn" style={{
                   display: 'flex', justifyContent: 'center', alignItems: 'center', padding: '16px 36px',
-                  backgroundColor: '#061B42', border: 'none',
-                  borderRadius: '100px', fontFamily: 'Inter', fontWeight: 600, fontSize: '20px', color: '#FFFFFF', cursor: 'pointer',
+                  backgroundColor: '#2C4B82', border: 'none',
+                  borderRadius: '16px', fontFamily: 'Inter', fontWeight: 600, fontSize: '20px', color: '#FFFFFF', cursor: 'pointer',
                   transition: 'all 0.3s ease'
                 }}
                   onMouseEnter={(e) => e.currentTarget.style.transform = 'translateY(-2px)'}
