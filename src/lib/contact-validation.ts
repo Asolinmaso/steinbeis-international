@@ -1,5 +1,10 @@
 /** Shared contact form rules — keep client + `/api/contact` aligned. */
 
+import {
+  extractDialPrefixAndNational,
+  validateSubscriberDigitsForPrefix,
+} from "@/lib/contact-phone-rules";
+
 export const MAX_NAME = 100;
 export const MAX_MESSAGE = 5000;
 /** Max length of full phone string as stored/sent (e.g. `+91 9876543210`). */
@@ -61,21 +66,15 @@ function validPhone(phone: string): string | null {
   const t = phone.trim();
   if (!t) return "Phone number is required";
 
-  const match = t.match(/^(\+\d{1,4})\s+(.+)$/);
-  if (!match) {
+  const parsed = extractDialPrefixAndNational(t);
+  if (!parsed) {
     return "Select a country code and enter your phone number";
   }
 
-  const national = match[2].replace(/\s/g, "");
-  if (!/^\d+$/.test(national)) {
-    return "Phone number should contain digits only";
-  }
-  if (national.length < 6) {
-    return "Phone number looks too short";
-  }
-  if (national.length > 15) {
-    return "Phone number looks too long";
-  }
+  const { prefix, nationalDigits } = parsed;
+  const err = validateSubscriberDigitsForPrefix(prefix, nationalDigits);
+  if (err) return err;
+
   if (t.length > MAX_PHONE) {
     return `Phone number must be at most ${MAX_PHONE} characters including country code`;
   }
