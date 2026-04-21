@@ -229,6 +229,7 @@ export default function Testimonials() {
                   src="/comma.png"
                   alt="quote"
                   fill
+                  sizes="120px"
                   style={{ objectFit: 'contain' }}
                 />
               </div>
