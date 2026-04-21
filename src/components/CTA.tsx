@@ -107,7 +107,7 @@ export default function CTA() {
                 Explore Courses
               </button>
             </Link>
-            <Link href="/contact#contact-form">
+            <Link href="/contact">
               <button
                 className="cpage-ready-btn"
                 type="button"
