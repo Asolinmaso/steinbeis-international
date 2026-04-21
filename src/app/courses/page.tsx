@@ -410,7 +410,7 @@ function CoursesPageContent() {
                 <motion.path
                   d="M0.361328 2.3196C54.7751 15.806 84.991 15.9807 139.376 2.3196"
                   stroke="white"
-                  strokeWidth="3"
+                  strokeWidth="2"
                   strokeDasharray="3.6 15"
                   strokeLinecap="round"
                   animate={{ strokeDashoffset: [0, -18.6] }}
@@ -423,7 +423,7 @@ function CoursesPageContent() {
                 <motion.path
                   d="M0.361328 15.6804C54.7751 2.19404 84.991 2.01931 139.376 15.6804"
                   stroke="white"
-                  strokeWidth="3"
+                  strokeWidth="2"
                   strokeDasharray="3.6 15"
                   strokeLinecap="round"
                   animate={{ strokeDashoffset: [0, -18.6] }}
@@ -436,7 +436,7 @@ function CoursesPageContent() {
                 <motion.path
                   d="M0.361328 2.3196C54.7751 15.806 84.991 15.9807 139.376 2.3196"
                   stroke="white"
-                  strokeWidth="3"
+                  strokeWidth="2"
                   strokeDasharray="3.6 15"
                   strokeLinecap="round"
                   animate={{ strokeDashoffset: [0, -18.6] }}
