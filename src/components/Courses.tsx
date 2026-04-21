@@ -109,10 +109,10 @@ export default function Courses() {
         marginBottom: '60px'
       }}>
         <Reveal>
-          <h2 style={{
+          <h2 className="courses-title" style={{
             fontFamily: 'Inter',
             fontWeight: 600,
-            fontSize: '48px',
+            fontSize: '32px',
             color: '#FFFFFF',
             textAlign: 'center',
             marginBottom: '20px'
@@ -122,10 +122,10 @@ export default function Courses() {
         </Reveal>
 
         <Reveal delay={0.1}>
-          <p style={{
+          <p className="courses-desc" style={{
             fontFamily: 'Inter',
             fontWeight: 400,
-            fontSize: '22px',
+            fontSize: '20px',
             color: '#FFFFFF',
             textAlign: 'center',
             maxWidth: '800px',
