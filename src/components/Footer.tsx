@@ -19,8 +19,11 @@ export default function Footer() {
         flexDirection: 'column',
         alignItems: 'center',
         paddingTop: '150px',
-        marginTop: '2rem'
-
+        marginTop: '-3px',
+        borderWidth: 0,
+        borderStyle: 'none',
+        outline: 'none',
+        boxShadow: 'none'
       }}>
       {/* Background Container for shape and overflow */}
       <div className="footer-shape-container" style={{
@@ -167,10 +170,7 @@ export default function Footer() {
           </motion.div>
         </motion.div>
 
-        {/* Divider */}
-        <div style={{ width: '100%', marginBottom: '25px', padding: '0 20px' }}>
-          <div style={{ width: '100%', height: '1px', backgroundColor: 'rgba(255,255,255,0.2)' }} />
-        </div>
+        {/* Divider removed */}
 
         {/* Copyright */}
         <Reveal delay={0.15}>
