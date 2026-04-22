@@ -386,7 +386,7 @@ export default function ContactPage() {
                           display: 'flex',
                           alignItems: 'center',
                           fontFamily: 'Inter',
-                          fontSize: '20px',
+                          fontSize: '16px',
                           color: '#2E2E2E',
                           cursor: 'pointer',
                           paddingRight: '24px',
@@ -474,7 +474,7 @@ export default function ContactPage() {
                     onClick={() => setCourseDropdownOpen(!courseDropdownOpen)}
                     style={{
                       width: '100%', border: 'none', borderBottom: '1px solid #C4C4C4', padding: '12px 0',
-                      fontFamily: 'Inter', fontSize: '20px', outline: 'none', backgroundColor: 'transparent',
+                      fontFamily: 'Inter', fontSize: '16px', outline: 'none', backgroundColor: 'transparent',
                       color: course ? '#2E2E2E' : '#888888', cursor: 'pointer', display: 'flex', justifyContent: 'space-between',
                       alignItems: 'center', userSelect: 'none'
                     }}
@@ -546,7 +546,7 @@ export default function ContactPage() {
                   rows={3}
                   style={{
                     width: '100%', border: 'none', borderBottom: '1px solid #C4C4C4', padding: '12px 0',
-                    fontFamily: 'Inter', fontSize: '20px', outline: 'none', resize: 'vertical', backgroundColor: 'transparent'
+                    fontFamily: 'Inter', fontSize: '16px', outline: 'none', resize: 'vertical', backgroundColor: 'transparent'
                   }} />
 
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', marginTop: '16px' }}>
