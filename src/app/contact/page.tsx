@@ -4,7 +4,24 @@ import Link from 'next/link';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { Reveal, RevealX } from '@/components/motion';
+import {
+  CONTACT_COURSE_OPTIONS,
+  contactPayloadHasErrors,
+  validateContactPayload,
+  type ContactFieldErrors,
+} from '@/lib/contact-validation';
+import { subscriberDigitBounds } from '@/lib/contact-phone-rules';
+
 type FormStatus = "idle" | "submitting" | "success" | "error";
+
+const FIELD_ORDER = [
+  "firstName",
+  "lastName",
+  "email",
+  "phone",
+  "course",
+  "message",
+] as const;
 
 const FAQS = [
   {
@@ -147,6 +164,14 @@ export default function ContactPage() {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
+  /** Keep national digits within the selected country’s allowed length (e.g. +91 → max 10). */
+  React.useEffect(() => {
+    const bounds = subscriberDigitBounds(selectedCountryCode);
+    const maxDigits = bounds?.[1];
+    if (maxDigits == null) return;
+    setPhone((prev) => prev.replace(/\D/g, "").slice(0, maxDigits));
+  }, [selectedCountryCode]);
+
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -155,6 +180,37 @@ export default function ContactPage() {
   const [message, setMessage] = useState("");
   const [formStatus, setFormStatus] = useState<FormStatus>("idle");
   const [formError, setFormError] = useState<string | null>(null);
+  const [fieldErrors, setFieldErrors] = useState<ContactFieldErrors>({});
+
+  function clearFieldError<K extends keyof ContactFieldErrors>(key: K) {
+    setFieldErrors((prev) => {
+      if (!(key in prev)) return prev;
+      const next = { ...prev };
+      delete next[key];
+      return next;
+    });
+  }
+
+  const nationalPhoneMaxDigits =
+    subscriberDigitBounds(selectedCountryCode)?.[1] ?? 15;
+
+  function focusFirstFieldError(errors: ContactFieldErrors) {
+    requestAnimationFrame(() => {
+      for (const key of FIELD_ORDER) {
+        if (!errors[key]) continue;
+        const id =
+          key === "course"
+            ? "contact-course-trigger"
+            : key === "phone"
+              ? "contact-phone"
+              : `contact-${key}`;
+        const el = document.getElementById(id);
+        el?.focus();
+        el?.scrollIntoView({ behavior: "smooth", block: "center" });
+        break;
+      }
+    });
+  }
 
   const toggleFAQ = (index: number) => {
     setOpenFAQIndex(openFAQIndex === index ? null : index);
@@ -163,6 +219,26 @@ export default function ContactPage() {
   async function handleContactSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setFormError(null);
+
+    const phoneFull = `${selectedCountryCode} ${phone.trim()}`;
+    const payload = {
+      firstName,
+      lastName,
+      email,
+      phone: phoneFull,
+      course,
+      message,
+    };
+
+    const errors = validateContactPayload(payload);
+    if (contactPayloadHasErrors(errors)) {
+      setFieldErrors(errors);
+      setFormStatus("idle");
+      focusFirstFieldError(errors);
+      return;
+    }
+
+    setFieldErrors({});
     setFormStatus("submitting");
 
     try {
@@ -173,7 +249,7 @@ export default function ContactPage() {
           firstName,
           lastName,
           email,
-          phone: `${selectedCountryCode} ${phone}`,
+          phone: phoneFull,
           course,
           message,
         }),
@@ -192,6 +268,7 @@ export default function ContactPage() {
       }
 
       setFormStatus("success");
+      setFieldErrors({});
       setFirstName("");
       setLastName("");
       setEmail("");
@@ -336,49 +413,83 @@ export default function ContactPage() {
               >
                 {/* Row 1 */}
                 <div className="contact-form-pair-row" style={{ display: 'flex', gap: '32px' }}>
-                  <input
-                    type="text"
-                    name="firstName"
-                    autoComplete="given-name"
-                    required
-                    value={firstName}
-                    onChange={(e) => setFirstName(e.target.value)}
-                    placeholder="First Name"
-                    className="contact-form-input"
-                    style={{
-                      flex: 1, border: 'none', borderBottom: '1px solid #C4C4C4', padding: '12px 0',
-                      fontFamily: 'Inter', fontSize: '20px', outline: 'none', backgroundColor: 'transparent'
-                    }} />
-                  <input
-                    type="text"
-                    name="lastName"
-                    autoComplete="family-name"
-                    value={lastName}
-                    onChange={(e) => setLastName(e.target.value)}
-                    placeholder="Last Name"
-                    className="contact-form-input"
-                    style={{
-                      flex: 1, border: 'none', borderBottom: '1px solid #C4C4C4', padding: '12px 0',
-                      fontFamily: 'Inter', fontSize: '20px', outline: 'none', backgroundColor: 'transparent'
-                    }} />
+                  <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '6px' }}>
+                    <input
+                      id="contact-firstName"
+                      type="text"
+                      name="firstName"
+                      autoComplete="given-name"
+                      required
+                      value={firstName}
+                      onChange={(e) => {
+                        clearFieldError("firstName");
+                        setFirstName(e.target.value);
+                      }}
+                      placeholder="First Name"
+                      className={`contact-form-input${fieldErrors.firstName ? " contact-form-input--error" : ""}`}
+                      aria-invalid={Boolean(fieldErrors.firstName)}
+                      aria-describedby={fieldErrors.firstName ? "contact-firstName-error" : undefined}
+                      style={{
+                        flex: 1, border: 'none', borderBottom: `1px solid ${fieldErrors.firstName ? "#C62828" : "#C4C4C4"}`, padding: '12px 0',
+                        fontFamily: 'Inter', fontSize: '20px', outline: 'none', backgroundColor: 'transparent'
+                      }} />
+                    {fieldErrors.firstName ? (
+                      <p id="contact-firstName-error" className="contact-form-error" role="alert">{fieldErrors.firstName}</p>
+                    ) : null}
+                  </div>
+                  <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '6px' }}>
+                    <input
+                      id="contact-lastName"
+                      type="text"
+                      name="lastName"
+                      autoComplete="family-name"
+                      value={lastName}
+                      onChange={(e) => {
+                        clearFieldError("lastName");
+                        setLastName(e.target.value);
+                      }}
+                      placeholder="Last Name"
+                      className={`contact-form-input${fieldErrors.lastName ? " contact-form-input--error" : ""}`}
+                      aria-invalid={Boolean(fieldErrors.lastName)}
+                      aria-describedby={fieldErrors.lastName ? "contact-lastName-error" : undefined}
+                      style={{
+                        flex: 1, border: 'none', borderBottom: `1px solid ${fieldErrors.lastName ? "#C62828" : "#C4C4C4"}`, padding: '12px 0',
+                        fontFamily: 'Inter', fontSize: '20px', outline: 'none', backgroundColor: 'transparent'
+                      }} />
+                    {fieldErrors.lastName ? (
+                      <p id="contact-lastName-error" className="contact-form-error" role="alert">{fieldErrors.lastName}</p>
+                    ) : null}
+                  </div>
                 </div>
 
                 {/* Row 2 */}
                 <div className="contact-form-pair-row" style={{ display: 'flex', gap: '32px' }}>
-                  <input
-                    type="email"
-                    name="email"
-                    autoComplete="email"
-                    required
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    placeholder="Email"
-                    className="contact-form-input"
-                    style={{
-                      flex: 1, border: 'none', borderBottom: '1px solid #C4C4C4', padding: '12px 0',
-                      fontFamily: 'Inter', fontSize: '20px', outline: 'none', backgroundColor: 'transparent'
-                    }} />
-                  <div style={{ flex: 1, display: 'flex', borderBottom: '1px solid #C4C4C4', padding: '12px 0', alignItems: 'center' }}>
+                  <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '6px' }}>
+                    <input
+                      id="contact-email"
+                      type="email"
+                      name="email"
+                      autoComplete="email"
+                      required
+                      value={email}
+                      onChange={(e) => {
+                        clearFieldError("email");
+                        setEmail(e.target.value);
+                      }}
+                      placeholder="Email"
+                      className={`contact-form-input${fieldErrors.email ? " contact-form-input--error" : ""}`}
+                      aria-invalid={Boolean(fieldErrors.email)}
+                      aria-describedby={fieldErrors.email ? "contact-email-error" : undefined}
+                      style={{
+                        flex: 1, border: 'none', borderBottom: `1px solid ${fieldErrors.email ? "#C62828" : "#C4C4C4"}`, padding: '12px 0',
+                        fontFamily: 'Inter', fontSize: '20px', outline: 'none', backgroundColor: 'transparent'
+                      }} />
+                    {fieldErrors.email ? (
+                      <p id="contact-email-error" className="contact-form-error" role="alert">{fieldErrors.email}</p>
+                    ) : null}
+                  </div>
+                  <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '6px' }}>
+                  <div style={{ flex: 1, display: 'flex', borderBottom: `1px solid ${fieldErrors.phone ? "#C62828" : "#C4C4C4"}`, padding: '12px 0', alignItems: 'center' }}>
                     <div className="custom-dropdown-container" style={{ position: 'relative', display: 'flex', alignItems: 'center', marginRight: '16px' }}>
                       <div
                         onClick={() => setCountryDropdownOpen(!countryDropdownOpen)}
@@ -455,22 +566,50 @@ export default function ContactPage() {
                       )}
                     </div>
                     <input
+                      id="contact-phone"
                       type="tel"
                       name="phone"
                       autoComplete="tel-national"
                       inputMode="numeric"
+                      maxLength={nationalPhoneMaxDigits}
                       value={phone}
-                      onChange={(e) => setPhone(e.target.value)}
+                      onChange={(e) => {
+                        clearFieldError("phone");
+                        setPhone(
+                          e.target.value
+                            .replace(/\D/g, "")
+                            .slice(0, nationalPhoneMaxDigits)
+                        );
+                      }}
                       placeholder="Phone number"
-                      className="contact-form-input"
+                      className={`contact-form-input${fieldErrors.phone ? " contact-form-input--error" : ""}`}
+                      aria-invalid={Boolean(fieldErrors.phone)}
+                      aria-describedby={fieldErrors.phone ? "contact-phone-error" : undefined}
                       style={{
                         border: 'none', flex: 1, fontFamily: 'Inter', fontSize: '20px', outline: 'none', backgroundColor: 'transparent'
                       }} />
+                  </div>
+                  {fieldErrors.phone ? (
+                    <p id="contact-phone-error" className="contact-form-error" role="alert">{fieldErrors.phone}</p>
+                  ) : null}
                   </div>
                 </div>
 
                 <div className="custom-dropdown-container" style={{ position: 'relative', width: '100%' }}>
                   <div
+                    id="contact-course-trigger"
+                    tabIndex={0}
+                    role="button"
+                    aria-haspopup="listbox"
+                    aria-expanded={courseDropdownOpen}
+                    aria-invalid={Boolean(fieldErrors.course)}
+                    aria-describedby={fieldErrors.course ? "contact-course-error" : undefined}
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter" || e.key === " ") {
+                        e.preventDefault();
+                        setCourseDropdownOpen((o) => !o);
+                      }
+                    }}
                     onClick={() => setCourseDropdownOpen(!courseDropdownOpen)}
                     style={{
                       width: '100%', border: 'none', borderBottom: '1px solid #C4C4C4', padding: '12px 0',
@@ -511,10 +650,11 @@ export default function ContactPage() {
                         borderTop: 'none'
                       }}
                     >
-                      {['German A1', 'German A2', 'German B1', 'German B2'].map((c, i) => (
+                      {CONTACT_COURSE_OPTIONS.map((c, i) => (
                         <div
                           key={i}
                           onClick={() => {
+                            clearFieldError("course");
                             setCourse(c);
                             setCourseDropdownOpen(false);
                           }}
@@ -535,6 +675,9 @@ export default function ContactPage() {
                       ))}
                     </div>
                   )}
+                  {fieldErrors.course ? (
+                    <p id="contact-course-error" className="contact-form-error" role="alert">{fieldErrors.course}</p>
+                  ) : null}
                 </div>
 
                 <textarea
