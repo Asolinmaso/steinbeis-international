@@ -31,7 +31,7 @@ export default function Footer() {
         borderTopLeftRadius: '100px',
         borderTopRightRadius: '100px',
         overflow: 'hidden',
-        zIndex: 0
+        zIndex: 2
       }}>
         {/* Background Image with Overlay */}
         <div className="footer-bg-image" style={{

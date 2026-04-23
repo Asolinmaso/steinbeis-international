@@ -497,7 +497,7 @@ export default function ContactPage() {
                           display: 'flex',
                           alignItems: 'center',
                           fontFamily: 'Inter',
-                          fontSize: '20px',
+                          fontSize: '16px',
                           color: '#2E2E2E',
                           cursor: 'pointer',
                           paddingRight: '24px',
@@ -612,8 +612,8 @@ export default function ContactPage() {
                     }}
                     onClick={() => setCourseDropdownOpen(!courseDropdownOpen)}
                     style={{
-                      width: '100%', border: 'none', borderBottom: `1px solid ${fieldErrors.course ? "#C62828" : "#C4C4C4"}`, padding: '12px 0',
-                      fontFamily: 'Inter', fontSize: '20px', outline: 'none', backgroundColor: 'transparent',
+                      width: '100%', border: 'none', borderBottom: '1px solid #C4C4C4', padding: '12px 0',
+                      fontFamily: 'Inter', fontSize: '16px', outline: 'none', backgroundColor: 'transparent',
                       color: course ? '#2E2E2E' : '#888888', cursor: 'pointer', display: 'flex', justifyContent: 'space-between',
                       alignItems: 'center', userSelect: 'none'
                     }}
@@ -680,28 +680,17 @@ export default function ContactPage() {
                   ) : null}
                 </div>
 
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '6px', width: '100%' }}>
-                  <textarea
-                    id="contact-message"
-                    name="message"
-                    required
-                    value={message}
-                    onChange={(e) => {
-                      clearFieldError("message");
-                      setMessage(e.target.value);
-                    }}
-                    placeholder="Message"
-                    rows={3}
-                    aria-invalid={Boolean(fieldErrors.message)}
-                    aria-describedby={fieldErrors.message ? "contact-message-error" : undefined}
-                    style={{
-                      width: '100%', border: 'none', borderBottom: `1px solid ${fieldErrors.message ? "#C62828" : "#C4C4C4"}`, padding: '12px 0',
-                      fontFamily: 'Inter', fontSize: '20px', outline: 'none', resize: 'vertical', backgroundColor: 'transparent'
-                    }} />
-                  {fieldErrors.message ? (
-                    <p id="contact-message-error" className="contact-form-error" role="alert">{fieldErrors.message}</p>
-                  ) : null}
-                </div>
+                <textarea
+                  name="message"
+                  required
+                  value={message}
+                  onChange={(e) => setMessage(e.target.value)}
+                  placeholder="Message"
+                  rows={3}
+                  style={{
+                    width: '100%', border: 'none', borderBottom: '1px solid #C4C4C4', padding: '12px 0',
+                    fontFamily: 'Inter', fontSize: '16px', outline: 'none', resize: 'vertical', backgroundColor: 'transparent'
+                  }} />
 
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', marginTop: '16px' }}>
                   <div className="contact-submit-container" style={{ display: 'flex', justifyContent: 'flex-end' }}>

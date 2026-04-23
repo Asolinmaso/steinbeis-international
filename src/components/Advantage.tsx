@@ -141,7 +141,7 @@ export default function Advantage() {
                 style={{
                   width: "193px",
                   height: "61px",
-                  fontSize: "24px",
+                  fontSize: "20px",
                   fontWeight: 500,
                   borderRadius: "16px",
                   backgroundColor: "#2C4B82",

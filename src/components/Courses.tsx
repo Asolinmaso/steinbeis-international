@@ -195,7 +195,7 @@ export default function Courses() {
                 <h3 style={{
                   fontFamily: 'Inter',
                   fontWeight: 700,
-                  fontSize: '28px',
+                  fontSize: '20px',
                   color: '#2E2E2E',
                   margin: 0
                 }}>
@@ -205,7 +205,7 @@ export default function Courses() {
                 <p style={{
                   fontFamily: 'Inter',
                   fontWeight: 400,
-                  fontSize: '20px',
+                  fontSize: '16px',
                   color: '#4B5563',
                   margin: 0
                 }}>
