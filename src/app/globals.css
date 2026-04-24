@@ -2007,6 +2007,14 @@ button {
 }
 
 /* ----- Contact Page ----- */
+.contact-form-error {
+  font-family: Inter, system-ui, sans-serif;
+  font-size: 14px;
+  line-height: 1.35;
+  color: #c62828;
+  margin: 0;
+}
+
 @media (max-width: 768px) {
   .contact-hero {
     margin-top: 72px !important;
