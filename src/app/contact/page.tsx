@@ -249,7 +249,7 @@ export default function ContactPage() {
           firstName,
           lastName,
           email,
-          phone: phoneFull,
+          phone: `${selectedCountryCode} ${phone}`,
           course,
           message,
         }),
@@ -489,109 +489,109 @@ export default function ContactPage() {
                     ) : null}
                   </div>
                   <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '6px' }}>
-                  <div style={{ flex: 1, display: 'flex', borderBottom: `1px solid ${fieldErrors.phone ? "#C62828" : "#C4C4C4"}`, padding: '12px 0', alignItems: 'center' }}>
-                    <div className="custom-dropdown-container" style={{ position: 'relative', display: 'flex', alignItems: 'center', marginRight: '16px' }}>
-                      <div
-                        onClick={() => setCountryDropdownOpen(!countryDropdownOpen)}
-                        style={{
-                          display: 'flex',
-                          alignItems: 'center',
-                          fontFamily: 'Inter',
-                          fontSize: '16px',
-                          color: '#2E2E2E',
-                          cursor: 'pointer',
-                          paddingRight: '24px',
-                          outline: 'none',
-                          width: 'auto',
-                          userSelect: 'none'
-                        }}
-                      >
-                        {selectedCountryCode}
-                      </div>
-                      <svg
-                        width="10"
-                        height="6"
-                        viewBox="0 0 10 6"
-                        fill="none"
-                        style={{
-                          position: 'absolute',
-                          right: '0',
-                          pointerEvents: 'none',
-                          transform: countryDropdownOpen ? 'rotate(180deg)' : 'none',
-                          transition: 'transform 0.2s ease'
-                        }}
-                      >
-                        <path d="M0 0L5 6L10 0H0Z" fill="#2E2E2E" />
-                      </svg>
-
-                      {countryDropdownOpen && (
+                    <div style={{ flex: 1, display: 'flex', borderBottom: `1px solid ${fieldErrors.phone ? "#C62828" : "#C4C4C4"}`, padding: '12px 0', alignItems: 'center' }}>
+                      <div className="custom-dropdown-container" style={{ position: 'relative', display: 'flex', alignItems: 'center', marginRight: '16px' }}>
                         <div
+                          onClick={() => setCountryDropdownOpen(!countryDropdownOpen)}
                           style={{
-                            position: 'absolute',
-                            top: 'calc(100% + 8px)',
-                            left: '0',
-                            width: '90px',
-                            maxHeight: '300px',
-                            backgroundColor: '#FFFFFF',
-                            boxShadow: '0 4px 20px rgba(0,0,0,0.15)',
-                            borderRadius: '8px',
-                            overflowY: 'auto',
-                            zIndex: 100,
-                            padding: '8px 0'
+                            display: 'flex',
+                            alignItems: 'center',
+                            fontFamily: 'Inter',
+                            fontSize: '16px',
+                            color: '#2E2E2E',
+                            cursor: 'pointer',
+                            paddingRight: '24px',
+                            outline: 'none',
+                            width: 'auto',
+                            userSelect: 'none'
                           }}
                         >
-                          {COUNTRY_CODES.map((c, i) => (
-                            <div
-                              key={i}
-                              onClick={() => {
-                                setSelectedCountryCode(c.code);
-                                setCountryDropdownOpen(false);
-                              }}
-                              style={{
-                                padding: '10px 16px',
-                                fontFamily: 'Inter',
-                                fontSize: '18px',
-                                color: '#2E2E2E',
-                                cursor: 'pointer',
-                                backgroundColor: selectedCountryCode === c.code ? '#F2F2F2' : 'transparent',
-                                transition: 'background-color 0.2s ease'
-                              }}
-                              onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = '#F2F2F2')}
-                              onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = selectedCountryCode === c.code ? '#F2F2F2' : 'transparent')}
-                            >
-                              {c.label}
-                            </div>
-                          ))}
+                          {selectedCountryCode}
                         </div>
-                      )}
+                        <svg
+                          width="10"
+                          height="6"
+                          viewBox="0 0 10 6"
+                          fill="none"
+                          style={{
+                            position: 'absolute',
+                            right: '0',
+                            pointerEvents: 'none',
+                            transform: countryDropdownOpen ? 'rotate(180deg)' : 'none',
+                            transition: 'transform 0.2s ease'
+                          }}
+                        >
+                          <path d="M0 0L5 6L10 0H0Z" fill="#2E2E2E" />
+                        </svg>
+
+                        {countryDropdownOpen && (
+                          <div
+                            style={{
+                              position: 'absolute',
+                              top: 'calc(100% + 8px)',
+                              left: '0',
+                              width: '90px',
+                              maxHeight: '300px',
+                              backgroundColor: '#FFFFFF',
+                              boxShadow: '0 4px 20px rgba(0,0,0,0.15)',
+                              borderRadius: '8px',
+                              overflowY: 'auto',
+                              zIndex: 100,
+                              padding: '8px 0'
+                            }}
+                          >
+                            {COUNTRY_CODES.map((c, i) => (
+                              <div
+                                key={i}
+                                onClick={() => {
+                                  setSelectedCountryCode(c.code);
+                                  setCountryDropdownOpen(false);
+                                }}
+                                style={{
+                                  padding: '10px 16px',
+                                  fontFamily: 'Inter',
+                                  fontSize: '18px',
+                                  color: '#2E2E2E',
+                                  cursor: 'pointer',
+                                  backgroundColor: selectedCountryCode === c.code ? '#F2F2F2' : 'transparent',
+                                  transition: 'background-color 0.2s ease'
+                                }}
+                                onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = '#F2F2F2')}
+                                onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = selectedCountryCode === c.code ? '#F2F2F2' : 'transparent')}
+                              >
+                                {c.label}
+                              </div>
+                            ))}
+                          </div>
+                        )}
+                      </div>
+                      <input
+                        id="contact-phone"
+                        type="tel"
+                        name="phone"
+                        autoComplete="tel-national"
+                        inputMode="numeric"
+                        maxLength={nationalPhoneMaxDigits}
+                        value={phone}
+                        onChange={(e) => {
+                          clearFieldError("phone");
+                          setPhone(
+                            e.target.value
+                              .replace(/\D/g, "")
+                              .slice(0, nationalPhoneMaxDigits)
+                          );
+                        }}
+                        placeholder="Phone number"
+                        className={`contact-form-input${fieldErrors.phone ? " contact-form-input--error" : ""}`}
+                        aria-invalid={Boolean(fieldErrors.phone)}
+                        aria-describedby={fieldErrors.phone ? "contact-phone-error" : undefined}
+                        style={{
+                          border: 'none', flex: 1, fontFamily: 'Inter', fontSize: '20px', outline: 'none', backgroundColor: 'transparent'
+                        }} />
                     </div>
-                    <input
-                      id="contact-phone"
-                      type="tel"
-                      name="phone"
-                      autoComplete="tel-national"
-                      inputMode="numeric"
-                      maxLength={nationalPhoneMaxDigits}
-                      value={phone}
-                      onChange={(e) => {
-                        clearFieldError("phone");
-                        setPhone(
-                          e.target.value
-                            .replace(/\D/g, "")
-                            .slice(0, nationalPhoneMaxDigits)
-                        );
-                      }}
-                      placeholder="Phone number"
-                      className={`contact-form-input${fieldErrors.phone ? " contact-form-input--error" : ""}`}
-                      aria-invalid={Boolean(fieldErrors.phone)}
-                      aria-describedby={fieldErrors.phone ? "contact-phone-error" : undefined}
-                      style={{
-                        border: 'none', flex: 1, fontFamily: 'Inter', fontSize: '20px', outline: 'none', backgroundColor: 'transparent'
-                      }} />
-                  </div>
-                  {fieldErrors.phone ? (
-                    <p id="contact-phone-error" className="contact-form-error" role="alert">{fieldErrors.phone}</p>
-                  ) : null}
+                    {fieldErrors.phone ? (
+                      <p id="contact-phone-error" className="contact-form-error" role="alert">{fieldErrors.phone}</p>
+                    ) : null}
                   </div>
                 </div>
 
