@@ -1,11 +1,10 @@
 import { NextResponse } from "next/server";
 import nodemailer from "nodemailer";
-
-const MAX_MESSAGE = 5000;
-const MAX_NAME = 100;
-const MAX_PHONE = 30;
-
-const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+import {
+  contactPayloadHasErrors,
+  validateContactPayload,
+  type ContactPayload,
+} from "@/lib/contact-validation";
 
 function escapeHtml(s: string): string {
   return s
@@ -32,33 +31,40 @@ export async function POST(req: Request) {
   }
 
   const b = body as Record<string, unknown>;
-  const firstName =
-    typeof b.firstName === "string" ? b.firstName.trim() : "";
-  const lastName = typeof b.lastName === "string" ? b.lastName.trim() : "";
-  const email =
-    typeof b.email === "string" ? b.email.trim().toLowerCase() : "";
-  const phone = typeof b.phone === "string" ? b.phone.trim() : "";
-  const course = typeof b.course === "string" ? b.course.trim() : "";
-  const message = typeof b.message === "string" ? b.message.trim() : "";
+  const payload: ContactPayload = {
+    firstName: typeof b.firstName === "string" ? b.firstName : "",
+    lastName: typeof b.lastName === "string" ? b.lastName : "",
+    email: typeof b.email === "string" ? b.email : "",
+    phone: typeof b.phone === "string" ? b.phone : "",
+    course: typeof b.course === "string" ? b.course : "",
+    message: typeof b.message === "string" ? b.message : "",
+  };
 
-  if (!firstName || firstName.length > MAX_NAME) {
-    return badRequest("First name is required");
+  const normalized: ContactPayload = {
+    ...payload,
+    email: payload.email.trim().toLowerCase(),
+    firstName: payload.firstName.trim(),
+    lastName: payload.lastName.trim(),
+    phone: payload.phone.trim(),
+    course: payload.course.trim(),
+    message: payload.message.trim(),
+  };
+
+  const errors = validateContactPayload(normalized);
+  if (contactPayloadHasErrors(errors)) {
+    const order: (keyof ContactPayload)[] = [
+      "firstName",
+      "lastName",
+      "email",
+      "phone",
+      "course",
+      "message",
+    ];
+    const first = order.find((k) => errors[k]);
+    return badRequest(first ? errors[first]! : "Invalid input");
   }
-  if (lastName.length > MAX_NAME) {
-    return badRequest("Last name is too long");
-  }
-  if (!email || !EMAIL_RE.test(email)) {
-    return badRequest("A valid email is required");
-  }
-  if (phone.length > MAX_PHONE) {
-    return badRequest("Phone number is too long");
-  }
-  if (!course) {
-    return badRequest("Please select a course");
-  }
-  if (!message || message.length > MAX_MESSAGE) {
-    return badRequest("Message is required");
-  }
+
+  const { firstName, lastName, email, phone, course, message } = normalized;
 
   const host = process.env.SMTP_HOST;
   const user = process.env.SMTP_USER;
@@ -87,7 +93,7 @@ export async function POST(req: Request) {
   });
 
   const fullName = [firstName, lastName].filter(Boolean).join(" ");
-  const phoneLine = phone ? `+91 ${phone}` : "(not provided)";
+  const phoneLine = phone ? phone : "(not provided)";
 
   const text = [
     "New contact form submission",
