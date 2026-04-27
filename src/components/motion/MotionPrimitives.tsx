@@ -7,7 +7,7 @@ import {
   type SVGMotionProps,
   type Variants,
 } from "framer-motion";
-import type { CSSProperties, ReactNode } from "react";
+import React, { useState, useEffect, type ReactNode, type CSSProperties } from "react";
 
 /** Replay when the section enters the viewport (including initial paint when in view). */
 export const replayViewport = {
@@ -194,7 +194,17 @@ export function MotionFeatureCard({
   danceDelay = 0,
   ...props
 }: HTMLMotionProps<"div"> & { rotate: number; marginTop: string; danceDelay?: number }) {
+  const [isMobile, setIsMobile] = useState(false);
   const reduce = useReducedMotion();
+
+  useEffect(() => {
+    const m = window.matchMedia("(max-width: 1024px)");
+    setIsMobile(m.matches);
+    const h = (e: MediaQueryListEvent) => setIsMobile(e.matches);
+    m.addEventListener("change", h);
+    return () => m.removeEventListener("change", h);
+  }, []);
+
   if (reduce) {
     return (
       <div
@@ -211,43 +221,81 @@ export function MotionFeatureCard({
       </div>
     );
   }
+
+  const shakeTransition = {
+    duration: 4.2,
+    repeat: Infinity,
+    ease: "easeInOut",
+    delay: danceDelay,
+  };
+
+  const shakeKeyframes = {
+    y: [0, -8, 6, -7, 5, -5, 4, 0],
+    x: [0, 4, -4, 3, -3, 2, -2, 0],
+  };
+
   return (
     <motion.div
       className={className}
       custom={rotate}
       variants={featureCardVariants}
-      style={{ marginTop, transformOrigin: "center center", ...style }}
+      initial="hidden"
+      whileInView="visible"
+      viewport={replayViewport}
+      style={{
+        width: style?.width,
+        height: style?.height,
+        marginTop,
+        cursor: style?.cursor || "pointer",
+        transformOrigin: "center center",
+        position: "relative",
+      }}
       whileHover={{
         rotate: 0,
         y: -12,
         scale: 1.06,
-        boxShadow: "0px 24px 48px rgba(0,0,0,0.28)",
+        boxShadow: "0px 24px 48px rgba(0, 0, 0, 0.28)",
         transition: { type: "spring", stiffness: 400, damping: 22 },
       }}
       {...props}
     >
+      {/* CARD BACKGROUND LAYER: Shakes on mobile alone */}
       <motion.div
         style={{
+          position: "absolute",
+          inset: 0,
+          backgroundColor: (style?.backgroundColor as string) || "#FFFFFF",
+          borderRadius: (style?.borderRadius as string) || "32px",
+          boxShadow: (style?.boxShadow as string) || "0px 10px 24px rgba(0, 0, 0, 0.25)",
+          zIndex: -1,
+          transformOrigin: "center center",
+        }}
+        // On mobile, shake relative to the parent's base rotation (0 is parent's rotation)
+        animate={isMobile ? {
+          rotate: [0, 5.5, -4.5, 4, -3.5, 3, -2, 0],
+          ...shakeKeyframes
+        } : {}}
+        transition={isMobile ? shakeTransition : {}}
+      />
+
+      {/* CARD CONTENT LAYER: Shakes on desktop alone */}
+      <motion.div
+        style={{
+          padding: style?.padding || "24px",
           display: "flex",
           flexDirection: "column",
-          gap: "24px",
+          gap: style?.gap || "24px",
           width: "100%",
           height: "100%",
           flex: 1,
           minHeight: 0,
           transformOrigin: "center center",
         }}
-        animate={{
+        animate={!isMobile ? {
           rotate: [0, 5.5, -4.5, 4, -3.5, 3, -2, 0],
-          y: [0, -8, 6, -7, 5, -5, 4, 0],
-          x: [0, 4, -4, 3, -3, 2, -2, 0],
-        }}
-        transition={{
-          duration: 4.2,
-          repeat: Infinity,
-          ease: "easeInOut",
-          delay: danceDelay,
-        }}
+          ...shakeKeyframes
+        } : {}}
+        transition={!isMobile ? shakeTransition : {}}
       >
         {children as ReactNode}
       </motion.div>
