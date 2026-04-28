@@ -28,14 +28,14 @@ const advantages = [
     icon: <Image src="/Group.png" alt="Fees" width={50} height={50} style={{ width: 'auto', height: 'auto' }} />,
   },
   {
-    text: "Study Materials Included",
-    bg: "#EEFEFF",
-    color: "#25CAD8",
-    shadow: "rgba(37, 202, 216, 0.4)",
+    text: "Flexible Learning Timings",
+    bg: "#FFECE7",
+    color: "#FA4516",
+    shadow: "rgba(250, 69, 22, 0.4)",
     top: "130px",
     left: "975px",
     width: "405px",
-    icon: <Image src="/book.png" alt="Books" width={50} height={50} style={{ width: 'auto', height: 'auto' }} />,
+    icon: <Image src="/time.png" alt="time" width={50} height={50} style={{ width: 'auto', height: 'auto' }} />,
   },
   {
     text: "Hostel Accommodation",
@@ -43,20 +43,9 @@ const advantages = [
     color: "#25CAD8",
     shadow: "rgba(37, 202, 216, 0.4)",
     top: "258px",
-    left: "585px",
+    left: "767px",
     width: "366px",
     icon: <Image src="/hostel.png" alt="Hostel" width={50} height={50} style={{ width: 'auto', height: 'auto' }} />,
-  },
-  {
-    text: "Flexible Learning Timings",
-    bg: "#FFECE7",
-    color: "#FA4516",
-    shadow: "rgba(250, 69, 22, 0.4)",
-    top: "258px",
-    left: "975px",
-    width: "405px",
-    icon: <Image src="/time.png" alt="time" width={50} height={50} style={{ width: 'auto', height: 'auto' }} />,
-
   },
 ];
 
