@@ -1,5 +1,6 @@
 "use client";
 import Link from 'next/link';
+import Image from 'next/image';
 import React, { useState } from 'react';
 import { usePathname } from 'next/navigation';
 
@@ -12,10 +13,13 @@ export default function Navbar() {
       <nav className="navbar-root motion-navbar">
         <div style={{ display: 'flex', alignItems: 'center' }}>
           <Link href="/">
-            <img
+            <Image
               src="/logo.png"
               alt="Steinbeis International Logo"
+              width={198}
+              height={49}
               className="navbar-logo"
+              priority
             />
           </Link>
         </div>

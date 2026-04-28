@@ -1,5 +1,6 @@
 "use client";
 import React, { useState } from 'react';
+import Image from 'next/image';
 import { Reveal, RevealX } from '@/components/motion';
 
 export default function About() {
@@ -57,14 +58,13 @@ export default function About() {
           }}
         >
           <div className="about-visual-stack">
-            <img
+            <Image
               className="about-hero-bg"
               src="/classroom.png"
-              alt=""
+              alt="Classroom"
               width={640}
               height={620}
-              decoding="async"
-              aria-hidden
+              priority
             />
 
           </div>
