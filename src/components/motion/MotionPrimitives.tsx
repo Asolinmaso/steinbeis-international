@@ -7,7 +7,7 @@ import {
   type SVGMotionProps,
   type Variants,
 } from "framer-motion";
-import React, { useState, useEffect, type ReactNode, type CSSProperties } from "react";
+import React, { type ReactNode, type CSSProperties } from "react";
 
 /** Replay when the section enters the viewport (including initial paint when in view). */
 export const replayViewport = {
@@ -194,16 +194,7 @@ export function MotionFeatureCard({
   danceDelay = 0,
   ...props
 }: HTMLMotionProps<"div"> & { rotate: number; marginTop: string; danceDelay?: number }) {
-  const [isMobile, setIsMobile] = useState(false);
   const reduce = useReducedMotion();
-
-  useEffect(() => {
-    const m = window.matchMedia("(max-width: 1024px)");
-    setIsMobile(m.matches);
-    const h = (e: MediaQueryListEvent) => setIsMobile(e.matches);
-    m.addEventListener("change", h);
-    return () => m.removeEventListener("change", h);
-  }, []);
 
   if (reduce) {
     return (
@@ -259,7 +250,7 @@ export function MotionFeatureCard({
       }}
       {...props}
     >
-      {/* CARD BACKGROUND LAYER: Shakes on mobile alone */}
+      {/* CARD BACKGROUND LAYER: Shakes on both desktop and mobile */}
       <motion.div
         style={{
           position: "absolute",
@@ -270,15 +261,14 @@ export function MotionFeatureCard({
           zIndex: -1,
           transformOrigin: "center center",
         }}
-        // On mobile, shake relative to the parent's base rotation (0 is parent's rotation)
-        animate={isMobile ? {
+        animate={{
           rotate: [0, 5.5, -4.5, 4, -3.5, 3, -2, 0],
           ...shakeKeyframes
-        } : {}}
-        transition={isMobile ? shakeTransition : {}}
+        }}
+        transition={shakeTransition}
       />
 
-      {/* CARD CONTENT LAYER: Shakes on desktop alone */}
+      {/* CARD CONTENT LAYER: Shakes on both desktop and mobile */}
       <motion.div
         style={{
           padding: style?.padding || "24px",
@@ -291,11 +281,11 @@ export function MotionFeatureCard({
           minHeight: 0,
           transformOrigin: "center center",
         }}
-        animate={!isMobile ? {
+        animate={{
           rotate: [0, 5.5, -4.5, 4, -3.5, 3, -2, 0],
           ...shakeKeyframes
-        } : {}}
-        transition={!isMobile ? shakeTransition : {}}
+        }}
+        transition={shakeTransition}
       >
         {children as ReactNode}
       </motion.div>
